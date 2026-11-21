@@ -72,7 +72,7 @@ export function SEOHead() {
     }
     canonicalLink.href = canonical;
 
-    let schema = document.getElementById("mjl-organization-schema");
+    let schema = document.getElementById("mjl-organization-schema") as HTMLScriptElement | null;
     if (!schema) {
       schema = document.createElement("script");
       schema.id = "mjl-organization-schema";
