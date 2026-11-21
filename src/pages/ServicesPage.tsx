@@ -37,7 +37,10 @@ export function ServicesPage() {
     return { lines, total: lines.reduce((sum, line) => sum + line.amount, 0) };
   }, [units, packaging, marking, storageDays, model, t, i18n.language]);
 
-  const formatMoney = (value: number) => new Intl.NumberFormat(i18n.language === "ru" ? "ru-RU" : i18n.language === "zh" ? "zh-CN" : "en-US", { style: "currency", currency: "RUB", maximumFractionDigits: 0 }).format(value);
+  const locale = i18n.resolvedLanguage === "zh" ? "zh-CN" : i18n.resolvedLanguage === "en" ? "en-US" : "ru-RU";
+  const formatMoney = (value: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "RUB", maximumFractionDigits: 0 }).format(value);
+  const formatCount = (value: number) => new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(value);
+  const selectedMarketplace = t(`services.calculator.marketplaces.${marketplace}`);
 
   return (
     <main className="services-page">
@@ -87,13 +90,13 @@ export function ServicesPage() {
         <div className="calculator-heading"><span className="section-kicker">{t("services.calculator.eyebrow")}</span><h2>{t("services.calculator.title")}</h2><p>{t("services.calculator.intro")}</p></div>
         <div className="calculator-layout">
           <div className="calculator-form">
-            <div className="calculator-field"><label>{t("services.calculator.marketplace")}</label><div className="choice-grid three">
-              {["wb", "ozon", "both"].map(value => <button type="button" key={value} className={marketplace === value ? "choice-button selected" : "choice-button"} onClick={() => setMarketplace(value)}>{t(`services.calculator.marketplaces.${value}`)}</button>)}
+            <div className="calculator-field"><label>{t("services.calculator.marketplace")}</label><div className="choice-grid three" role="group" aria-label={t("services.calculator.marketplace")}>
+              {["wb", "ozon", "both"].map(value => <button type="button" key={value} className={marketplace === value ? "choice-button selected" : "choice-button"} aria-pressed={marketplace === value} onClick={() => setMarketplace(value)}>{t(`services.calculator.marketplaces.${value}`)}</button>)}
             </div></div>
-            <div className="calculator-field"><label>{t("services.calculator.model")}</label><div className="choice-grid two">
-              {(["FBO", "FBS"] as const).map(value => <button type="button" key={value} className={model === value ? "choice-button selected" : "choice-button"} onClick={() => setModel(value)}><strong>{value}</strong><small>{t(`services.calculator.models.${value.toLowerCase()}`)}</small></button>)}
+            <div className="calculator-field"><label>{t("services.calculator.model")}</label><div className="choice-grid two" role="group" aria-label={t("services.calculator.model")}>
+              {(["FBO", "FBS"] as const).map(value => <button type="button" key={value} className={model === value ? "choice-button selected" : "choice-button"} aria-pressed={model === value} onClick={() => setModel(value)}><strong>{value}</strong><small>{t(`services.calculator.models.${value.toLowerCase()}`)}</small></button>)}
             </div></div>
-            <div className="calculator-field"><div className="field-label-row"><label htmlFor="units">{t("services.calculator.items")}</label><output>{money.format(units)}</output></div><input id="units" className="calculator-range" type="range" min="10" max="5000" step="10" value={units} onChange={event => setUnits(Number(event.target.value))}/><div className="range-ends"><span>10</span><span>5 000</span></div></div>
+            <div className="calculator-field"><div className="field-label-row"><label htmlFor="units">{t("services.calculator.items")}</label><output>{formatCount(units)}</output></div><input id="units" className="calculator-range" type="range" min="10" max="5000" step="10" value={units} onChange={event => setUnits(Number(event.target.value))}/><div className="range-ends"><span>10</span><span>5 000</span></div></div>
             <div className="calculator-field"><label htmlFor="packaging">{t("services.calculator.packaging")}</label><select id="packaging" value={packaging} onChange={event => setPackaging(event.target.value as PackagingType)}><option value="standard">{t("services.calculator.standard")}</option><option value="protective">{t("services.calculator.protective")}</option><option value="custom">{t("services.calculator.custom")}</option></select></div>
             <div className="calculator-field"><div className="field-label-row"><label htmlFor="storage">{t("services.calculator.storageDays")}</label><output>{storageDays} {t("services.calculator.days")}</output></div><input id="storage" className="calculator-range" type="range" min="0" max="60" value={storageDays} onChange={event => setStorageDays(Number(event.target.value))}/><div className="range-ends"><span>0</span><span>60 {t("services.calculator.days")}</span></div></div>
             <label className="marking-toggle"><input type="checkbox" checked={marking} onChange={event => setMarking(event.target.checked)}/><span className="custom-check"><Check size={13}/></span><span>{t("services.calculator.marking")}<small>{t("services.calculator.markingHint")}</small></span></label>
@@ -101,7 +104,7 @@ export function ServicesPage() {
           <aside className="calculator-result">
             <div className="result-top"><span>{t("services.calculator.estimateLabel")}</span><span className="result-live"><i/> {t("services.calculator.live")}</span></div>
             <div className="result-total">{formatMoney(estimate.total)}</div>
-            <p className="result-caption">{t("services.calculator.resultCaption", { count: units })}</p>
+            <p className="result-caption">{t("services.calculator.resultCaption", { count: formatCount(units), marketplace: selectedMarketplace })}</p>
             <div className="result-divider"/>
             <div className="result-breakdown-title">{t("services.calculator.breakdown")}</div>
             <div className="result-lines">{estimate.lines.map(line => <div className="result-line" key={line.label}><span>{line.label}</span><strong>{formatMoney(line.amount)}</strong></div>)}</div>
