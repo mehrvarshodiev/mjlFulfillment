@@ -82,6 +82,7 @@ export function SEOHead() {
     schema.textContent = JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": `${origin}#organization`,
       name: "mjlFulfillment",
       url: origin,
       description,
@@ -91,8 +92,9 @@ export function SEOHead() {
         "@type": "OfferCatalog",
         name: "Marketplace fulfillment services",
         itemListElement: ["Receiving and inspection", "Labeling and packing", "Storage", "Order picking", "Marketplace dispatch"].map((name) => ({
-          "@type": "OfferCatalog",
-          name
+          "@type": "Service",
+          name,
+          provider: { "@id": `${origin}#organization` }
         }))
       }
     });
