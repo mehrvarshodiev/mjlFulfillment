@@ -40,7 +40,7 @@ function setMeta(name: string, content: string, attribute: "name" | "property" =
 
 export function SEOHead() {
   const location = useLocation();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   useEffect(() => {
     const language = (i18n.resolvedLanguage || "ru").split("-")[0] as keyof typeof pageMeta;
@@ -96,7 +96,30 @@ export function SEOHead() {
         }))
       }
     });
-  }, [location.pathname, i18n.resolvedLanguage]);
+    if (path === "/services") {
+      let faqSchema = document.getElementById("mjl-faq-schema") as HTMLScriptElement | null;
+      if (!faqSchema) {
+        faqSchema = document.createElement("script");
+        faqSchema.id = "mjl-faq-schema";
+        faqSchema.type = "application/ld+json";
+        document.head.appendChild(faqSchema);
+      }
+      faqSchema.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [1, 2, 3, 4].map((number) => ({
+          "@type": "Question",
+          name: t(`services.faq.items.${number}.question`),
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: t(`services.faq.items.${number}.answer`)
+          }
+        }))
+      });
+    } else {
+      document.getElementById("mjl-faq-schema")?.remove();
+    }
+  }, [location.pathname, i18n.resolvedLanguage, t]);
 
   return null;
 }
