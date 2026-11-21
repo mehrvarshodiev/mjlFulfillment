@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { ArrowUpRight, CheckCircle2, Clock3, Globe2, Mail, MapPin, MessageCircle, PackageCheck, Send, ShieldCheck, Truck } from "lucide-react";
+import { CheckCircle2, Clock3, Globe2, MessageCircle, PackageCheck, Send, ShieldCheck, Truck } from "lucide-react";
 
 type FormState = {
   name: string;
