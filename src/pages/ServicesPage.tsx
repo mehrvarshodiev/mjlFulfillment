@@ -13,7 +13,6 @@ const services = [
   { key: "dispatch", icon: Truck, number: "06" },
 ];
 
-const money = new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 });
 
 export function ServicesPage() {
   const { t, i18n } = useTranslation();
