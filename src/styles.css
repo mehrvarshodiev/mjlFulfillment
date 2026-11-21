@@ -284,3 +284,22 @@
 @media(max-width:1100px){.header-inner{gap:16px;padding-inline:28px}.brand-link{width:185px}.nav-link{padding-inline:8px}.header-actions{gap:7px}}
 @media(max-width:760px){.header-actions{display:none}.mobile-nav-bottom .theme-switcher{display:grid}.mobile-nav-bottom{justify-content:flex-start;flex-wrap:wrap}.mobile-nav-bottom .header-cta{margin-left:auto}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Search-friendly service FAQ */
+.services-faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:65px;padding-top:45px;padding-bottom:110px}
+.services-faq-heading h2{margin:15px 0;font-size:clamp(28px,3.6vw,42px);line-height:1.12;letter-spacing:-.05em}
+.services-faq-heading p{max-width:390px;color:#8fa1b8;font-size:12px;line-height:1.8}
+.services-faq-list{display:grid;gap:10px}
+.services-faq-item{border:1px solid rgb(148 163 184 / 15%);border-radius:14px;background:#132239;overflow:hidden}
+.services-faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px;color:#e6eef9;font-size:13px;font-weight:700;line-height:1.55;cursor:pointer;list-style:none}
+.services-faq-item summary::-webkit-details-marker{display:none}
+.services-faq-item summary svg{flex-shrink:0;color:#7eabf7;transition:transform .2s}
+.services-faq-item[open] summary svg{transform:rotate(180deg)}
+.services-faq-item>p{margin:0;padding:0 20px 20px;color:#94a6bd;font-size:12px;line-height:1.85}
+:root[data-theme="light"] .services-faq-item{background:#fff;border-color:#e1e8f0}
+:root[data-theme="light"] .services-faq-item summary{color:#172033}
+:root[data-theme="light"] .services-faq-item>p{color:#64748b}
+:root[data-theme="light"] .services-faq-heading h2{color:#172033}
+:root[data-theme="light"] .services-faq-heading p{color:#64748b}
+@media(max-width:800px){.services-faq{grid-template-columns:1fr;gap:25px;padding-top:20px;padding-bottom:75px}}
+@media(max-width:520px){.services-faq-item summary{padding:17px;font-size:12px}.services-faq-item>p{padding:0 17px 17px}}
