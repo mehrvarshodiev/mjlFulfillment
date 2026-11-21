@@ -113,6 +113,22 @@ export function ServicesPage() {
           </aside>
         </div>
       </section>
+
+      <section className="services-faq section-wrap" aria-labelledby="services-faq-title">
+        <div className="services-faq-heading">
+          <span className="section-kicker">{t("services.faq.eyebrow", { defaultValue: "FAQ / FULFILLMENT" })}</span>
+          <h2 id="services-faq-title">{t("services.faq.title")}</h2>
+          <p>{t("services.faq.intro")}</p>
+        </div>
+        <div className="services-faq-list">
+          {[1, 2, 3, 4].map((number) => (
+            <details className="services-faq-item" key={number}>
+              <summary>{t(`services.faq.items.${number}.question`)}<ArrowDown size={17}/></summary>
+              <p>{t(`services.faq.items.${number}.answer`)}</p>
+            </details>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
