@@ -56,6 +56,8 @@ export function SiteLayout() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) themeMeta.setAttribute("content", theme === "light" ? "#f4f7fb" : "#0b1220");
     window.localStorage.setItem("mjl-theme", theme);
   }, [theme]);
 
