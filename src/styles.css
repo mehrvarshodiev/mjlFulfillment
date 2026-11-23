@@ -333,3 +333,8 @@
 :root[data-theme="light"] .about-location .location-symbol{background:#dbeafe;border-color:#bfdbfe;color:#2563eb}
 :root[data-theme="light"] .services-hero-aside{border-color:#dbe3ee}
 @media(max-width:760px){:root[data-theme="light"] .fulfillment-models,:root[data-theme="light"] .about-flow,:root[data-theme="light"] .china-process{background:#e9eff7}}
+
+.language-switcher a{display:grid;place-items:center;width:30px;height:28px;border-radius:999px;color:#91a0b4;font-size:10px;font-weight:800;text-transform:uppercase;text-decoration:none;transition:background .2s,color .2s}
+.language-switcher a:hover,.language-switcher a.language-active{background:rgb(96 165 250 / 15%);color:#93c5fd}
+:root[data-theme="light"] .language-switcher a{color:#64748b}
+:root[data-theme="light"] .language-switcher a:hover,:root[data-theme="light"] .language-switcher a.language-active{background:#dbeafe;color:#1d4ed8}
