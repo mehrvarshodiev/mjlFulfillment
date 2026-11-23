@@ -24,8 +24,14 @@ function getInitialTheme(): Theme {
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
+  const current = (i18n.resolvedLanguage || "ru").split("-")[0];
   return <div className="language-switcher" aria-label="Select language">
-    {(["ru", "en", "zh"] as const).map((language) => <button key={language} type="button" onClick={() => void i18n.changeLanguage(language)} aria-pressed={i18n.resolvedLanguage === language}>{language}</button>)}
+    {(["ru", "en", "zh"] as const).map((language) => {
+      const url = new URL(window.location.href);
+      if (language === "ru") url.searchParams.delete("lang");
+      else url.searchParams.set("lang", language);
+      return <a key={language} href={`${url.pathname}${url.search}${url.hash}`} aria-current={current === language ? "page" : undefined} className={current === language ? "language-active" : undefined}>{language}</a>;
+    })}
   </div>;
 }
 
