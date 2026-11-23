@@ -10,7 +10,7 @@ void i18n.use(LanguageDetector).use(initReactI18next).init({
   resources:{ru:{translation:ru},en:{translation:en},zh:{translation:zh}},
   fallbackLng:"ru",supportedLngs:[...supportedLanguages],load:"languageOnly",
   interpolation:{escapeValue:false},
-  detection:{order:["localStorage","navigator"],lookupLocalStorage:"mjl-language",caches:["localStorage"]},
+  detection:{order:["querystring","localStorage","navigator"],lookupQuerystring:"lang",lookupLocalStorage:"mjl-language",caches:["localStorage"]},
   react:{useSuspense:false}
 });
 export default i18n;
