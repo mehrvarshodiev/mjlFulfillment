@@ -47,7 +47,7 @@ export function SEOHead() {
     const path = location.pathname === "/" ? "/" : location.pathname.replace(/\/$/, "");
     const metadata = pageMeta[language]?.[path as keyof typeof pageMeta[typeof language]] || pageMeta.ru["/"];
     const [title, description] = metadata;
-    const canonical = `${origin}${path}`;
+    const canonical = language === "ru" ? `${origin}${path}` : `${origin}${path}?lang=${language}`;
 
     document.title = title;
     document.documentElement.lang = language;
@@ -71,6 +71,22 @@ export function SEOHead() {
       document.head.appendChild(canonicalLink);
     }
     canonicalLink.href = canonical;
+
+    const alternates: Array<[string, string]> = [
+      ["ru", `${origin}${path}`],
+      ["en", `${origin}${path}?lang=en`],
+      ["zh", `${origin}${path}?lang=zh`],
+      ["x-default", `${origin}${path}`]
+    ];
+    document.head.querySelectorAll('link[data-mjl-hreflang="true"]').forEach((element) => element.remove());
+    alternates.forEach(([hreflang, href]) => {
+      const link = document.createElement("link");
+      link.rel = "alternate";
+      link.hreflang = hreflang;
+      link.href = href;
+      link.dataset.mjlHreflang = "true";
+      document.head.appendChild(link);
+    });
 
     let schema = document.getElementById("mjl-organization-schema") as HTMLScriptElement | null;
     if (!schema) {
