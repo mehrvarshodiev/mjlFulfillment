@@ -1,8 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://mjlfulfillment.vercel.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://mjlfulfillment.vercel.app/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://mjlfulfillment.vercel.app/china</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://mjlfulfillment.vercel.app/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://mjlfulfillment.vercel.app/contacts</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://mjlfulfillment.vercel.app/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://mjlfulfillment.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mjlfulfillment.vercel.app/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://mjlfulfillment.vercel.app/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mjlfulfillment.vercel.app/"/>
+    <changefreq>weekly</changefreq><priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mjlfulfillment.vercel.app/services</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://mjlfulfillment.vercel.app/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mjlfulfillment.vercel.app/services?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://mjlfulfillment.vercel.app/services?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mjlfulfillment.vercel.app/services"/>
+    <changefreq>monthly</changefreq><priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mjlfulfillment.vercel.app/china</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://mjlfulfillment.vercel.app/china"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mjlfulfillment.vercel.app/china?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://mjlfulfillment.vercel.app/china?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mjlfulfillment.vercel.app/china"/>
+    <changefreq>monthly</changefreq><priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mjlfulfillment.vercel.app/about</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://mjlfulfillment.vercel.app/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mjlfulfillment.vercel.app/about?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://mjlfulfillment.vercel.app/about?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mjlfulfillment.vercel.app/about"/>
+    <changefreq>monthly</changefreq><priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://mjlfulfillment.vercel.app/contacts</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://mjlfulfillment.vercel.app/contacts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mjlfulfillment.vercel.app/contacts?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://mjlfulfillment.vercel.app/contacts?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mjlfulfillment.vercel.app/contacts"/>
+    <changefreq>monthly</changefreq><priority>0.8</priority>
+  </url>
 </urlset>
