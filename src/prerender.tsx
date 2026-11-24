@@ -13,12 +13,6 @@ import { AboutPage } from "./pages/AboutPage";
 import { ContactsPage } from "./pages/ContactsPage";
 import { localizedSeoUrl, origin, pageMeta } from "./components/seo/SEOHead";
 
-const prerenderRoutes = [
-  "/", "/services", "/china", "/about", "/contacts",
-  "/en/", "/en/services", "/en/china", "/en/about", "/en/contacts",
-  "/zh/", "/zh/services", "/zh/china", "/zh/about", "/zh/contacts"
-];
-
 type SupportedLanguage = "ru" | "en" | "zh";
 
 function detectRoute(pathname: string): { language: SupportedLanguage; routePath: string; basename: string } {
@@ -26,13 +20,15 @@ function detectRoute(pathname: string): { language: SupportedLanguage; routePath
   const first = segments[0];
   const language: SupportedLanguage = first === "en" || first === "zh" ? first : "ru";
   const prefix = language === "ru" ? "" : `/${language}`;
-  const routePath = language === "ru"
-    ? (pathname || "/")
-    : (pathname.slice(prefix.length) || "/");
-  return { language, routePath: routePath.startsWith("/") ? routePath : `/${routePath}`, basename: prefix || "/" };
+  const routePath = language === "ru" ? (pathname || "/") : (pathname.slice(prefix.length) || "/");
+  return {
+    language,
+    routePath: routePath.startsWith("/") ? routePath : `/${routePath}`,
+    basename: prefix || "/"
+  };
 }
 
-function getHeadElements(language: "ru" | "en" | "zh", path: string, title: string, description: string) {
+function getHeadElements(language: SupportedLanguage, path: string, title: string, description: string) {
   const canonical = localizedSeoUrl(language, path);
   const alternates: Array<[string, string]> = [
     ["ru", localizedSeoUrl("ru", path)],
@@ -65,14 +61,13 @@ function getHeadElements(language: "ru" | "en" | "zh", path: string, title: stri
 export async function prerender(data: { url: string }) {
   const requestUrl = new URL(data.url, origin);
   const { language, routePath, basename } = detectRoute(requestUrl.pathname);
-  const translations = { ru, en, zh };
   const instance = createInstance();
 
   await instance.use(initReactI18next).init({
     resources: {
-      ru: { translation: translations.ru },
-      en: { translation: translations.en },
-      zh: { translation: translations.zh }
+      ru: { translation: ru },
+      en: { translation: en },
+      zh: { translation: zh }
     },
     lng: language,
     fallbackLng: "ru",
@@ -100,12 +95,9 @@ export async function prerender(data: { url: string }) {
   const html = renderToString(app);
   const metadata = pageMeta[language][routePath as keyof typeof pageMeta["ru"]] || pageMeta.ru["/"];
   const [title, description] = metadata;
-  const { parseLinks } = await import("vite-prerender-plugin/parse");
-  const links = new Set([...parseLinks(html), ...prerenderRoutes]);
 
   return {
     html,
-    links,
     head: {
       title,
       lang: language === "zh" ? "zh-Hans" : language,
