@@ -46,7 +46,7 @@ try {
     const tags = [...result.head.elements].map(renderHeadElement).join("\n    ");
     let html = template
       .replace('<html lang="ru">', `<html lang="${escapeAttribute(result.head.lang)}">`)
-      .replace(/<title>.*?<\\/title>/s, `<title>${escapeAttribute(result.head.title)}</title>`)
+      .replace(/<title>.*?<\/title>/s, \`<title>\${escapeAttribute(result.head.title)}</title>\`)
       .replace('<div id="root"></div>', `<div id="root">${result.html}</div>`)
       .replace("</head>", `    ${tags}\n  </head>`);
 
@@ -55,7 +55,7 @@ try {
     await writeFile(output, html, "utf8");
   }
 
-  process.stdout.write(`Prerendered ${routes.length} static pages (RU, EN, ZH).\\n`);
+  process.stdout.write(\`Prerendered \${routes.length} static pages (RU, EN, ZH).\n\`);
 } finally {
   await vite.close();
 }
