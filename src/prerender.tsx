@@ -1,8 +1,7 @@
 import { createInstance } from "i18next";
 import { renderToString } from "react-dom/server";
 import { I18nextProvider, initReactI18next } from "react-i18next";
-import { Route, Routes } from "react-router-dom";
-import { StaticRouter } from "react-router-dom/server";
+import { Route, Routes, StaticRouter } from "react-router-dom";
 import ru from "./i18n/locales/ru.json";
 import en from "./i18n/locales/en.json";
 import zh from "./i18n/locales/zh.json";
@@ -20,10 +19,12 @@ const prerenderRoutes = [
   "/zh/", "/zh/services", "/zh/china", "/zh/about", "/zh/contacts"
 ];
 
-function detectRoute(pathname: string) {
+type SupportedLanguage = "ru" | "en" | "zh";
+
+function detectRoute(pathname: string): { language: SupportedLanguage; routePath: string; basename: string } {
   const segments = pathname.split("/").filter(Boolean);
   const first = segments[0];
-  const language = first === "en" || first === "zh" ? first : "ru";
+  const language: SupportedLanguage = first === "en" || first === "zh" ? first : "ru";
   const prefix = language === "ru" ? "" : `/${language}`;
   const routePath = language === "ru"
     ? (pathname || "/")
@@ -97,7 +98,7 @@ export async function prerender(data: { url: string }) {
   );
 
   const html = renderToString(app);
-  const metadata = pageMeta[language][routePath as keyof typeof pageMeta[typeof language]] || pageMeta.ru["/"];
+  const metadata = pageMeta[language][routePath as keyof typeof pageMeta["ru"]] || pageMeta.ru["/"];
   const [title, description] = metadata;
   const { parseLinks } = await import("vite-prerender-plugin/parse");
   const links = new Set([...parseLinks(html), ...prerenderRoutes]);
