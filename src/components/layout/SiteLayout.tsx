@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, Outlet } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { ArrowUpRight, Instagram, Menu, Moon, Send, Sun, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { MjlLogo } from "../brand/MjlLogo";
@@ -17,20 +16,21 @@ const links = [
 type Theme = "dark" | "light";
 
 function getInitialTheme(): Theme {
-  const saved = window.localStorage.getItem("mjl-theme");
-  if (saved === "dark" || saved === "light") return saved;
-  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  // A stable server/client default keeps the initial render hydration-safe.
+  return "dark";
 }
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
+  const { pathname, search, hash } = useLocation();
   const current = (i18n.resolvedLanguage || "ru").split("-")[0];
   return <div className="language-switcher" aria-label="Select language">
     {(["ru", "en", "zh"] as const).map((language) => {
-      const url = new URL(window.location.href);
-      if (language === "ru") url.searchParams.delete("lang");
-      else url.searchParams.set("lang", language);
-      return <a key={language} href={`${url.pathname}${url.search}${url.hash}`} aria-current={current === language ? "page" : undefined} className={current === language ? "language-active" : undefined}>{language}</a>;
+      const params = new URLSearchParams(search);
+      params.set("lang", language);
+      const query = params.toString();
+      const href = `${pathname}${query ? `?${query}` : ""}${hash}`;
+      return <a key={language} href={href} aria-current={current === language ? "page" : undefined} className={current === language ? "language-active" : undefined}>{language}</a>;
     })}
   </div>;
 }
@@ -60,11 +60,27 @@ export function SiteLayout() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
+    let nextTheme: Theme = "dark";
+    try {
+      const saved = window.localStorage.getItem("mjl-theme");
+      if (saved === "dark" || saved === "light") nextTheme = saved;
+      else if (window.matchMedia("(prefers-color-scheme: light)").matches) nextTheme = "light";
+    } catch {
+      // Storage can be disabled; keep the accessible dark default.
+    }
+    setTheme(nextTheme);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
     const themeMeta = document.querySelector('meta[name="theme-color"]');
     if (themeMeta) themeMeta.setAttribute("content", theme === "light" ? "#f4f7fb" : "#0b1220");
-    window.localStorage.setItem("mjl-theme", theme);
+    try {
+      window.localStorage.setItem("mjl-theme", theme);
+    } catch {
+      // Theme still works for the current page when storage is unavailable.
+    }
   }, [theme]);
 
   const toggleTheme = () => setTheme((current) => current === "dark" ? "light" : "dark");
@@ -78,7 +94,7 @@ export function SiteLayout() {
         <div className="header-actions"><LanguageSwitcher /><ThemeSwitcher theme={theme} onToggle={toggleTheme}/><Link to="/contacts" className="header-cta">{t("common.contact")}<ArrowUpRight size={15}/></Link></div>
         <button className="mobile-menu-toggle" type="button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X/> : <Menu/>}</button>
       </div>
-      <AnimatePresence>{menuOpen && <motion.nav className="mobile-nav" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: .2 }} aria-label="Mobile navigation">{links.map((link) => <NavLink key={link.to} to={link.to} end={link.end} onClick={() => setMenuOpen(false)} className={({ isActive }) => isActive ? "mobile-nav-link active" : "mobile-nav-link"}>{t(link.key)}</NavLink>)}<div className="mobile-nav-bottom"><LanguageSwitcher/><ThemeSwitcher theme={theme} onToggle={toggleTheme}/><Link to="/contacts" className="header-cta" onClick={() => setMenuOpen(false)}>{t("common.contact")}<ArrowUpRight size={15}/></Link></div></motion.nav>}</AnimatePresence>
+      {menuOpen && <nav className="mobile-nav mobile-nav-enter" aria-label="Mobile navigation">{links.map((link) => <NavLink key={link.to} to={link.to} end={link.end} onClick={() => setMenuOpen(false)} className={({ isActive }) => isActive ? "mobile-nav-link active" : "mobile-nav-link"}>{t(link.key)}</NavLink>)}<div className="mobile-nav-bottom"><LanguageSwitcher/><ThemeSwitcher theme={theme} onToggle={toggleTheme}/><Link to="/contacts" className="header-cta" onClick={() => setMenuOpen(false)}>{t("common.contact")}<ArrowUpRight size={15}/></Link></div></nav>}
     </header>
     <div className="page-content"><Outlet /></div>
     <footer className="site-footer"><div className="footer-inner"><div className="footer-brand"><Link to="/" aria-label="mjlFulfillment — home"><MjlLogo/></Link><p>{t("footer.tagline")}</p><SocialLinks/></div><div className="footer-links">{links.slice(1).map((link) => <Link key={link.to} to={link.to}>{t(link.key)}</Link>)}</div><div className="footer-bottom"><span>© {new Date().getFullYear()} mjlFulfillment. {t("footer.rights")}</span><span>Wildberries · Ozon · Cross-border logistics</span></div></div></footer>
