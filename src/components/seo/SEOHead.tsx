@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const pageMeta = {
+export const pageMeta = {
   ru: {
     "/": ["Фулфилмент для Wildberries и Ozon — MJL Fulfillment", "Приёмка, проверка, маркировка, упаковка, хранение и доставка товаров на склады Wildberries и Ozon. Фулфилмент для продавцов из России, СНГ и Китая."],
     "/services": ["Услуги и тарифы фулфилмента — MJL Fulfillment", "Услуги фулфилмента для Wildberries и Ozon: приёмка, проверка качества, маркировка, упаковка, хранение, комплектация и отгрузка."],
@@ -26,7 +26,13 @@ const pageMeta = {
   }
 } as const;
 
-const origin = "https://mjlfulfillment.vercel.app";
+export const origin = "https://mjlfulfillment.vercel.app";
+
+export function localizedSeoUrl(language: "ru" | "en" | "zh", path: string): string {
+  const prefix = language === "ru" ? "" : `/${language}`;
+  const normalizedPath = path === "/" ? "/" : path;
+  return `${origin}${prefix}${normalizedPath}`;
+}
 
 function setMeta(name: string, content: string, attribute: "name" | "property" = "name") {
   let element = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${name}"]`);
@@ -47,10 +53,10 @@ export function SEOHead() {
     const path = location.pathname === "/" ? "/" : location.pathname.replace(/\/$/, "");
     const metadata = pageMeta[language]?.[path as keyof typeof pageMeta[typeof language]] || pageMeta.ru["/"];
     const [title, description] = metadata;
-    const canonical = language === "ru" ? `${origin}${path}` : `${origin}${path}?lang=${language}`;
+    const canonical = localizedSeoUrl(language, path);
 
     document.title = title;
-    document.documentElement.lang = language;
+    document.documentElement.lang = language === "zh" ? "zh-Hans" : language;
     setMeta("description", description);
     setMeta("robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
     setMeta("theme-color", document.documentElement.dataset.theme === "light" ? "#f4f7fb" : "#0b1220");
@@ -73,10 +79,10 @@ export function SEOHead() {
     canonicalLink.href = canonical;
 
     const alternates: Array<[string, string]> = [
-      ["ru", `${origin}${path}`],
-      ["en", `${origin}${path}?lang=en`],
-      ["zh", `${origin}${path}?lang=zh`],
-      ["x-default", `${origin}${path}`]
+      ["ru", localizedSeoUrl("ru", path)],
+      ["en", localizedSeoUrl("en", path)],
+      ["zh-Hans", localizedSeoUrl("zh", path)],
+      ["x-default", localizedSeoUrl("ru", path)]
     ];
     document.head.querySelectorAll('link[data-mjl-hreflang="true"]').forEach((element) => element.remove());
     alternates.forEach(([hreflang, href]) => {
