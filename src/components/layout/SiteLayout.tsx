@@ -22,7 +22,7 @@ function getInitialTheme(): Theme {
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
-  const { pathname, search, hash } = useLocation();
+  const { pathname, hash } = useLocation();
   const current = (i18n.resolvedLanguage || "ru").split("-")[0];
   return <div className="language-switcher" aria-label="Select language">
     {(["ru", "en", "zh"] as const).map((language) => {
