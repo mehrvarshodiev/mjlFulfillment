@@ -26,10 +26,8 @@ function LanguageSwitcher() {
   const current = (i18n.resolvedLanguage || "ru").split("-")[0];
   return <div className="language-switcher" aria-label="Select language">
     {(["ru", "en", "zh"] as const).map((language) => {
-      const params = new URLSearchParams(search);
-      params.set("lang", language);
-      const query = params.toString();
-      const href = `${pathname}${query ? `?${query}` : ""}${hash}`;
+      const prefix = language === "ru" ? "" : `/${language}`;
+      const href = `${prefix}${pathname === "/" ? "/" : pathname}${hash}`;
       return <a key={language} href={href} aria-current={current === language ? "page" : undefined} className={current === language ? "language-active" : undefined}>{language}</a>;
     })}
   </div>;
