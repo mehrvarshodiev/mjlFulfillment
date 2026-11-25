@@ -20,7 +20,7 @@ export function AboutPage() {
   const { t } = useTranslation();
   const warehouseAddress = "Московская область, село Беседы, Промышленный проезд, 1А";
   const yandexSearchUrl = `https://yandex.ru/maps/?text=${encodeURIComponent(warehouseAddress)}`;
-  const yandexWidgetUrl = `https://yandex.ru/map-widget/v1/?text=${encodeURIComponent(warehouseAddress)}&lang=ru_RU&z=15`;
+  const yandexWidgetUrl = `https://yandex.ru/map-widget/v1/?mode=search&text=${encodeURIComponent(warehouseAddress)}&lang=ru_RU&z=15`;
   return (
     <main className="about-page">
       <section className="about-hero section-wrap">
