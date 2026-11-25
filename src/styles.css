@@ -1103,3 +1103,17 @@ textarea:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .warehouse-map-link { transition: none; }
 }
+
+
+/* Form feedback: visible progress without an animation dependency. */
+.contacts-submit-spinner {
+  animation: contacts-submit-spin 900ms linear infinite;
+}
+
+@keyframes contacts-submit-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contacts-submit-spinner { animation: none; }
+}
