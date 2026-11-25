@@ -981,3 +981,125 @@ textarea:focus-visible {
     transform: none;
   }
 }
+
+
+/* Warehouse map: framed to match the dark MJL logistics interface. */
+.warehouse-map-section {
+  padding-bottom: 88px;
+}
+.warehouse-map-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 20px;
+}
+.warehouse-map-heading h2 {
+  margin: 11px 0 8px;
+  color: #f1f6ff;
+  font-size: clamp(25px, 3vw, 36px);
+  letter-spacing: -.045em;
+}
+.warehouse-map-heading p {
+  max-width: 720px;
+  margin: 0;
+  color: #91a4bd;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.warehouse-map-link {
+  display: inline-flex;
+  min-height: 44px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 0 16px;
+  border: 1px solid rgb(96 165 250 / 28%);
+  border-radius: 999px;
+  background: rgb(37 99 235 / 13%);
+  color: #b9d4ff;
+  font-size: 11px;
+  font-weight: 750;
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+.warehouse-map-link:hover {
+  transform: translateY(-2px);
+  border-color: rgb(96 165 250 / 55%);
+  background: rgb(37 99 235 / 22%);
+}
+.warehouse-map-address {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 14px;
+  padding: 14px 17px;
+  border: 1px solid rgb(96 165 250 / 16%);
+  border-radius: 14px;
+  background: linear-gradient(110deg, rgb(37 99 235 / 12%), rgb(20 34 56 / 88%));
+  color: #dbeafe;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.warehouse-map-address svg {
+  flex: 0 0 auto;
+  color: #7eb2ff;
+}
+.warehouse-map-frame {
+  position: relative;
+  min-height: 360px;
+  overflow: hidden;
+  border: 1px solid rgb(96 165 250 / 22%);
+  border-radius: 22px;
+  background: #101b2d;
+  box-shadow: 0 24px 70px rgb(0 0 0 / 24%);
+}
+.warehouse-map-frame iframe {
+  display: block;
+  width: 100%;
+  min-height: 460px;
+  border: 0;
+  filter: saturate(.82) contrast(1.02);
+}
+.warehouse-map-disclaimer {
+  max-width: 880px;
+  margin: 13px 2px 0;
+  color: #71849e;
+  font-size: 10px;
+  line-height: 1.7;
+}
+:root[data-theme="light"] .warehouse-map-heading h2 {
+  color: #15243a;
+}
+:root[data-theme="light"] .warehouse-map-heading p,
+:root[data-theme="light"] .warehouse-map-disclaimer {
+  color: #64748b;
+}
+:root[data-theme="light"] .warehouse-map-address {
+  border-color: rgb(37 99 235 / 16%);
+  background: linear-gradient(110deg, #edf4ff, #f8fbff);
+  color: #1e3a5f;
+}
+:root[data-theme="light"] .warehouse-map-frame {
+  border-color: rgb(37 99 235 / 17%);
+  background: #edf2f8;
+  box-shadow: 0 20px 55px rgb(26 51 84 / 12%);
+}
+:root[data-theme="light"] .warehouse-map-link {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+@media (max-width: 760px) {
+  .warehouse-map-section { padding-bottom: 68px; }
+  .warehouse-map-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .warehouse-map-frame { min-height: 320px; border-radius: 16px; }
+  .warehouse-map-frame iframe { min-height: 380px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .warehouse-map-link { transition: none; }
+}
