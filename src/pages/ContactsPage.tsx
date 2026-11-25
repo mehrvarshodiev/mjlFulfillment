@@ -1,6 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { CheckCircle2, Clock3, Globe2, MessageCircle, PackageCheck, Send, ShieldCheck, Truck } from "lucide-react";
+import { CheckCircle2, Clock3, Globe2, LoaderCircle, MessageCircle, PackageCheck, Send, ShieldCheck, Truck } from "lucide-react";
+
+type LeadApiResult = { ok?: boolean; code?: string };
 
 type FormState = {
   name: string;
@@ -14,6 +16,20 @@ type FormState = {
   website: string;
 };
 
+function getLeadErrorKey(code: string | null): string {
+  switch (code) {
+    case "telegram_not_configured": return "contacts.errorNotConfigured";
+    case "rate_limited": return "contacts.errorRateLimited";
+    case "invalid_fields": return "contacts.errorInvalid";
+    case "telegram_delivery_failed":
+    case "telegram_unavailable": return "contacts.errorDelivery";
+    case "timeout":
+    case "network":
+    case "request_failed": return "contacts.errorTemporary";
+    default: return "contacts.error";
+  }
+}
+
 const initialForm: FormState = {
   name: "", phone: "", company: "", country: "", productType: "", volume: "", marketplace: "both", telegram: "", website: ""
 };
@@ -22,27 +38,40 @@ export function ContactsPage() {
   const { t } = useTranslation();
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorCode, setErrorCode] = useState<string | null>(null);
 
   const update = (field: keyof FormState, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
     if (status === "error" || status === "success") setStatus("idle");
+    setErrorCode(null);
   };
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (status === "sending") return;
+    setErrorCode(null);
     setStatus("sending");
+
     try {
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form)
+        body: JSON.stringify(form),
+        signal: AbortSignal.timeout(12_000)
       });
-      const result = await response.json() as { ok?: boolean; code?: string };
-      if (!response.ok || !result.ok) throw new Error(result.code || "request_failed");
+      const result = await response.json().catch(() => ({})) as LeadApiResult;
+
+      if (!response.ok || !result.ok) {
+        setErrorCode(result.code || (response.status >= 500 ? "telegram_unavailable" : "request_failed"));
+        setStatus("error");
+        return;
+      }
+
       setStatus("success");
       setForm(initialForm);
-    } catch {
+    } catch (error) {
+      const isTimeout = error instanceof DOMException && error.name === "TimeoutError";
+      setErrorCode(isTimeout ? "timeout" : "network");
       setStatus("error");
     }
   }
@@ -64,7 +93,7 @@ export function ContactsPage() {
       </div>
       <div className="contacts-form-card">
         <div className="contacts-form-heading"><span>{t("contacts.formEyebrow")}</span><h2>{t("contacts.formTitle")}</h2><p>{t("contacts.formDescription")}</p></div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} aria-busy={status === "sending"}>
           <div className="contacts-field-grid">
             <label>{t("contacts.name")}<input required autoComplete="name" maxLength={100} value={form.name} onChange={(e) => update("name", e.target.value)} placeholder={t("contacts.namePlaceholder")}/></label>
             <label>{t("contacts.phone")}<input required type="tel" autoComplete="tel" maxLength={40} value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder={t("contacts.phonePlaceholder")}/></label>
@@ -77,9 +106,9 @@ export function ContactsPage() {
           </div>
           <label className="contacts-honeypot" aria-hidden="true">Website<input tabIndex={-1} autoComplete="off" value={form.website} onChange={(e) => update("website", e.target.value)}/></label>
           <label className="contacts-consent"><input type="checkbox" required/><span>{t("contacts.privacy")}</span></label>
-          <button className="button-primary contacts-submit" type="submit" disabled={status === "sending"}>{status === "sending" ? t("contacts.sending") : t("contacts.submit")}<Send size={16}/></button>
+          <button className="button-primary contacts-submit" type="submit" disabled={status === "sending"}>{status === "sending" ? t("contacts.sending") : t("contacts.submit")}{status === "sending" ? <LoaderCircle className="contacts-submit-spinner" size={16}/> : <Send size={16}/>}</button>
           {status === "success" && <p className="contacts-feedback success" role="status"><CheckCircle2 size={17}/>{t("contacts.success")}</p>}
-          {status === "error" && <p className="contacts-feedback error" role="alert">{t("contacts.error")}</p>}
+          {status === "error" && <p className="contacts-feedback error" role="alert">{t(getLeadErrorKey(errorCode), { defaultValue: t("contacts.error") })}</p>}
         </form>
       </div>
     </section>
