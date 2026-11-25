@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, Instagram, Menu, Moon, Send, Sun, X } from "l
 import { useTranslation } from "react-i18next";
 import { MjlLogo } from "../brand/MjlLogo";
 import { SEOHead } from "../seo/SEOHead";
+import { ScrollExperience } from "./ScrollExperience";
 
 const links = [
   { to: "/", key: "navigation.home", end: true },
@@ -105,6 +106,7 @@ function SocialLinks() {
 
 export function SiteLayout() {
   const { t, i18n } = useTranslation();
+  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [headerVisible, setHeaderVisible] = useState(true);
@@ -217,6 +219,7 @@ export function SiteLayout() {
   return (
     <div className="site-shell">
       <SEOHead />
+      <ScrollExperience />
       <header
         className={[
           "site-header",
@@ -339,7 +342,7 @@ export function SiteLayout() {
         </div>
       )}
 
-      <div className="page-content"><Outlet /></div>
+      <div className="page-content page-content--enter" key={pathname}><Outlet /></div>
 
       <footer className="site-footer">
         <div className="footer-inner">

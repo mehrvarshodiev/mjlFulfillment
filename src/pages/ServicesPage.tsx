@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowDown, ArrowUpRight, Check, ClipboardCheck, Package, ScanSearch, ShieldCheck, Truck, Warehouse } from "lucide-react";
 import { Link } from "react-router-dom";
-import { pricing, type FulfillmentModel, type PackagingType } from "../data/pricing";
+import type { FulfillmentModel, PackagingType } from "../data/pricing";
+import { calculateEstimate } from "../features/calculator/calculateEstimate";
 
 const services = [
   { key: "receiving", icon: Package, number: "01" },
@@ -23,22 +24,21 @@ export function ServicesPage() {
   const [marking, setMarking] = useState(false);
   const [storageDays, setStorageDays] = useState(7);
 
-  const estimate = useMemo(() => {
-    const safeUnits = Math.max(1, Math.min(100000, units || 1));
-    const lines = [
-      { label: t("services.calculator.receiving"), amount: safeUnits * pricing.receivingPerUnit },
-      { label: t("services.calculator.inspection"), amount: safeUnits * pricing.inspectionPerUnit },
-      { label: t("services.calculator.packaging"), amount: safeUnits * pricing.packagingPerUnit[packaging] },
-      ...(marking ? [{ label: t("services.calculator.marking"), amount: safeUnits * pricing.markingPerUnit }] : []),
-      ...(storageDays > 0 ? [{ label: t("services.calculator.storage"), amount: safeUnits * storageDays * pricing.storagePerUnitPerDay }] : []),
-      { label: t("services.calculator.dispatch"), amount: safeUnits * pricing.dispatchPerUnit[model] },
-    ];
-    return { lines, total: lines.reduce((sum, line) => sum + line.amount, 0) };
-  }, [units, packaging, marking, storageDays, model, t, i18n.language]);
+  const estimate = useMemo(
+    () => calculateEstimate({ units, packaging, marking, storageDays, model }),
+    [units, packaging, marking, storageDays, model]
+  );
 
   const locale = i18n.resolvedLanguage === "zh" ? "zh-CN" : i18n.resolvedLanguage === "en" ? "en-US" : "ru-RU";
-  const formatMoney = (value: number) => new Intl.NumberFormat(locale, { style: "currency", currency: "RUB", maximumFractionDigits: 0 }).format(value);
-  const formatCount = (value: number) => new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(value);
+  const numberFormatters = useMemo(
+    () => ({
+      money: new Intl.NumberFormat(locale, { style: "currency", currency: "RUB", maximumFractionDigits: 0 }),
+      count: new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }),
+    }),
+    [locale]
+  );
+  const formatMoney = (value: number) => numberFormatters.money.format(value);
+  const formatCount = (value: number) => numberFormatters.count.format(value);
   const selectedMarketplace = t(`services.calculator.marketplaces.${marketplace}`);
 
   return (
@@ -106,7 +106,7 @@ export function ServicesPage() {
             <p className="result-caption">{t("services.calculator.resultCaption", { count: formatCount(units), marketplace: selectedMarketplace })}</p>
             <div className="result-divider"/>
             <div className="result-breakdown-title">{t("services.calculator.breakdown")}</div>
-            <div className="result-lines">{estimate.lines.map(line => <div className="result-line" key={line.label}><span>{line.label}</span><strong>{formatMoney(line.amount)}</strong></div>)}</div>
+            <div className="result-lines">{estimate.lines.map(line => <div className="result-line" key={line.key}><span>{t(line.key)}</span><strong>{formatMoney(line.amount)}</strong></div>)}</div>
             <div className="result-total-line"><span>{t("services.calculator.total")}</span><strong>{formatMoney(estimate.total)}</strong></div>
             <p className="calculator-disclaimer">{t("services.calculator.disclaimer")}</p>
             <Link to="/contacts" className="button-primary calculator-cta">{t("services.calculator.requestQuote")} <ArrowUpRight size={17}/></Link>
