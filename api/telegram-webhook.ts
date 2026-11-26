@@ -9,9 +9,8 @@ import {
   getLeadStats,
   getNoteSession,
   hasProcessedUpdate,
-  LeadFilter,
-  LeadRecord,
-  LeadStatus,
+  type LeadFilter,
+  type LeadStatus,
   leadNumber,
   listLeads,
   markUpdateProcessed,
@@ -19,9 +18,9 @@ import {
   STATUS_LABELS,
   telegramCall,
   updateLeadStatus,
-  ApiRequest,
-  ApiResponse
-} from "./_lib";
+  type ApiRequest,
+  type ApiResponse
+} from "../telegram-crm";
 
 type TelegramUser = { id: number };
 type TelegramChat = { id: number; type?: string };
