@@ -1,6 +1,6 @@
 import {
-  ApiRequest,
-  ApiResponse,
+  type ApiRequest,
+  type ApiResponse,
   clean,
   createDatabase,
   ensureSchema,
@@ -10,7 +10,7 @@ import {
   leadNumber,
   markNotification,
   telegramCall
-} from "./_lib";
+} from "../telegram-crm";
 
 type LeadPayload = {
   name?: unknown;
