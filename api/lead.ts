@@ -1,3 +1,17 @@
+import {
+  type ApiRequest,
+  type ApiResponse,
+  clean,
+  createDatabase,
+  ensureSchema,
+  escapeHtml,
+  insertLead,
+  isValidPhone,
+  leadNumber,
+  markNotification,
+  telegramCall
+} from "../telegram-crm.js";
+
 type LeadPayload = {
   name?: unknown;
   phone?: unknown;
@@ -10,34 +24,9 @@ type LeadPayload = {
   website?: unknown;
 };
 
-type ApiRequest = {
-  method?: string;
-  headers: Record<string, string | string[] | undefined>;
-  body?: unknown;
-};
-
-type ApiResponse = {
-  status: (code: number) => ApiResponse;
-  setHeader: (name: string, value: string) => void;
-  json: (body: Record<string, unknown>) => void;
-};
-
 const recentRequests = new Map<string, number[]>();
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS = 5;
-
-function clean(value: unknown, maxLength: number): string {
-  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
-}
-
-function escapeHtml(value: string): string {
-  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-function isValidPhone(value: string): boolean {
-  const digits = value.replace(/\D/g, "");
-  return digits.length >= 7 && digits.length <= 18;
-}
 
 function isAllowedOrigin(req: ApiRequest): boolean {
   const origin = req.headers.origin;
@@ -73,16 +62,13 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ ok: false, code: "method_not_allowed" });
   }
-
   if (!isAllowedOrigin(req)) {
     return res.status(403).json({ ok: false, code: "origin_not_allowed" });
   }
-
   const contentLength = Number(req.headers["content-length"] ?? 0);
   if (contentLength > 12_000) {
     return res.status(413).json({ ok: false, code: "payload_too_large" });
   }
-
   if (rateLimited(req)) {
     return res.status(429).json({ ok: false, code: "rate_limited" });
   }
@@ -107,39 +93,69 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     return res.status(400).json({ ok: false, code: "invalid_fields" });
   }
 
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-  if (!token || !chatId) {
-    return res.status(503).json({ ok: false, code: "telegram_not_configured" });
-  }
-
-  const lines = [
-    "<b>Новая заявка — mjlFulfillment</b>",
-    "",
-    "<b>Имя:</b> " + escapeHtml(lead.name),
-    "<b>Телефон:</b> " + escapeHtml(lead.phone),
-    "<b>Компания:</b> " + escapeHtml(lead.company || "Не указана"),
-    "<b>Страна:</b> " + escapeHtml(lead.country),
-    "<b>Тип товара:</b> " + escapeHtml(lead.productType),
-    "<b>Объём:</b> " + escapeHtml(lead.volume),
-    "<b>Маркетплейс:</b> " + escapeHtml(lead.marketplace || "Не указан"),
-    "<b>Telegram:</b> " + escapeHtml(lead.telegram || "Не указан")
-  ];
-
+  let sql: ReturnType<typeof createDatabase>;
+  let leadId: string;
   try {
-    const telegramResponse = await fetch("https://api.telegram.org/bot" + token + "/sendMessage", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text: lines.join("\n"), parse_mode: "HTML", disable_web_page_preview: true }),
-      signal: AbortSignal.timeout(10_000)
-    });
-
-    if (!telegramResponse.ok) {
-      return res.status(502).json({ ok: false, code: "telegram_delivery_failed" });
-    }
-
-    return res.status(200).json({ ok: true });
+    sql = createDatabase();
+    await ensureSchema(sql);
+    leadId = await insertLead(sql, lead);
   } catch {
-    return res.status(502).json({ ok: false, code: "telegram_unavailable" });
+    return res.status(503).json({ ok: false, code: "database_unavailable" });
   }
+
+  let notification = "pending";
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (process.env.TELEGRAM_BOT_TOKEN && chatId) {
+    const lines = [
+      "✨ <b>НОВАЯ ЗАЯВКА · MJL FULFILLMENT</b>",
+      "",
+      `<b>Номер:</b> ${leadNumber(leadId)}`,
+      `<b>Статус:</b> 🆕 Новая`,
+      "",
+      `<b>Имя:</b> ${escapeHtml(lead.name)}`,
+      `<b>Телефон:</b> ${escapeHtml(lead.phone)}`,
+      `<b>Компания:</b> ${escapeHtml(lead.company || "Не указана")}`,
+      `<b>Страна:</b> ${escapeHtml(lead.country)}`,
+      `<b>Тип товара:</b> ${escapeHtml(lead.productType)}`,
+      `<b>Объём:</b> ${escapeHtml(lead.volume)}`,
+      `<b>Маркетплейс:</b> ${escapeHtml(lead.marketplace || "Не указан")}`,
+      `<b>Telegram:</b> ${escapeHtml(lead.telegram || "Не указан")}`,
+      "",
+      "<i>Заявка сохранена в CRM.</i>"
+    ];
+    try {
+      const sent = await telegramCall<{ message_id: number }>("sendMessage", {
+        chat_id: chatId,
+        text: lines.join("\n"),
+        parse_mode: "HTML",
+        disable_web_page_preview: true,
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "👁 Открыть заявку", callback_data: `lead:${leadId}:open` }],
+            [{ text: "🟡 Взять в работу", callback_data: `lead:${leadId}:status:in_progress` }]
+          ]
+        }
+      });
+      await markNotification(sql, leadId, "sent", sent.message_id);
+      notification = "sent";
+    } catch {
+      try {
+        await markNotification(sql, leadId, "failed");
+      } catch {
+        // The lead itself is already stored; notification state can be reconciled later.
+      }
+    }
+  } else {
+    try {
+      await markNotification(sql, leadId, "failed");
+    } catch {
+      // Do not discard a successfully saved lead if notification metadata cannot be updated.
+    }
+  }
+
+  return res.status(200).json({
+    ok: true,
+    leadId: leadNumber(leadId),
+    notification
+  });
 }
