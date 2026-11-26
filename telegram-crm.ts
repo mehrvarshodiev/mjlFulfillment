@@ -234,7 +234,7 @@ export async function appendLeadNote(
 }
 
 export async function getLeadStats(sql: SqlClient): Promise<Record<LeadStatus, number> & { total: number }> {
-  const rows = await sql`SELECT status, COUNT(*)::int AS count FROM mjl_leads GROUP BY status`;
+  const rows = (await sql`SELECT status, COUNT(*)::int AS count FROM mjl_leads GROUP BY status`) as unknown as Array<{ status: string; count: number | string }>;
   const result: Record<LeadStatus, number> & { total: number } = {
     new: 0, in_progress: 0, waiting: 0, completed: 0, rejected: 0, total: 0
   };
@@ -249,7 +249,7 @@ export async function getLeadStats(sql: SqlClient): Promise<Record<LeadStatus, n
 }
 
 export async function hasProcessedUpdate(sql: SqlClient, updateId: number): Promise<boolean> {
-  const rows = await sql`SELECT 1 FROM mjl_telegram_updates WHERE update_id = ${updateId} LIMIT 1`;
+  const rows = (await sql`SELECT 1 FROM mjl_telegram_updates WHERE update_id = ${updateId} LIMIT 1`) as unknown as Array<Record<string, unknown>>;
   return rows.length > 0;
 }
 
