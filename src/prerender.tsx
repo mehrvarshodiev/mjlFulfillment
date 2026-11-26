@@ -100,12 +100,55 @@ export async function prerender(data: { url: string }) {
   const metadata = pageMeta[language][routePath] ?? pageMeta[language]["/"] ?? fallbackMetadata;
   const [title, description] = metadata;
 
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${origin}#organization`,
+    name: "mjlFulfillment",
+    url: origin,
+    description,
+    knowsAbout: ["Fulfillment", "Warehouse operations", "Wildberries", "Ozon", "Marketplace logistics", "Cross-border logistics"],
+    areaServed: ["Russia", "Commonwealth of Independent States", "China"],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Marketplace fulfillment services",
+      itemListElement: ["Receiving and inspection", "Labeling and packing", "Storage", "Order picking", "Marketplace dispatch"].map((name) => ({
+        "@type": "Service",
+        name,
+        provider: { "@id": `${origin}#organization` }
+      }))
+    }
+  };
+
+  const structuredData: Array<{ id: string; data: Record<string, unknown> }> = [
+    { id: "mjl-organization-schema", data: organizationSchema }
+  ];
+
+  if (routePath === "/services") {
+    structuredData.push({
+      id: "mjl-faq-schema",
+      data: {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [1, 2, 3, 4].map((number) => ({
+          "@type": "Question",
+          name: instance.t(`services.faq.items.${number}.question`),
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: instance.t(`services.faq.items.${number}.answer`)
+          }
+        }))
+      }
+    });
+  }
+
   return {
     html,
     head: {
       title,
       lang: language === "zh" ? "zh-Hans" : language,
-      elements: getHeadElements(language, routePath, title, description)
+      elements: getHeadElements(language, routePath, title, description),
+      structuredData
     }
   };
 }
