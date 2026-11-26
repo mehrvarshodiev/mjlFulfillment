@@ -130,7 +130,7 @@ export function SiteLayout() {
   const closeMenuRef = useRef<HTMLButtonElement>(null);
   const wasMenuOpenRef = useRef(false);
 
-  const language = (i18n.resolvedLanguage || "ru").split("-")[0];
+  const language = (i18n.resolvedLanguage || "ru").split("-")[0] || "ru";
   const menuCopy: Record<string, { open: string; close: string; eyebrow: string; footnote: string }> = {
     ru: { open: "Открыть меню навигации", close: "Закрыть меню навигации", eyebrow: "НАВИГАЦИЯ ПО САЙТУ", footnote: "Логистика и складской фулфилмент" },
     en: { open: "Open navigation menu", close: "Close navigation menu", eyebrow: "EXPLORE MJL", footnote: "Marketplace logistics & fulfillment" },
