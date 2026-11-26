@@ -37,7 +37,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     });
     if (!sitemapResponse.ok) return res.status(502).json({ ok: false, code: "sitemap_unavailable" });
     const sitemap = await sitemapResponse.text();
-    const urls = [...sitemap.matchAll(/<loc>(.*?)<\\/loc>/g)]
+    const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)]
       .map((match) => match[1] ?? "")
       .filter((url) => {\n        if (!url) return false;
         try { return new URL(url).origin === SITE_ORIGIN; } catch { return false; }
