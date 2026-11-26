@@ -4,7 +4,7 @@ import {
   createDatabase,
   ensureSchema,
   telegramCall
-} from "../telegram-crm";
+} from "../telegram-crm.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   res.setHeader("Cache-Control", "no-store");
