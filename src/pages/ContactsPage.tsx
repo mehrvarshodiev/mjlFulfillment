@@ -2,7 +2,7 @@ import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { CheckCircle2, Clock3, Globe2, LoaderCircle, MessageCircle, PackageCheck, Send, ShieldCheck, Truck } from "lucide-react";
 
-type LeadApiResult = { ok?: boolean; code?: string };
+type LeadApiResult = { ok?: boolean; code?: string; leadId?: string; notification?: string };
 
 type FormState = {
   name: string;
@@ -19,6 +19,7 @@ type FormState = {
 function getLeadErrorKey(code: string | null): string {
   switch (code) {
     case "telegram_not_configured": return "contacts.errorNotConfigured";
+    case "database_unavailable": return "contacts.errorDatabase";
     case "rate_limited": return "contacts.errorRateLimited";
     case "invalid_fields": return "contacts.errorInvalid";
     case "telegram_delivery_failed":
@@ -62,7 +63,7 @@ export function ContactsPage() {
       const result = await response.json().catch(() => ({})) as LeadApiResult;
 
       if (!response.ok || !result.ok) {
-        setErrorCode(result.code || (response.status >= 500 ? "telegram_unavailable" : "request_failed"));
+        setErrorCode(result.code || (response.status >= 500 ? "request_failed" : "request_failed"));
         setStatus("error");
         return;
       }
