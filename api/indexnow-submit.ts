@@ -1,4 +1,15 @@
-import type { ApiRequest, ApiResponse } from "./_types.js";
+type ApiRequest = {
+  method?: string;
+  headers: Record<string, string | string[] | undefined>;
+  body?: unknown;
+  url?: string;
+};
+
+type ApiResponse = {
+  status: (code: number) => ApiResponse;
+  setHeader: (name: string, value: string) => void;
+  json: (body: Record<string, unknown>) => void;
+};
 
 const SITE_ORIGIN = "https://mjlfulfillment.vercel.app";
 
@@ -27,8 +38,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     if (!sitemapResponse.ok) return res.status(502).json({ ok: false, code: "sitemap_unavailable" });
     const sitemap = await sitemapResponse.text();
     const urls = [...sitemap.matchAll(/<loc>(.*?)<\\/loc>/g)]
-      .map((match) => match[1].trim())
-      .filter((url) => {
+      .map((match) => match[1] ?? "")
+      .filter((url) => {\n        if (!url) return false;
         try { return new URL(url).origin === SITE_ORIGIN; } catch { return false; }
       });
     const uniqueUrls = [...new Set(urls)].slice(0, 100);
