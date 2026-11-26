@@ -47,11 +47,14 @@ try {
   for (const route of routes) {
     const result = await prerender({ url: new URL(route, origin).toString() });
     const tags = [...result.head.elements].map(renderHeadElement).join("\n    ");
+  const jsonLd = (result.head.structuredData ?? []).map(({ id, data }) =>
+    `<script id="${escapeAttribute(id)}" type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\\\u003c")}</script>`
+  ).join("\n    ");
     const html = template
       .replace('<html lang="ru">', `<html lang="${escapeAttribute(result.head.lang)}">`)
       .replace(/<title>.*?<\/title>/s, "<title>" + escapeAttribute(result.head.title) + "</title>")
       .replace('<div id="root"></div>', `<div id="root">${result.html}</div>`)
-      .replace("</head>", `    ${tags}\n  </head>`);
+      .replace("</head>", `    ${tags}\n    ${jsonLd}\n  </head>`);
     const output = outputFileForRoute(route);
     await mkdir(path.dirname(output), { recursive: true });
     await writeFile(output, html, "utf8");
