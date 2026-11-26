@@ -1,10 +1,10 @@
 import {
-  ApiRequest,
-  ApiResponse,
+  type ApiRequest,
+  type ApiResponse,
   createDatabase,
   ensureSchema,
   telegramCall
-} from "./_lib";
+} from "../telegram-crm";
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   res.setHeader("Cache-Control", "no-store");
