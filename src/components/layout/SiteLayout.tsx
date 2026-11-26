@@ -28,7 +28,7 @@ function LanguageSwitcher() {
 
   return (
     <div className="language-switcher" aria-label="Select language">
-      {(["ru", "en", "zh"] as const).map((language) => {
+      {(["ru", "en", "zh", "ky", "kk", "uz", "tg"] as const).map((language) => {
         const prefix = language === "ru" ? "" : `/${language}`;
         const href = `${prefix}${pathname === "/" ? "/" : pathname}${hash}`;
 
@@ -54,7 +54,15 @@ function ThemeSwitcher({ theme, onToggle }: { theme: Theme; onToggle: () => void
       ? "切换主题"
       : i18n.resolvedLanguage === "en"
         ? "Switch color theme"
-        : "Переключить тему";
+        : i18n.resolvedLanguage === "uz"
+          ? "Rang mavzusini almashtirish"
+          : i18n.resolvedLanguage === "kk"
+            ? "Түс тақырыбын ауыстыру"
+            : i18n.resolvedLanguage === "ky"
+              ? "Түс темасын өзгөртүү"
+              : i18n.resolvedLanguage === "tg"
+                ? "Тағйири намуди ранг"
+                : "Переключить тему";
 
   return (
     <button
@@ -78,7 +86,15 @@ function SocialLinks() {
       ? "即将推出"
       : i18n.resolvedLanguage === "en"
         ? "Link coming soon"
-        : "Ссылка появится позже";
+        : i18n.resolvedLanguage === "uz"
+          ? "Havola tez orada qoʻshiladi"
+          : i18n.resolvedLanguage === "kk"
+            ? "Сілтеме жақында қосылады"
+            : i18n.resolvedLanguage === "ky"
+              ? "Шилтеме жакында кошулат"
+              : i18n.resolvedLanguage === "tg"
+                ? "Пайванд ба зудӣ илова мешавад"
+                : "Ссылка появится позже";
 
   return (
     <div className="social-links" aria-label="Social media">
@@ -114,19 +130,21 @@ export function SiteLayout() {
   const closeMenuRef = useRef<HTMLButtonElement>(null);
   const wasMenuOpenRef = useRef(false);
 
-  const language = (i18n.resolvedLanguage || "ru").split("-")[0];
-  const openMenuLabel =
-    language === "zh" ? "打开导航菜单" : language === "en" ? "Open navigation menu" : "Открыть меню навигации";
-  const closeMenuLabel =
-    language === "zh" ? "关闭导航菜单" : language === "en" ? "Close navigation menu" : "Закрыть меню навигации";
-  const menuEyebrow =
-    language === "zh" ? "快速导航" : language === "en" ? "EXPLORE MJL" : "НАВИГАЦИЯ ПО САЙТУ";
-  const menuFootnote =
-    language === "zh"
-      ? "物流与仓储履约服务"
-      : language === "en"
-        ? "Marketplace logistics & fulfillment"
-        : "Логистика и складской фулфилмент";
+  const language = (i18n.resolvedLanguage || "ru").split("-")[0] || "ru";
+  const menuCopy: Record<string, { open: string; close: string; eyebrow: string; footnote: string }> = {
+    ru: { open: "Открыть меню навигации", close: "Закрыть меню навигации", eyebrow: "НАВИГАЦИЯ ПО САЙТУ", footnote: "Логистика и складской фулфилмент" },
+    en: { open: "Open navigation menu", close: "Close navigation menu", eyebrow: "EXPLORE MJL", footnote: "Marketplace logistics & fulfillment" },
+    zh: { open: "打开导航菜单", close: "关闭导航菜单", eyebrow: "快速导航", footnote: "物流与仓储履约服务" },
+    ky: { open: "Багыттоо менюсун ачуу", close: "Багыттоо менюсун жабуу", eyebrow: "MJL МЕНЕН ТААНЫШУУ", footnote: "Маркетплейстер үчүн логистика жана фулфилмент" },
+    kk: { open: "Навигация мәзірін ашу", close: "Навигация мәзірін жабу", eyebrow: "MJL САЙТЫМЕН ТАНЫСУ", footnote: "Маркетплейстерге арналған логистика және фулфилмент" },
+    uz: { open: "Navigatsiya menyusini ochish", close: "Navigatsiya menyusini yopish", eyebrow: "MJL BILAN TANISHING", footnote: "Marketpleyslar uchun logistika va fulfilment" },
+    tg: { open: "Кушодани менюи навигатсия", close: "Бастани менюи навигатсия", eyebrow: "ШИНОСОӢ БО MJL", footnote: "Логистика ва фулфилмент барои маркетплейсҳо" }
+  };
+  const copy = menuCopy[language] ?? menuCopy.ru!;
+  const openMenuLabel = copy.open;
+  const closeMenuLabel = copy.close;
+  const menuEyebrow = copy.eyebrow;
+  const menuFootnote = copy.footnote;
 
   useEffect(() => {
     let nextTheme: Theme = "dark";
