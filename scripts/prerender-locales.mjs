@@ -3,11 +3,15 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const origin = "https://mjlfulfillment.vercel.app";
-const routes = [
-  "/", "/services", "/china", "/about", "/contacts",
-  "/en/", "/en/services", "/en/china", "/en/about", "/en/contacts",
-  "/zh/", "/zh/services", "/zh/china", "/zh/about", "/zh/contacts"
-];
+const languages = ["", "en", "zh", "ky", "kk", "uz", "tg"];
+const pages = ["", "services", "china", "about", "contacts"];
+const routes = languages.flatMap((language) =>
+  pages.map((page) => {
+    const prefix = language ? `/${language}` : "";
+    if (!page) return prefix ? `${prefix}/` : "/";
+    return `${prefix}/${page}`;
+  })
+);
 
 function escapeAttribute(value) {
   return String(value)
@@ -40,22 +44,19 @@ const vite = await createServer({
 
 try {
   const { prerender } = await vite.ssrLoadModule("/src/prerender.tsx");
-
   for (const route of routes) {
     const result = await prerender({ url: new URL(route, origin).toString() });
     const tags = [...result.head.elements].map(renderHeadElement).join("\n    ");
-    let html = template
+    const html = template
       .replace('<html lang="ru">', `<html lang="${escapeAttribute(result.head.lang)}">`)
       .replace(/<title>.*?<\/title>/s, "<title>" + escapeAttribute(result.head.title) + "</title>")
       .replace('<div id="root"></div>', `<div id="root">${result.html}</div>`)
       .replace("</head>", `    ${tags}\n  </head>`);
-
     const output = outputFileForRoute(route);
     await mkdir(path.dirname(output), { recursive: true });
     await writeFile(output, html, "utf8");
   }
-
-  process.stdout.write("Prerendered " + routes.length + " static pages (RU, EN, ZH).");
+  process.stdout.write("Prerendered " + routes.length + " static pages (RU, EN, ZH, KY, KK, UZ, TG).");
 } finally {
   await vite.close();
 }
