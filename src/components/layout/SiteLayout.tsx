@@ -140,7 +140,7 @@ export function SiteLayout() {
     uz: { open: "Navigatsiya menyusini ochish", close: "Navigatsiya menyusini yopish", eyebrow: "MJL BILAN TANISHING", footnote: "Marketpleyslar uchun logistika va fulfilment" },
     tg: { open: "Кушодани менюи навигатсия", close: "Бастани менюи навигатсия", eyebrow: "ШИНОСОӢ БО MJL", footnote: "Логистика ва фулфилмент барои маркетплейсҳо" }
   };
-  const copy = menuCopy[language] ?? menuCopy.ru;
+  const copy = menuCopy[language] ?? menuCopy.ru!;
   const openMenuLabel = copy.open;
   const closeMenuLabel = copy.close;
   const menuEyebrow = copy.eyebrow;
