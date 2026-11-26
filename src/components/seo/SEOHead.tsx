@@ -81,7 +81,8 @@ export function SEOHead() {
   useEffect(() => {
     const language = ((i18n.resolvedLanguage || "ru").split("-")[0] as SupportedLanguage);
     const path = location.pathname === "/" ? "/" : location.pathname.replace(/\/$/, "");
-    const metadata = pageMeta[language]?.[path] || pageMeta.ru["/"];
+    const fallbackMetadata: [string, string] = pageMeta.ru["/"]!;
+    const metadata = pageMeta[language]?.[path] ?? pageMeta[language]["/"] ?? fallbackMetadata;
     const [title, description] = metadata;
     const canonical = localizedSeoUrl(language, path);
     const locale: Record<SupportedLanguage, string> = {
