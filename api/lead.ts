@@ -10,7 +10,7 @@ import {
   leadNumber,
   markNotification,
   telegramCall
-} from "../telegram-crm";
+} from "../telegram-crm.js";
 
 type LeadPayload = {
   name?: unknown;
