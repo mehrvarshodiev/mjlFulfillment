@@ -39,7 +39,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     const sitemap = await sitemapResponse.text();
     const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)]
       .map((match) => match[1] ?? "")
-      .filter((url) => {\n        if (!url) return false;
+      .filter((url) => {
+        if (!url) return false;
         try { return new URL(url).origin === SITE_ORIGIN; } catch { return false; }
       });
     const uniqueUrls = [...new Set(urls)].slice(0, 100);
