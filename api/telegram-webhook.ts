@@ -20,7 +20,7 @@ import {
   updateLeadStatus,
   type ApiRequest,
   type ApiResponse
-} from "../telegram-crm";
+} from "../telegram-crm.js";
 
 type TelegramUser = { id: number };
 type TelegramChat = { id: number; type?: string };
