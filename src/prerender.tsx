@@ -96,7 +96,8 @@ export async function prerender(data: { url: string }) {
   );
 
   const html = renderToString(app);
-  const metadata = pageMeta[language][routePath as keyof typeof pageMeta.ru] || pageMeta[language]["/"];
+  const fallbackMetadata: [string, string] = pageMeta.ru["/"]!;
+  const metadata = pageMeta[language][routePath] ?? pageMeta[language]["/"] ?? fallbackMetadata;
   const [title, description] = metadata;
 
   return {
