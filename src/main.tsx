@@ -9,7 +9,8 @@ const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Missing #root application element");
 
 const firstPathSegment = window.location.pathname.split("/").filter(Boolean)[0];
-const basename = firstPathSegment === "en" || firstPathSegment === "zh" ? `/${firstPathSegment}` : "/";
+const supportedPrefixes = ["en", "zh", "ky", "kk", "uz", "tg"];
+const basename = firstPathSegment && supportedPrefixes.includes(firstPathSegment) ? `/${firstPathSegment}` : "/";
 
 const app = (
   <React.StrictMode>
