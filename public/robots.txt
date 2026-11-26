@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /api/
 
 Sitemap: https://mjlfulfillment.vercel.app/sitemap.xml
