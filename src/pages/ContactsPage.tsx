@@ -179,14 +179,23 @@ export function ContactsPage() {
           && (markingValue === "0" || markingValue === "1");
 
         if (valid) {
+          const quoteModel = model as QuoteSummary["model"];
+          const quoteMarketplace = marketplace as QuoteSummary["marketplace"];
+          const quotePackaging = packaging as QuoteSummary["packaging"];
           const quote: QuoteSummary = {
-            model,
-            marketplace,
+            model: quoteModel,
+            marketplace: quoteMarketplace,
             units,
-            packaging,
+            packaging: quotePackaging,
             marking,
             storageDays,
-            estimate: calculateEstimate({ units, model, packaging, marking, storageDays }).total
+            estimate: calculateEstimate({
+              units,
+              model: quoteModel,
+              packaging: quotePackaging,
+              marking,
+              storageDays
+            }).total
           };
           const locale = i18n.resolvedLanguage === "zh" ? "zh-CN"
             : i18n.resolvedLanguage === "en" ? "en-US" : "ru-RU";
@@ -194,15 +203,15 @@ export function ContactsPage() {
           setForm((current) => ({
             ...current,
             volume: formattedUnits + " " + t("contacts.unitsPerMonth"),
-            marketplace
+            marketplace: quoteMarketplace
           }));
           setQuoteSummary(quote);
           setRequestContext([
             "source=calculator",
-            "model=" + model,
-            "marketplace=" + marketplace,
+            "model=" + quoteModel,
+            "marketplace=" + quoteMarketplace,
             "units_per_month=" + units,
-            "packaging=" + packaging,
+            "packaging=" + quotePackaging,
             "marking=" + marking,
             "storage_days=" + storageDays,
             "indicative_demo_estimate_rub=" + quote.estimate,
@@ -227,7 +236,7 @@ export function ContactsPage() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [i18n.resolvedLanguage, t]);
 
   useEffect(() => {
     if (!showSuccessModal) return;
