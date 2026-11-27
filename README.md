@@ -37,3 +37,19 @@ Required server-only variables:
 The first production request to `/api/telegram-setup?key=...` creates the CRM tables and configures the Telegram webhook and command menu. Remove `TELEGRAM_SETUP_KEY` after setup. The webhook accepts updates only with Telegram's secret header and only from the configured private administrator chat.
 
 Database tables are initialized idempotently by the server API: `mjl_leads`, `mjl_lead_events`, `mjl_bot_sessions`, and `mjl_telegram_updates`.
+
+## Telegram username verification on the contact form
+
+The Telegram field is optional. When provided, the visitor must verify that exact public username through Telegram Login (OpenID Connect) before the lead is accepted. The server validates Telegram's signed ID token and stores a short-lived verification ticket in an HttpOnly cookie; the ticket is never exposed to frontend JavaScript.
+
+Configure the existing MJL CRM bot in `@BotFather` → select the bot → **Login Widget**:
+- Allowed website origin: `https://mjlfulfillment.vercel.app`
+- Allowed redirect URI: `https://mjlfulfillment.vercel.app/api/telegram-auth`
+- Keep the default `RS256` signing algorithm.
+
+Add these server-only Vercel Production environment variables:
+- `TELEGRAM_LOGIN_CLIENT_ID`
+- `TELEGRAM_LOGIN_CLIENT_SECRET` (Sensitive)
+- `TELEGRAM_LOGIN_REDIRECT_URI=https://mjlfulfillment.vercel.app/api/telegram-auth`
+
+Never expose the client secret in a `VITE_*` variable. Redeploy after adding the variables. Preview URLs require their own Allowed URL entries and matching environment configuration; the production redirect must not be reused with a different host.
