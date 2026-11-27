@@ -175,7 +175,7 @@ export async function listLeads(
         volume, marketplace, telegram, request_context, status, notes, notification_status, created_at, updated_at
         FROM mjl_leads ORDER BY created_at DESC LIMIT ${safeLimit} OFFSET ${safeOffset}`
     : await sql`SELECT id::text AS id, name, phone, company, country, product_type,
-        volume, marketplace, telegram, status, notes, notification_status, created_at, updated_at
+        volume, marketplace, telegram, request_context, status, notes, notification_status, created_at, updated_at
         FROM mjl_leads WHERE status = ${filter}
         ORDER BY created_at DESC LIMIT ${safeLimit} OFFSET ${safeOffset}`;
   const counts = filter === "all"
