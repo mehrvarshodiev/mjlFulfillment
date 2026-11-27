@@ -22,7 +22,6 @@ type LeadPayload = {
   volume?: unknown;
   marketplace?: unknown;
   telegram?: unknown;
-  telegramProof?: unknown;
   website?: unknown;
 };
 
