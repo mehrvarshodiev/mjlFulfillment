@@ -298,7 +298,7 @@ export function ContactsPage() {
     }
 
     try {
-      sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify({ form, consent } satisfies SavedForm));
+      sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify({ form, consent, requestContext, quoteSummary, sourceContext } satisfies SavedForm));
     } catch {
       setTelegramVerification("error");
       return;
@@ -334,7 +334,7 @@ export function ContactsPage() {
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, requestContext }),
         signal: AbortSignal.timeout(12_000)
       });
       const result = await response.json().catch(() => ({})) as LeadApiResult;
@@ -354,6 +354,9 @@ export function ContactsPage() {
       setShowSuccessModal(true);
       setForm(initialForm);
       setConsent(false);
+      setRequestContext("");
+      setQuoteSummary(null);
+      setSourceContext(null);
       setVerifiedUsername("");
       setTelegramVerification("idle");
       try {
