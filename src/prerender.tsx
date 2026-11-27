@@ -1,5 +1,6 @@
 import { createInstance } from "i18next";
 import { renderToString } from "react-dom/server";
+import { Suspense } from "react";
 import { I18nextProvider, initReactI18next } from "react-i18next";
 import { Route, Routes, StaticRouter } from "react-router-dom";
 import ru from "./i18n/locales/ru.json";
@@ -19,6 +20,10 @@ import { localizedSeoUrl, origin, pageMeta } from "./components/seo/SEOHead";
 
 type SupportedLanguage = "ru" | "en" | "zh" | "ky" | "kk" | "uz" | "tg";
 const supportedLanguages: SupportedLanguage[] = ["ru", "en", "zh", "ky", "kk", "uz", "tg"];
+function PageLoader() {
+  return <div className="page-loader" role="status" aria-live="polite"><span className="page-loader-mark">MJL</span><span>FULFILLMENT</span></div>;
+}
+
 const resources = {
   ru: { translation: ru }, en: { translation: en }, zh: { translation: zh },
   ky: { translation: ky }, kk: { translation: kk }, uz: { translation: uz }, tg: { translation: tg }
@@ -85,10 +90,10 @@ export async function prerender(data: { url: string }) {
         <Routes>
           <Route element={<SiteLayout />}>
             <Route index element={<HomePage />} />
-            <Route path="services" element={<ServicesPage />} />
-            <Route path="china" element={<ChinaSellersPage />} />
-            <Route path="about" element={<AboutPage />} />
-            <Route path="contacts" element={<ContactsPage />} />
+            <Route path="services" element={<Suspense fallback={<PageLoader />}><ServicesPage /></Suspense>} />
+            <Route path="china" element={<Suspense fallback={<PageLoader />}><ChinaSellersPage /></Suspense>} />
+            <Route path="about" element={<Suspense fallback={<PageLoader />}><AboutPage /></Suspense>} />
+            <Route path="contacts" element={<Suspense fallback={<PageLoader />}><ContactsPage /></Suspense>} />
           </Route>
         </Routes>
       </StaticRouter>
