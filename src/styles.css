@@ -1842,3 +1842,79 @@ textarea:focus-visible {
   font-size: 11px;
   font-weight: 800;
 }
+
+
+/* Lead intent carried over from the service calculator or China landing page. */
+.contacts-context-card {
+  margin: 0 0 19px;
+  padding: 16px 17px;
+  border: 1px solid rgb(96 165 250 / 25%);
+  border-radius: 15px;
+  background: linear-gradient(125deg, rgb(37 99 235 / 13%), rgb(16 31 51 / 75%));
+  color: #dceaff;
+}
+.contacts-context-card > strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #dbeafe;
+  font-size: 12px;
+  font-weight: 800;
+}
+.contacts-context-card > p {
+  margin: 0;
+  color: #9fb3ce;
+  font-size: 10px;
+  line-height: 1.65;
+}
+.contacts-context-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 13px;
+}
+.contacts-context-grid > span {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+  padding: 9px 10px;
+  border: 1px solid rgb(148 163 184 / 13%);
+  border-radius: 10px;
+  background: rgb(5 16 31 / 34%);
+}
+.contacts-context-grid small {
+  color: #839ab7;
+  font-size: 9px;
+}
+.contacts-context-grid b {
+  overflow-wrap: anywhere;
+  color: #e7f0ff;
+  font-size: 11px;
+  font-weight: 750;
+}
+.contacts-context-card > p.contacts-context-disclaimer {
+  margin-top: 11px;
+  color: #8297b2;
+  font-size: 9px;
+}
+:root[data-theme="light"] .contacts-context-card {
+  border-color: #c9defc;
+  background: linear-gradient(125deg, #eff6ff, #f8fbff);
+  color: #1e3a5f;
+}
+:root[data-theme="light"] .contacts-context-card > strong,
+:root[data-theme="light"] .contacts-context-grid b {
+  color: #1e3a5f;
+}
+:root[data-theme="light"] .contacts-context-card > p,
+:root[data-theme="light"] .contacts-context-grid small {
+  color: #647b98;
+}
+:root[data-theme="light"] .contacts-context-grid > span {
+  border-color: #dce8f7;
+  background: rgb(255 255 255 / 75%);
+}
+@media (max-width: 600px) {
+  .contacts-context-card { padding: 14px; }
+  .contacts-context-grid { gap: 7px; }
+  .contacts-context-grid > span { padding: 8px; }
+}

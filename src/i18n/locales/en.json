@@ -24,9 +24,24 @@
     "primaryCta": "Calculate pricing",
     "secondaryCta": "Discuss a shipment",
     "metrics": {
-      "sla": "Operational SLA",
-      "dispatch": "Dispatch to marketplace warehouses",
-      "marketplaces": "Shipment preparation for Wildberries and Ozon"
+      "models": "FBO AND FBS MODELS",
+      "siteLanguages": "WEBSITE LANGUAGES",
+      "marketplaces": "MARKETPLACES",
+      "operations": "WAREHOUSE OPERATIONS"
+    },
+    "heroNote": "From inbound receiving to marketplace handover",
+    "visualStatus": "WAREHOUSE WORKFLOW",
+    "visualReady": "PREPARATION FOR DISPATCH",
+    "qualityControl": "Quality inspection",
+    "dispatchWorkflow": "Shipment preparation",
+    "servicesEyebrow": "WAREHOUSE OPERATIONS / 01",
+    "chinaEyebrow": "SHIPMENTS FROM CHINA / 02",
+    "closingEyebrow": "LET’S DISCUSS YOUR SHIPMENT / 03",
+    "operations": {
+      "receiving": "01 / RECEIVING",
+      "labeling": "02 / LABELING",
+      "packing": "03 / PACKING",
+      "dispatch": "04 / DISPATCH"
     }
   },
   "services": {
@@ -313,7 +328,17 @@
     "successTitle": "Your inquiry is received!",
     "successDescription": "Thank you for contacting MJL Fulfillment. We have received your details and our team will get back to you within one business day.",
     "successReference": "Your inquiry reference",
-    "successClose": "Done"
+    "successClose": "Done",
+    "unitsPerMonth": "units/month",
+    "contextTitle": "Calculator settings carried over",
+    "contextDescription": "Your estimate settings have been added to the inquiry. Please review the monthly volume and marketplace before sending.",
+    "contextModel": "Model",
+    "contextMarketplace": "Marketplace",
+    "contextUnits": "Monthly units",
+    "contextEstimate": "Indicative estimate",
+    "contextDisclaimer": "This estimate uses demonstration rates and is not an offer. Our manager will confirm the final price.",
+    "sourceChinaTitle": "China-to-Russia shipment inquiry",
+    "sourceChinaDescription": "Tell us about the supplier, products, shipment volume and route to Russia."
   },
   "footer": {
     "tagline": "End-to-end fulfillment and logistics for e-commerce.",

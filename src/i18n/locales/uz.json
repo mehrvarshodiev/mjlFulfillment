@@ -24,9 +24,24 @@
     "primaryCta": "Narxni hisoblash",
     "secondaryCta": "Yetkazib berishni muhokama qilish",
     "metrics": {
-      "sla": "Operatsion SLA",
-      "dispatch": "Marketpleys omborlariga jo‘natish",
-      "marketplaces": "Wildberries va Ozon uchun yuklarni tayyorlash"
+      "models": "FBO VA FBS MODELLARI",
+      "siteLanguages": "SAYT TILLARI",
+      "marketplaces": "MARKETPLEYSLAR",
+      "operations": "OMBOR OPERATSIYALARI"
+    },
+    "heroNote": "Tovarni qabul qilishdan marketpleys omboriga topshirishgacha",
+    "visualStatus": "OMBOR ISH JARAYONI",
+    "visualReady": "JO‘NATISHGA TAYYORLASH",
+    "qualityControl": "Sifat nazorati",
+    "dispatchWorkflow": "Jo‘natmani tayyorlash",
+    "servicesEyebrow": "OMBOR OPERATSIYALARI / 01",
+    "chinaEyebrow": "XITOYDAN YETKAZIB BERISH / 02",
+    "closingEyebrow": "JO‘NATMANGIZNI MUHOKAMA QILAYLIK / 03",
+    "operations": {
+      "receiving": "01 / QABUL QILISH",
+      "labeling": "02 / MARKIROVKA",
+      "packing": "03 / QADOQLASH",
+      "dispatch": "04 / JO‘NATISH"
     }
   },
   "services": {
@@ -313,7 +328,17 @@
     "successTitle": "So‘rovingiz qabul qilindi!",
     "successDescription": "MJL Fulfillment bilan bog‘langaningiz uchun rahmat. Ma’lumotlaringizni oldik va jamoamiz bir ish kuni ichida siz bilan bog‘lanadi.",
     "successReference": "So‘rov raqami",
-    "successClose": "Tayyor"
+    "successClose": "Tayyor",
+    "unitsPerMonth": "dona/oy",
+    "contextTitle": "Kalkulyator parametrlari qo‘shildi",
+    "contextDescription": "Taxminiy hisob parametrlari so‘rovga qo‘shildi. Yuborishdan oldin oylik hajm va marketpleysni tekshiring.",
+    "contextModel": "Model",
+    "contextMarketplace": "Marketpleys",
+    "contextUnits": "Oylik mahsulot soni",
+    "contextEstimate": "Taxminiy summa",
+    "contextDisclaimer": "Hisob namunaviy tariflar asosida tuzilgan va ommaviy oferta emas. Yakuniy narxni menejer tasdiqlaydi.",
+    "sourceChinaTitle": "Xitoydan Rossiyaga yetkazib berish so‘rovi",
+    "sourceChinaDescription": "Yetkazib beruvchi, mahsulot, hajm va Rossiyaga yetkazish yo‘nalishi haqida ayting."
   },
   "footer": {
     "tagline": "Elektron tijorat uchun to‘liq fulfilment va logistika xizmatlari.",

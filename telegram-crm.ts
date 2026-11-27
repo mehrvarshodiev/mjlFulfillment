@@ -9,6 +9,7 @@ export type LeadInput = {
   volume: string;
   marketplace: string;
   telegram: string;
+  requestContext: string;
 };
 
 export type LeadRecord = {
@@ -21,6 +22,7 @@ export type LeadRecord = {
   volume: string;
   marketplace: string;
   telegram: string;
+  request_context: string;
   status: LeadStatus;
   notes: string;
   notification_status: string;
@@ -66,6 +68,7 @@ export async function ensureSchema(sql: SqlClient): Promise<void> {
         volume TEXT NOT NULL,
         marketplace TEXT NOT NULL DEFAULT '',
         telegram TEXT NOT NULL DEFAULT '',
+        request_context TEXT NOT NULL DEFAULT '',
         status TEXT NOT NULL DEFAULT 'new'
           CHECK (status IN ('new', 'in_progress', 'waiting', 'completed', 'rejected')),
         notes TEXT NOT NULL DEFAULT '',
@@ -74,6 +77,7 @@ export async function ensureSchema(sql: SqlClient): Promise<void> {
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
         updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       )`;
+      await sql`ALTER TABLE mjl_leads ADD COLUMN IF NOT EXISTS request_context TEXT NOT NULL DEFAULT ''`;
       await sql`CREATE INDEX IF NOT EXISTS mjl_leads_status_created_idx
         ON mjl_leads (status, created_at DESC)`;
       await sql`CREATE TABLE IF NOT EXISTS mjl_lead_events (
@@ -123,10 +127,10 @@ export function isValidPhone(value: string): boolean {
 
 export async function insertLead(sql: SqlClient, lead: LeadInput): Promise<string> {
   const rows = await sql`INSERT INTO mjl_leads
-    (name, phone, company, country, product_type, volume, marketplace, telegram)
+    (name, phone, company, country, product_type, volume, marketplace, telegram, request_context)
     VALUES
     (${lead.name}, ${lead.phone}, ${lead.company}, ${lead.country},
-     ${lead.productType}, ${lead.volume}, ${lead.marketplace}, ${lead.telegram})
+     ${lead.productType}, ${lead.volume}, ${lead.marketplace}, ${lead.telegram}, ${lead.requestContext})
     RETURNING id::text AS id`;
   const id = rows[0]?.id;
   if (!id) throw new Error("Lead insert returned no id");
@@ -137,7 +141,7 @@ export async function insertLead(sql: SqlClient, lead: LeadInput): Promise<strin
 
 export async function getLead(sql: SqlClient, id: string): Promise<LeadRecord | null> {
   const rows = await sql`SELECT id::text AS id, name, phone, company, country,
-    product_type, volume, marketplace, telegram, status, notes, notification_status,
+    product_type, volume, marketplace, telegram, request_context, status, notes, notification_status,
     created_at, updated_at
     FROM mjl_leads WHERE id = ${id} LIMIT 1`;
   return (rows[0] as LeadRecord | undefined) ?? null;
@@ -168,10 +172,10 @@ export async function listLeads(
   const safeOffset = Math.max(0, offset);
   const items = filter === "all"
     ? await sql`SELECT id::text AS id, name, phone, company, country, product_type,
-        volume, marketplace, telegram, status, notes, notification_status, created_at, updated_at
+        volume, marketplace, telegram, request_context, status, notes, notification_status, created_at, updated_at
         FROM mjl_leads ORDER BY created_at DESC LIMIT ${safeLimit} OFFSET ${safeOffset}`
     : await sql`SELECT id::text AS id, name, phone, company, country, product_type,
-        volume, marketplace, telegram, status, notes, notification_status, created_at, updated_at
+        volume, marketplace, telegram, request_context, status, notes, notification_status, created_at, updated_at
         FROM mjl_leads WHERE status = ${filter}
         ORDER BY created_at DESC LIMIT ${safeLimit} OFFSET ${safeOffset}`;
   const counts = filter === "all"
