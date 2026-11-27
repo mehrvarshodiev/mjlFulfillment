@@ -401,6 +401,24 @@ export function ContactsPage() {
         </div>
 
         <form onSubmit={handleSubmit} aria-busy={status === "sending"}>
+          {quoteSummary ? (
+            <aside className="contacts-context-card" role="note">
+              <strong>{t("contacts.contextTitle")}</strong>
+              <p>{t("contacts.contextDescription")}</p>
+              <div className="contacts-context-grid">
+                <span><small>{t("contacts.contextModel")}</small><b>{quoteSummary.model}</b></span>
+                <span><small>{t("contacts.contextMarketplace")}</small><b>{quoteSummary.marketplace === "both" ? t("contacts.marketplaceBoth") : quoteSummary.marketplace === "wildberries" ? "Wildberries" : "Ozon"}</b></span>
+                <span><small>{t("contacts.contextUnits")}</small><b>{quoteSummary.units.toLocaleString(quoteLocale)} {t("contacts.unitsPerMonth")}</b></span>
+                <span><small>{t("contacts.contextEstimate")}</small><b>{quoteMoney}</b></span>
+              </div>
+              <p className="contacts-context-disclaimer">{t("contacts.contextDisclaimer")}</p>
+            </aside>
+          ) : sourceContext === "china" ? (
+            <aside className="contacts-context-card" role="note">
+              <strong>{t("contacts.sourceChinaTitle")}</strong>
+              <p>{t("contacts.sourceChinaDescription")}</p>
+            </aside>
+          ) : null}
           <div className="contacts-field-grid">
             <label>
               <span>{t("contacts.name")}<span className="contacts-required-mark" aria-hidden="true"> *</span></span>
