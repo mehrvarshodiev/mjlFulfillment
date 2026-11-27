@@ -1,3 +1,4 @@
+import { normalizeTelegramUsername, verifyTelegramProof } from "./telegram-auth.js";
 import {
   type ApiRequest,
   type ApiResponse,
@@ -89,8 +90,28 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     telegram: clean(payload.telegram, 80)
   };
 
-  if (!lead.name || !lead.phone || !lead.country || !lead.productType || !lead.volume || !isValidPhone(lead.phone)) {
+  if (
+    !lead.name ||
+    !lead.phone ||
+    !lead.company ||
+    !lead.country ||
+    !lead.productType ||
+    !lead.volume ||
+    !["both", "wildberries", "ozon", "other"].includes(lead.marketplace) ||
+    !isValidPhone(lead.phone)
+  ) {
     return res.status(400).json({ ok: false, code: "invalid_fields" });
+  }
+
+  if (lead.telegram) {
+    const telegramUsername = normalizeTelegramUsername(lead.telegram);
+    if (!telegramUsername) {
+      return res.status(400).json({ ok: false, code: "invalid_telegram_username" });
+    }
+    if (!verifyTelegramProof(req.headers.cookie, telegramUsername)) {
+      return res.status(400).json({ ok: false, code: "telegram_not_verified" });
+    }
+    lead.telegram = `@${telegramUsername}`;
   }
 
   let sql: ReturnType<typeof createDatabase>;
