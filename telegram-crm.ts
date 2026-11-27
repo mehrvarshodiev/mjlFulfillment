@@ -9,6 +9,7 @@ export type LeadInput = {
   volume: string;
   marketplace: string;
   telegram: string;
+  notes?: string;
 };
 
 export type LeadRecord = {
@@ -123,10 +124,10 @@ export function isValidPhone(value: string): boolean {
 
 export async function insertLead(sql: SqlClient, lead: LeadInput): Promise<string> {
   const rows = await sql`INSERT INTO mjl_leads
-    (name, phone, company, country, product_type, volume, marketplace, telegram)
+    (name, phone, company, country, product_type, volume, marketplace, telegram, notes)
     VALUES
     (${lead.name}, ${lead.phone}, ${lead.company}, ${lead.country},
-     ${lead.productType}, ${lead.volume}, ${lead.marketplace}, ${lead.telegram})
+     ${lead.productType}, ${lead.volume}, ${lead.marketplace}, ${lead.telegram}, ${lead.notes ?? ""})
     RETURNING id::text AS id`;
   const id = rows[0]?.id;
   if (!id) throw new Error("Lead insert returned no id");

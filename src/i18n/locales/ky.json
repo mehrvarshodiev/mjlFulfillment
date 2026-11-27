@@ -27,6 +27,13 @@
       "sla": "Операциялык SLA",
       "dispatch": "Маркетплейс кампаларына жөнөтүү",
       "marketplaces": "Wildberries жана Ozon үчүн жүктөрдү даярдоо"
+    },
+    "workflowStatus": "ИШ ПРОЦЕССИНИН СХЕМАСЫ",
+    "facts": {
+      "models": "ФУЛФИЛМЕНТ МОДЕЛДЕРИ",
+      "operations": "НЕГИЗГИ ОПЕРАЦИЯЛАР",
+      "marketplaces": "МАРКЕТПЛЕЙСТЕР",
+      "geography": "САТУУЧУЛАРДЫН РЫНОКТОРУ"
     }
   },
   "services": {
@@ -313,7 +320,12 @@
     "successTitle": "Суроо-талабыңыз кабыл алынды!",
     "successDescription": "MJL Fulfillment компаниясына кайрылганыңыз үчүн рахмат. Маалыматыңызды алдык жана бир жумуш күнүнүн ичинде сиз менен байланышабыз.",
     "successReference": "Суроо-талап номери",
-    "successClose": "Даяр"
+    "successClose": "Даяр",
+    "calculatorSummaryTitle": "Болжолдуу эсептин параметрлери",
+    "calculatorSummaryDescription": "Сумма үлгүлүү тарифтер менен эсептелди жана оферта болуп саналбайт. Менеджер товар жана логистика тууралуу маалыматты тактагандан кийин акыркы бааны ырастайт.",
+    "calculatorVolume": "Калькулятор боюнча {{count}} даана",
+    "calculatorSummaryIncluded": "Кошулган",
+    "calculatorSummaryNotIncluded": "Тандалган жок"
   },
   "footer": {
     "tagline": "Электрондук соода үчүн толук фулфилмент жана логистика кызматтары.",

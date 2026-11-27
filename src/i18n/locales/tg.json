@@ -27,6 +27,13 @@
       "sla": "SLA-и амалиётӣ",
       "dispatch": "Ирсол ба анборҳои маркетплейсҳо",
       "marketplaces": "Омода кардани бор барои Wildberries ва Ozon"
+    },
+    "workflowStatus": "НАҚШАИ РАВАНДИ КОР",
+    "facts": {
+      "models": "МОДЕЛҲОИ ФУЛФИЛМЕНТ",
+      "operations": "АМАЛИЁТИ АСОСӢ",
+      "marketplaces": "МАРКЕТПЛЕЙСҲО",
+      "geography": "БОЗОРҲОИ ФУРӮШАНДАГОН"
     }
   },
   "services": {
@@ -313,7 +320,12 @@
     "successTitle": "Дархости шумо қабул шуд!",
     "successDescription": "Ташаккур барои муроҷиат ба MJL Fulfillment. Мо маълумоти шуморо гирифтем ва дар давоми як рӯзи корӣ бо шумо тамос мегирем.",
     "successReference": "Рақами дархост",
-    "successClose": "Тайёр"
+    "successClose": "Тайёр",
+    "calculatorSummaryTitle": "Параметрҳои ҳисобкунии тахминӣ",
+    "calculatorSummaryDescription": "Маблағ аз рӯи тарифҳои намунавӣ ҳисоб шудааст ва пешниҳоди расмӣ нест. Менеҷер пас аз дақиқ кардани мол ва логистика нархи ниҳоиро тасдиқ мекунад.",
+    "calculatorVolume": "{{count}} адад аз рӯи ҳисобкунак",
+    "calculatorSummaryIncluded": "Илова шудааст",
+    "calculatorSummaryNotIncluded": "Интихоб нашудааст"
   },
   "footer": {
     "tagline": "Хизматрасониҳои пурраи фулфилмент ва логистика барои тиҷорати электронӣ.",

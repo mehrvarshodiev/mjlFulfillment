@@ -27,6 +27,13 @@
       "sla": "运营服务水平协议",
       "dispatch": "发往电商平台仓库",
       "marketplaces": "支持 Wildberries 与 Ozon 入仓"
+    },
+    "workflowStatus": "履约流程示意",
+    "facts": {
+      "models": "履约模式",
+      "operations": "核心操作环节",
+      "marketplaces": "电商平台",
+      "geography": "卖家目标市场"
     }
   },
   "services": {
@@ -313,7 +320,12 @@
     "successTitle": "咨询已成功提交！",
     "successDescription": "感谢您联系 MJL Fulfillment。我们已收到您的信息，团队将在一个工作日内与您联系。",
     "successReference": "咨询编号",
-    "successClose": "完成"
+    "successClose": "完成",
+    "calculatorSummaryTitle": "您的预估参数",
+    "calculatorSummaryDescription": "此金额按演示费率计算，不构成正式报价。经理将在了解商品和物流需求后确认最终价格。",
+    "calculatorVolume": "计算器预估 {{count}} 件",
+    "calculatorSummaryIncluded": "已加入",
+    "calculatorSummaryNotIncluded": "未选择"
   },
   "footer": {
     "tagline": "面向电子商务的一站式履约与物流服务。",

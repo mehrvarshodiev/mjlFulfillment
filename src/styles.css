@@ -1842,3 +1842,26 @@ textarea:focus-visible {
   font-size: 11px;
   font-weight: 800;
 }
+
+
+/* Calculator-to-inquiry context */
+.contacts-calculator-summary{margin:0 0 22px;padding:20px;border:1px solid rgb(96 165 250 / 25%);border-radius:16px;background:linear-gradient(145deg,rgb(37 99 235 / 12%),rgb(15 31 51 / 92%))}
+.contacts-calculator-summary-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.contacts-calculator-summary-heading>div{display:grid;gap:8px;min-width:0}
+.contacts-calculator-summary-heading>div>span{color:#8fbaff;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.contacts-calculator-summary-heading strong{color:#f4f8ff;font-size:clamp(23px,3vw,30px);letter-spacing:-.045em;line-height:1.1}
+.contacts-calculator-summary-model{padding:7px 10px;border:1px solid rgb(96 165 250 / 30%);border-radius:9px;color:#a8c9ff;font-size:10px;font-weight:800}
+.contacts-calculator-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px 18px;margin:18px 0 0;padding-top:16px;border-top:1px solid rgb(148 163 184 / 16%)}
+.contacts-calculator-summary-grid div{display:grid;gap:5px;min-width:0}
+.contacts-calculator-summary-grid dt{color:#8498b2;font-size:9px;font-weight:600}
+.contacts-calculator-summary-grid dd{margin:0;color:#e3edfb;font-size:11px;font-weight:700;overflow-wrap:anywhere}
+.contacts-calculator-summary>p{margin:16px 0 0;color:#93a6bf;font-size:10px;line-height:1.65}
+:root[data-theme="light"] .contacts-calculator-summary{background:linear-gradient(145deg,#eff6ff,#f8fbff);border-color:#bfdbfe}
+:root[data-theme="light"] .contacts-calculator-summary-heading>div>span{color:#2563eb}
+:root[data-theme="light"] .contacts-calculator-summary-heading strong{color:#172033}
+:root[data-theme="light"] .contacts-calculator-summary-model{color:#1d4ed8;border-color:#bfdbfe}
+:root[data-theme="light"] .contacts-calculator-summary-grid{border-top-color:#dbeafe}
+:root[data-theme="light"] .contacts-calculator-summary-grid dt{color:#64748b}
+:root[data-theme="light"] .contacts-calculator-summary-grid dd{color:#1e293b}
+:root[data-theme="light"] .contacts-calculator-summary>p{color:#64748b}
+@media(max-width:600px){.contacts-calculator-summary{padding:16px}.contacts-calculator-summary-grid{gap:12px}.contacts-calculator-summary-heading strong{font-size:24px}}
