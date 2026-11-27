@@ -371,6 +371,12 @@ export function ContactsPage() {
     }
   }
 
+  const quoteLocale = i18n.resolvedLanguage === "zh" ? "zh-CN"
+    : i18n.resolvedLanguage === "en" ? "en-US" : "ru-RU";
+  const quoteMoney = quoteSummary
+    ? new Intl.NumberFormat(quoteLocale, { style: "currency", currency: "RUB", maximumFractionDigits: 0 }).format(quoteSummary.estimate)
+    : "";
+
   return <main className="contacts-page">
     <section className="contacts-hero section-wrap">
       <div className="contacts-copy">
