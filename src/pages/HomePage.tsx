@@ -32,6 +32,10 @@ export function HomePage() {
       <div className="hero-index">01 <span>—</span> 04</div>
     </section>
     <section className="metrics-strip"><div className="section-wrap metrics-grid"><div><strong>FBO <span>/</span> FBS</strong><small>{t("home.metrics.models")}</small></div><div><strong>7</strong><small>{t("home.metrics.siteLanguages")}</small></div><div><strong>WB <span>+</span> OZON</strong><small>{t("home.metrics.marketplaces")}</small></div><div><strong>06</strong><small>{t("home.metrics.operations")}</small></div></div></section>
+    <section className="seller-value section-wrap">
+      <div className="section-heading"><div><span className="section-kicker">{t("home.sellerEyebrow")}</span><h2>{t("home.sellerTitle")}</h2></div><p>{t("home.sellerIntro")}</p></div>
+      <div className="seller-value-grid">{(t("home.sellerBenefits", { returnObjects: true }) as { title: string; description: string }[]).map((benefit, index) => <article className="seller-value-card" key={benefit.title}><span>0{index + 1}</span><h3>{benefit.title}</h3><p>{benefit.description}</p></article>)}</div>
+    </section>
     <section className="services-preview section-wrap">
       <div className="section-heading"><div><span className="section-kicker">{t("home.servicesEyebrow")}</span><h2>{t("services.title")}</h2></div><Link to="/services" className="text-link">{t("common.learnMore")}<ArrowUpRight size={16}/></Link></div>
       <div className="service-grid">{services.map(({icon:Icon,title,detail},index)=><article className="service-tile service-tile-reveal" key={detail} style={{ animationDelay: `${index * 70}ms` }}><div className="tile-top"><Icon size={21}/><span>{detail}</span></div><h3>{title}</h3><span className="tile-arrow"><ArrowUpRight size={17}/></span></article>)}</div>
