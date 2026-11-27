@@ -26,7 +26,7 @@ export function ChinaSellersPage() {
           <h1>{t("china.title")}</h1>
           <p>{t("china.description")}</p>
           <div className="china-hero-actions">
-            <Link className="button-primary" to="/contacts">{t("china.cta")}<ArrowUpRight size={17}/></Link>
+            <Link className="button-primary" to="/contacts?source=china">{t("china.cta")}<ArrowUpRight size={17}/></Link>
             <a className="button-secondary" href="#china-process">{t("china.processLink")}<ArrowRight size={16}/></a>
           </div>
           <div className="china-trust-row"><span><Languages size={15}/>{t("china.languageSupport")}</span><span><PackageCheck size={15}/>{t("china.marketplaceSupport")}</span></div>
@@ -61,7 +61,7 @@ export function ChinaSellersPage() {
         <div className="marketplace-panels"><article><span className="marketplace-monogram">WB</span><div><h3>Wildberries</h3><p>{t("china.wildberries")}</p></div><ArrowUpRight size={18}/></article><article><span className="marketplace-monogram ozon">O</span><div><h3>Ozon</h3><p>{t("china.ozon")}</p></div><ArrowUpRight size={18}/></article></div>
       </section>
 
-      <section className="china-cta"><div className="section-wrap china-cta-inner"><div><span className="section-kicker">{t("china.ctaEyebrow")}</span><h2>{t("china.ctaTitle")}</h2><p>{t("china.ctaDescription")}</p></div><Link to="/contacts" className="button-light">{t("china.cta")}<ArrowUpRight size={17}/></Link></div></section>
+      <section className="china-cta"><div className="section-wrap china-cta-inner"><div><span className="section-kicker">{t("china.ctaEyebrow")}</span><h2>{t("china.ctaTitle")}</h2><p>{t("china.ctaDescription")}</p></div><Link to="/contacts?source=china" className="button-light">{t("china.cta")}<ArrowUpRight size={17}/></Link></div></section>
     </main>
   );
 }
