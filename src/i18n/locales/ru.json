@@ -27,6 +27,13 @@
       "sla": "Операционный SLA",
       "dispatch": "Отгрузка на склады маркетплейсов",
       "marketplaces": "Подготовка поставок для Wildberries и Ozon"
+    },
+    "workflowStatus": "СХЕМА ОБРАБОТКИ",
+    "facts": {
+      "models": "МОДЕЛИ ФУЛФИЛМЕНТА",
+      "operations": "КЛЮЧЕВЫХ ОПЕРАЦИЙ",
+      "marketplaces": "МАРКЕТПЛЕЙСА",
+      "geography": "ГЕОГРАФИЯ ПРОДАВЦОВ"
     }
   },
   "services": {
@@ -313,7 +320,12 @@
     "successTitle": "Заявка принята!",
     "successDescription": "Спасибо за обращение в MJL Fulfillment. Мы получили ваши данные и свяжемся с вами в течение одного рабочего дня.",
     "successReference": "Номер вашей заявки",
-    "successClose": "Готово"
+    "successClose": "Готово",
+    "calculatorSummaryTitle": "Параметры предварительного расчёта",
+    "calculatorSummaryDescription": "Сумма рассчитана по демонстрационным тарифам и не является офертой. Менеджер подтвердит итоговую стоимость после уточнения товара и логистики.",
+    "calculatorVolume": "{{count}} шт. по калькулятору",
+    "calculatorSummaryIncluded": "Добавлена",
+    "calculatorSummaryNotIncluded": "Не выбрана"
   },
   "footer": {
     "tagline": "Комплексный фулфилмент и логистика для электронной коммерции.",
