@@ -22,6 +22,7 @@ type LeadPayload = {
   volume?: unknown;
   marketplace?: unknown;
   telegram?: unknown;
+  requestContext?: unknown;
   website?: unknown;
 };
 
@@ -87,7 +88,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     productType: clean(payload.productType, 120),
     volume: clean(payload.volume, 80),
     marketplace: clean(payload.marketplace, 80),
-    telegram: clean(payload.telegram, 80)
+    telegram: clean(payload.telegram, 80),
+    requestContext: clean(payload.requestContext, 1000)
   };
 
   if (
@@ -141,6 +143,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       `<b>Объём:</b> ${escapeHtml(lead.volume)}`,
       `<b>Маркетплейс:</b> ${escapeHtml(lead.marketplace || "Не указан")}`,
       `<b>Telegram:</b> ${escapeHtml(lead.telegram || "Не указан")}`,
+      ...(lead.requestContext ? ["", "<b>Контекст запроса:</b>", escapeHtml(lead.requestContext)] : []),
       "",
       "<i>Заявка сохранена в CRM.</i>"
     ];
