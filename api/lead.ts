@@ -1,4 +1,5 @@
 import { normalizeTelegramUsername, verifyTelegramProof } from "./telegram-auth.js";
+import { pricing, type FulfillmentModel, type PackagingType } from "../src/data/pricing.js";
 import {
   type ApiRequest,
   type ApiResponse,
@@ -23,7 +24,74 @@ type LeadPayload = {
   marketplace?: unknown;
   telegram?: unknown;
   website?: unknown;
+  calculator?: unknown;
 };
+
+type CalculatorPayload = {
+  marketplace: "wb" | "ozon" | "both";
+  model: FulfillmentModel;
+  units: number;
+  packaging: PackagingType;
+  marking: boolean;
+  storageDays: number;
+};
+
+function parseCalculatorPayload(value: unknown): CalculatorPayload | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  const candidate = value as Record<string, unknown>;
+  const marketplace = candidate.marketplace;
+  const model = candidate.model;
+  const packaging = candidate.packaging;
+  const units = candidate.units;
+  const storageDays = candidate.storageDays;
+  const marking = candidate.marking;
+
+  if (
+    !["wb", "ozon", "both"].includes(String(marketplace)) ||
+    !["FBO", "FBS"].includes(String(model)) ||
+    !["standard", "protective", "custom"].includes(String(packaging)) ||
+    typeof units !== "number" || !Number.isInteger(units) || units < 10 || units > 5000 || units % 10 !== 0 ||
+    typeof storageDays !== "number" || !Number.isInteger(storageDays) || storageDays < 0 || storageDays > 60 ||
+    typeof marking !== "boolean"
+  ) return null;
+
+  return {
+    marketplace: marketplace as CalculatorPayload["marketplace"],
+    model: model as FulfillmentModel,
+    units,
+    packaging: packaging as PackagingType,
+    marking,
+    storageDays
+  };
+}
+
+function createCalculatorNote(quote: CalculatorPayload): string {
+  const marketplace = quote.marketplace === "wb"
+    ? "Wildberries"
+    : quote.marketplace === "ozon" ? "Ozon" : "Wildberries + Ozon";
+  const packaging = quote.packaging === "standard"
+    ? "стандартная"
+    : quote.packaging === "protective" ? "защитная" : "индивидуальная";
+  const total = quote.units * (
+    pricing.receivingPerUnit +
+    pricing.inspectionPerUnit +
+    pricing.packagingPerUnit[quote.packaging] +
+    (quote.marking ? pricing.markingPerUnit : 0) +
+    quote.storageDays * pricing.storagePerUnitPerDay +
+    pricing.dispatchPerUnit[quote.model]
+  );
+
+  return [
+    "Предварительный расчёт с сайта (демонстрационные тарифы, не оферта)",
+    `Модель: ${quote.model}`,
+    `Маркетплейс: ${marketplace}`,
+    `Количество: ${quote.units.toLocaleString("ru-RU")} ед.`,
+    `Упаковка: ${packaging}`,
+    `Маркировка: ${quote.marking ? "да" : "нет"}`,
+    `Хранение: ${quote.storageDays} дн.`,
+    `Ориентировочная сумма: ${Math.round(total).toLocaleString("ru-RU")} ₽`
+  ].join("; ");
+}
 
 const recentRequests = new Map<string, number[]>();
 const WINDOW_MS = 10 * 60 * 1000;
@@ -79,6 +147,13 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     return res.status(200).json({ ok: true });
   }
 
+  const calculator = payload.calculator === undefined || payload.calculator === null
+    ? null
+    : parseCalculatorPayload(payload.calculator);
+  if (payload.calculator !== undefined && payload.calculator !== null && !calculator) {
+    return res.status(400).json({ ok: false, code: "invalid_calculator_context" });
+  }
+
   const lead = {
     name: clean(payload.name, 100),
     phone: clean(payload.phone, 40),
@@ -87,7 +162,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     productType: clean(payload.productType, 120),
     volume: clean(payload.volume, 80),
     marketplace: clean(payload.marketplace, 80),
-    telegram: clean(payload.telegram, 80)
+    telegram: clean(payload.telegram, 80),
+    notes: calculator ? createCalculatorNote(calculator) : ""
   };
 
   if (
@@ -141,6 +217,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       `<b>Объём:</b> ${escapeHtml(lead.volume)}`,
       `<b>Маркетплейс:</b> ${escapeHtml(lead.marketplace || "Не указан")}`,
       `<b>Telegram:</b> ${escapeHtml(lead.telegram || "Не указан")}`,
+      ...(lead.notes ? [`<b>Параметры расчёта:</b> ${escapeHtml(lead.notes)}`] : []),
       "",
       "<i>Заявка сохранена в CRM.</i>"
     ];
