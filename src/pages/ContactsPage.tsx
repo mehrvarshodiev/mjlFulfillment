@@ -331,7 +331,7 @@ export function ContactsPage() {
                   value={form.telegram}
                   onChange={(e) => update("telegram", e.target.value)}
                   placeholder="@username"
-                  aria-describedby="contacts-telegram-help contacts-telegram-status"
+                  aria-describedby="contacts-telegram-help"
                   aria-invalid={telegramVerification === "invalid" || telegramVerification === "mismatch" || telegramVerification === "error"}
                 />
               </label>
@@ -350,9 +350,7 @@ export function ContactsPage() {
                 </p>
               ) : telegramAvailable === false ? (
                 <p className="contacts-telegram-status" id="contacts-telegram-status">{t("contacts.telegramUnavailable")}</p>
-              ) : (
-                <p className="contacts-telegram-status" id="contacts-telegram-status">{t("contacts.telegramHint")}</p>
-              )}
+              ) : null}
               {telegramAvailable === true && telegramVerification !== "verified" && (
                 <button
                   className="contacts-telegram-verify"
