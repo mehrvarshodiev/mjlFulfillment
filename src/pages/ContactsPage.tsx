@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
 import {
   BadgeCheck,
@@ -87,6 +88,7 @@ export function ContactsPage() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [leadId, setLeadId] = useState("");
   const modalCloseRef = useRef<HTMLButtonElement>(null);
+  const successModalRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     let active = true;
@@ -148,18 +150,43 @@ export function ContactsPage() {
 
   useEffect(() => {
     if (!showSuccessModal) return;
+
     const previousOverflow = document.body.style.overflow;
+    const previouslyFocused = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
     document.body.style.overflow = "hidden";
-    modalCloseRef.current?.focus();
 
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setShowSuccessModal(false);
+    const focusFrame = window.requestAnimationFrame(() => modalCloseRef.current?.focus());
+    const handleModalKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setShowSuccessModal(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+      const focusable = successModalRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable?.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
     };
-    window.addEventListener("keydown", closeOnEscape);
 
+    window.addEventListener("keydown", handleModalKeyDown);
     return () => {
+      window.cancelAnimationFrame(focusFrame);
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", closeOnEscape);
+      window.removeEventListener("keydown", handleModalKeyDown);
+      if (previouslyFocused?.isConnected) previouslyFocused.focus();
     };
   }, [showSuccessModal]);
 
@@ -395,7 +422,7 @@ export function ContactsPage() {
       <article><span><Globe2 size={19}/></span><h3>{t("contacts.stepThreeTitle")}</h3><p>{t("contacts.stepThreeDescription")}</p></article>
     </section>
 
-    {showSuccessModal && (
+    {showSuccessModal && createPortal(
       <div
         className="contacts-success-overlay"
         role="presentation"
@@ -403,7 +430,14 @@ export function ContactsPage() {
           if (event.target === event.currentTarget) setShowSuccessModal(false);
         }}
       >
-        <section className="contacts-success-modal" role="dialog" aria-modal="true" aria-labelledby="contacts-success-title" aria-describedby="contacts-success-description">
+        <section
+          ref={successModalRef}
+          className="contacts-success-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="contacts-success-title"
+          aria-describedby="contacts-success-description"
+        >
           <button
             ref={modalCloseRef}
             className="contacts-success-close"
@@ -413,21 +447,31 @@ export function ContactsPage() {
           >
             <X size={18}/>
           </button>
-          <div className="contacts-success-icon"><CheckCircle2 size={31}/></div>
+
+          <div className="contacts-success-icon" aria-hidden="true">
+            <CheckCircle2 size={34} strokeWidth={2.2}/>
+          </div>
           <span className="contacts-success-eyebrow">MJL FULFILLMENT</span>
           <h2 id="contacts-success-title">{t("contacts.successTitle")}</h2>
           <p id="contacts-success-description">{t("contacts.successDescription")}</p>
+
           {leadId && (
             <div className="contacts-success-reference">
               <span>{t("contacts.successReference")}</span>
               <strong>{leadId}</strong>
             </div>
           )}
-          <button className="button-primary contacts-success-action" type="button" onClick={() => setShowSuccessModal(false)}>
+
+          <button
+            className="button-primary contacts-success-action"
+            type="button"
+            onClick={() => setShowSuccessModal(false)}
+          >
             {t("contacts.successClose")}
           </button>
         </section>
-      </div>
+      </div>,
+      document.body
     )}
   </main>;
 }
