@@ -216,6 +216,7 @@ export function ContactsPage() {
     }
     if (telegramUsername && verifiedUsername !== telegramUsername) {
       setErrorCode("telegram_not_verified");
+      setStatus("error");
       setTelegramVerification("idle");
       return;
     }
@@ -232,6 +233,10 @@ export function ContactsPage() {
 
       if (!response.ok || !result.ok) {
         setErrorCode(result.code || "request_failed");
+        if (result.code === "telegram_not_verified") {
+          setVerifiedUsername("");
+          setTelegramVerification("idle");
+        }
         setStatus("error");
         return;
       }
