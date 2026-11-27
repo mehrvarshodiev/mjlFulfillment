@@ -36,312 +36,5 @@
     "dispatchWorkflow": "Joâ€˜natmani tayyorlash",
     "servicesEyebrow": "OMBOR OPERATSIYALARI / 01",
     "chinaEyebrow": "XITOYDAN YETKAZIB BERISH / 02",
-    "closingEyebrow": "JOâ€˜NATMANGIZNI MUHOKAMA QILAYLIK / 03",
-    "operations": {
-      "receiving": "01 / QABUL QILISH",
-      "labeling": "02 / MARKIROVKA",
-      "packing": "03 / QADOQLASH",
-      "dispatch": "04 / JOâ€˜NATISH"
-    }
-  },
-  "services": {
-    "title": "Biznesingiz ish jarayoniga mos fulfilment",
-    "description": "Tovarlarni qayta ishlashning har bir bosqichida shaffof jarayonlar va aniq narxlar.",
-    "fbo": "FBO â€” marketpleys omboriga yetkazish",
-    "fbs": "FBS â€” saqlash va buyurtmalarni bajarish",
-    "receiving": "Tovarlarni qabul qilish va sonini tekshirish",
-    "inspection": "Sifat nazorati va nuqsonlarni aniqlash",
-    "labeling": "Mahsulot markirovkasi va Chestny ZNAK",
-    "packing": "Marketpleys talablariga mos qadoqlash",
-    "storage": "Xavfsiz saqlash",
-    "picking": "Buyurtmalarni yigâ€˜ish",
-    "dispatch": "WB va Ozon omborlariga yetkazish",
-    "calculator": {
-      "eyebrow": "XARAJATLARNI REJALASHTIRING",
-      "intro": "Asosiy ombor operatsiyalari uchun taxminiy hisob olish maqsadida yuk parametrlari va hajmini kiriting.",
-      "model": "Fulfilment modeli",
-      "marketplaces": {
-        "wb": "Wildberries",
-        "ozon": "Ozon",
-        "both": "Ikkalasi"
-      },
-      "models": {
-        "fbo": "Marketpleys omboriga joâ€˜natish",
-        "fbs": "Buyurtmalarni bajarish"
-      },
-      "storageDays": "Saqlash muddati",
-      "days": "kun",
-      "markingHint": "Har bir mahsulotga zarur kodlarni qoâ€˜yish uchun taxminiy xizmat haqini qoâ€˜shadi.",
-      "estimateLabel": "Taxminiy hisob",
-      "live": "Onlayn hisoblash",
-      "resultCaption": "{{marketplace}} Â· {{count}} dona uchun taxminiy hisob",
-      "breakdown": "Xarajatlar tarkibi",
-      "total": "Taxminiy jami",
-      "requestQuote": "Aniq taklif soâ€˜rash",
-      "receiving": "Qabul qilish va sanash",
-      "inspection": "Sifat tekshiruvi",
-      "packaging": "Qadoqlash",
-      "marking": "Chestny ZNAK markirovkasi",
-      "storage": "Saqlash",
-      "dispatch": "Qayta ishlash va joâ€˜natish",
-      "disclaimer": "Bu faqat taxminiy hisob uchun namunaviy tariflar boâ€˜lib, ommaviy oferta hisoblanmaydi. Tanlangan marketpleys hisob doirasida koâ€˜rsatiladi; hozircha Wildberries va Ozon uchun namunaviy ombor tariflari bir xil. Yakuniy narx mahsulot oâ€˜lchami, toifasi, marketpleys qoidalari, hajm va logistikaga bogâ€˜liq. Amaldagi tariflarni jamoamiz bilan tasdiqlang.",
-      "title": "Xizmat narxini hisoblash",
-      "marketplace": "Marketpleys",
-      "items": "Mahsulotlar soni",
-      "standard": "Standart qadoqlash",
-      "protective": "Himoyalovchi qadoqlash",
-      "custom": "Maxsus qadoqlash"
-    },
-    "eyebrow": "TOâ€˜LIQ OPERATSION XIZMATLAR / 01",
-    "heroNote": "Bitta hamkor â€” qabul qilishdan marketpleys omboriga joâ€˜natishgacha",
-    "catalogEyebrow": "BIZ NIMALARNI BAJARAMIZ",
-    "catalogTitle": "Har bir operatsiya aniq boshqariladi",
-    "catalogDescription": "Biz kundalik fulfilment jarayonlarini boshqaramiz, siz esa mahsulot va savdoga eâ€™tibor qaratasiz.",
-    "modelsEyebrow": "IKKI XIL ISH MODELI",
-    "modelsTitle": "FBO yoki FBS â€” ish jarayoningizga mos tanlov",
-    "details": {
-      "receiving": "Kelgan yuklarni qabul qilamiz, miqdorini tekshiramiz, tafovutlarni qayd etamiz va tovarlarni ombor hisobiga kiritamiz.",
-      "inspection": "Tashqi koâ€˜rinish va komplektatsiyani tekshirib, joâ€˜natishdan oldin shikast yoki nomuvofiqliklarni aniqlaymiz.",
-      "labeling": "Marketpleys talablariga muvofiq yorliq, shtrix-kod va mahsulot markirovkasini tayyorlaymiz.",
-      "packing": "Mahsulot toifasi hamda Wildberries/Ozon qoidalariga muvofiq qadoqni tanlaymiz va mahsulotni himoyalaymiz.",
-      "storage": "Tovarlarni joylashtiramiz, qoldiqlarni kuzatamiz va omborda ehtiyotkorlik bilan saqlaymiz.",
-      "dispatch": "Buyurtmalarni yigâ€˜amiz, yuklarni tayyorlaymiz va marketpleys omborlariga topshirishni tashkil qilamiz."
-    },
-    "modelDetails": {
-      "fbo": "Partiyani marketpleys omboriga tayyorlaymiz, markirovka qilamiz, qadoqlaymiz va yetkazamiz. Keyin mahsulotlarni marketpleys saqlaydi va mijoz buyurtmalarini bajaradi.",
-      "fbs": "Tovarlaringizni saqlaymiz, yigâ€˜ish topshiriqlarini qabul qilamiz, buyurtmalarni tayyorlaymiz va marketpleys qoidalariga muvofiq yetkazish uchun topshiramiz."
-    },
-    "modelPoints": {
-      "inbound": "Yukni qabul qilish va tekshirish",
-      "preparation": "Markirovka va qadoqlash",
-      "dispatch": "Marketpleys omboriga yetkazish",
-      "storage": "Tovarlarni saqlash",
-      "picking": "Buyurtmalarni yigâ€˜ish va qadoqlash"
-    },
-    "faq": {
-      "title": "Fulfilment haqida savol-javoblar",
-      "intro": "Mahsulotlarni tayyorlash va marketpleys jarayonlari haqida aniq javoblar.",
-      "items": {
-        "1": {
-          "question": "Wildberries va Ozon uchun fulfilment nimalarni oâ€˜z ichiga oladi?",
-          "answer": "Xizmat doirasi ehtiyojlaringizga bogâ€˜liq. U tovarni qabul qilish va sanash, sifat tekshiruvi, markirovka, qadoqlash, saqlash, buyurtmalarni yigâ€˜ish hamda marketpleysga topshirish uchun yuklarni tayyorlashni oâ€˜z ichiga olishi mumkin."
-        },
-        "2": {
-          "question": "FBO va FBS oâ€˜rtasidagi farq nima?",
-          "answer": "FBO modelida tayyorlangan tovar marketpleys omboriga yetkaziladi; keyin marketpleys uni saqlaydi va buyurtmalarni qayta ishlaydi. FBS modelida tovar sotuvchi yoki uning fulfilment hamkori omborida qoladi, buyurtmalar esa marketpleys qoidalariga muvofiq yigâ€˜ilib, yetkazishga topshiriladi."
-        },
-        "3": {
-          "question": "Xitoydan kelgan sotuvchilar va yetkazib beruvchilar bilan ishlaysizmi?",
-          "answer": "Ha. Biz tovarni qabul qilish va tayyorlashni muvofiqlashtirish, ruscha-xitoycha muloqot hamda keyingi logistika bosqichiga topshirishda yordam beramiz. Aniq yoâ€˜nalish va ish hajmi alohida kelishiladi."
-        },
-        "4": {
-          "question": "Xizmat narxi qanday hisoblanadi?",
-          "answer": "Kalkulyator tanlangan parametrlar asosida taxminiy hisob beradi. Yakuniy narx mahsulot toifasi va oâ€˜lchami, hajm, marketpleys talablari, qadoqlash, saqlash va logistikaga bogâ€˜liq; soâ€˜rovni koâ€˜rib chiqqanimizdan soâ€˜ng tasdiqlanadi."
-        }
-      }
-    }
-  },
-  "china": {
-    "eyebrow": "Rossiya marketpleyslariga chiqish yoâ€˜lingiz",
-    "title": "Xitoydan Wildberries va Ozonâ€™gacha â€” yagona logistika hamkori bilan",
-    "description": "Zavodlar, brendlar va savdo kompaniyalariga yuklarni Rossiyaga yuborishni tashkil etishda yordam beramiz â€” yuklarni birlashtirishdan marketpleysga tayyorlashgacha.",
-    "customs": "Yuk va bojxona jarayonlarini muvofiqlashtirish",
-    "managers": "Rus va xitoy tillarida soâ€˜zlashuvchi menejerlar",
-    "support": "WeChat va Telegram orqali aloqa",
-    "cta": "Rossiya bozoriga chiqishni muhokama qilish",
-    "processLink": "Ish jarayoni",
-    "languageSupport": "Ruscha-xitoycha muloqot",
-    "marketplaceSupport": "Marketpleys talablariga tayyorlash",
-    "visualAlt": "Xitoydan Rossiyaga logistika yoâ€˜nalishi",
-    "whyEyebrow": "OSON HAMKORLIK",
-    "whyTitle": "Yetkazib beruvchini muvofiqlashtirishdan marketpleysga tayyorlashgacha",
-    "whyDescription": "Ombor tayyorlash jarayonlarini muvofiqlashtiramiz va kelishilgan har bir bosqichni aniq yuritamiz.",
-    "benefits": {
-      "bilingual": {
-        "title": "Ikki tilda muloqot",
-        "description": "Vazifalar va yuk holatini rus va xitoy tillarida muvofiqlashtirish."
-      },
-      "marketplaceReady": {
-        "title": "Marketpleys talablariga mos tayyorlash",
-        "description": "Wildberries va Ozon talablariga muvofiq markirovka, qadoqlash va buyurtmalarni tayyorlash."
-      },
-      "crossBorder": {
-        "title": "Yuk tashishni muvofiqlashtirish",
-        "description": "Yuk harakati va uni ombor qayta ishlash bosqichlariga topshirishni muvofiqlashtirish."
-      },
-      "visibility": {
-        "title": "Aniq ish bosqichlari",
-        "description": "Ish boshlanishidan oldin operatsiyalar, masâ€™ullar va yuk holatini kelishib olish."
-      }
-    },
-    "processEyebrow": "YUKDAN MARKETPLEYS UCHUN TAYYOR HOLATGACHA",
-    "processTitle": "Hamkorlikni boshlashning toâ€˜rt bosqichi",
-    "processDescription": "Aniq xizmat hajmi va ketma-ketligi mahsulot, yoâ€˜nalish va marketpleys talablariga bogâ€˜liq.",
-    "steps": {
-      "consolidation": {
-        "title": "Soâ€˜rov va rejalashtirish",
-        "description": "Mahsulot, hajm, yoâ€˜nalish, hujjatlar va kerakli ish modelini aniqlaymiz."
-      },
-      "preparation": {
-        "title": "Qabul qilish va tayyorlash",
-        "description": "Qabul qilish, tekshirish, markirovka va qadoqlash talablarini kelishamiz."
-      },
-      "compliance": {
-        "title": "Talablarni tekshirish",
-        "description": "Joâ€˜natishdan oldin yuk maâ€™lumotlari va marketpleys talablarini tekshiramiz."
-      },
-      "delivery": {
-        "title": "Logistik topshirish",
-        "description": "Yetkazib berish va tayyor tovarlarni keyingi bosqichga topshirishni muvofiqlashtiramiz."
-      }
-    },
-    "marketplaceEyebrow": "ROSSIYA MARKETPLEYSLARI",
-    "marketplaceTitle": "Wildberries va Ozonâ€™ga chiqing",
-    "marketplaceDescription": "Mahsulotlarni siz tanlagan marketpleysga tayyorlaymiz. Ish boshlanishidan oldin xizmat doirasi va talablar tasdiqlanadi.",
-    "wildberries": "Wildberries talablariga muvofiq mahsulot va yuklarni tayyorlash.",
-    "ozon": "Ozon talablariga muvofiq mahsulot va yuklarni tayyorlash.",
-    "ctaEyebrow": "YUKINGIZNI MUHOKAMA QILAYLIK",
-    "ctaTitle": "Qisqa soâ€˜rovdan boshlang",
-    "ctaDescription": "Mahsulotlaringiz, hajmingiz va yoâ€˜nalishingiz haqida ayting. MJL jamoasi keyingi qadamlarni belgilashga yordam beradi."
-  },
-  "about": {
-    "title": "Kengayishga tayyor operatsion infratuzilma",
-    "description": "Sifat nazorati va jarayonlarning koâ€˜rinuvchanligiga asoslangan prognoz qilinadigan taâ€™minot zanjiri.",
-    "warehouse": "Ombor infratuzilmasi",
-    "security": "Videokuzatuv va kirishni nazorat qilish",
-    "wms": "Operatsiyalarni kuzatish va WMS integratsiyasi",
-    "sla": "Kelishilgan SLA va muddatlar nazorati",
-    "location": "Moskva logistika markazi",
-    "eyebrow": "MJL HAQIDA / 03",
-    "visualLabel": "OMBOR OPERATSIYALARI",
-    "visualNote": "Infratuzilmaning namunaviy sxemasi",
-    "capabilitiesEyebrow": "ISH USLUBIMIZ",
-    "capabilitiesTitle": "Ishonchli qayta ishlashning asoslari",
-    "capabilitiesDescription": "Ombordagi asosiy ish yoâ€˜nalishlarimiz bilan tanishing. Aniq quvvat, mavjudlik va tartiblar loyiha muhokamasida tasdiqlanadi.",
-    "capabilities": {
-      "warehouse": {
-        "title": "Ombor operatsiyalari",
-        "description": "Tovarlarni qabul qilish, joylashtirish, saqlash va joâ€˜natishga tayyorlashni tashkil etish."
-      },
-      "security": {
-        "title": "Kirish va tovarlar nazorati",
-        "description": "Saqlanayotgan tovarlar uchun kelishilgan kirish nazorati tartiblari va ishlov berish qoidalari."
-      },
-      "wms": {
-        "title": "Operatsiyalarni kuzatish",
-        "description": "Ombor qoldiqlari harakatini qayd etish va hisobot formatlarini kelishish."
-      },
-      "sla": {
-        "title": "Muddatlar va masâ€™uliyat",
-        "description": "Ish boshlanishidan oldin qayta ishlash bosqichlari, maqsadli muddatlar va masâ€™ullarni kelishish."
-      }
-    },
-    "flowEyebrow": "ANIQ ISH JARAYONI",
-    "flowTitle": "Tovarlar ombordan qanday oâ€˜tadi",
-    "flowDescription": "Bu asosiy ish jarayoni. Operatsiyalar va nazorat nuqtalari mahsulot toifangizga moslashtiriladi.",
-    "flow": {
-      "receiving": {
-        "title": "Qabul qilish",
-        "description": "Kelgan tovarlar, miqdor va qoâ€˜shimcha maâ€™lumotlarni tekshirish."
-      },
-      "inspection": {
-        "title": "Tekshiruv",
-        "description": "Vizual tekshiruv va aniqlangan tafovutlarni qayd etish."
-      },
-      "processing": {
-        "title": "Tayyorlash",
-        "description": "Kelishilgan vazifa asosida markirovka, qadoqlash va toâ€˜plam tayyorlash."
-      },
-      "storage": {
-        "title": "Saqlash va joâ€˜natish",
-        "description": "Joylashtirish, qoldiqlarni kuzatish va topshirishga tayyorlash."
-      }
-    },
-    "locationEyebrow": "LOGISTIKA GEOGRAFIYASI",
-    "locationTitle": "Moskva logistika markazi",
-    "locationDescription": "Loyihangizni muhokama qilishda menejerimiz ombor joylashuvi, mavjud yoâ€˜nalishlar va qabul qilish shartlarini taqdim etadi.",
-    "locationNote": "Aniq manzil va yoâ€˜l-yoâ€˜riq soâ€˜rov boâ€˜yicha",
-    "mapEyebrow": "OMBOR MANZILI",
-    "mapTitle": "MJL omborini toping",
-    "mapDescription": "Rossiya, Moskva viloyati, Besedy qishlogâ€˜i, Promyshlenny Proyezd 1A. Berilgan manzil boâ€˜yicha Yandex Maps qidiruvi ochiladi.",
-    "mapDisclaimer": "Bino va kirish joyining aniq nuqtasi Yandex Maps maâ€™lumotlariga bogâ€˜liq. Kelishdan oldin vaqt va yuk tushirish joyini menejer bilan tasdiqlang.",
-    "openMap": "Yandex Mapsâ€™da ochish",
-    "ctaEyebrow": "SIZNING OPERATSION HAMKORINGIZ",
-    "ctaTitle": "Biznes ehtiyojlaringizni muhokama qilaylik",
-    "ctaDescription": "Mahsulot assortimenti, hajmi va savdo modelingizga mos ish jarayonini belgilaymiz."
-  },
-  "contacts": {
-    "title": "Logistika ehtiyojlaringizni muhokama qilaylik",
-    "description": "Mahsulotlaringiz va hajmingiz haqida ayting. Biz biznesingiz uchun operatsion model tayyorlaymiz.",
-    "name": "Ism",
-    "telegram": "Telegram @username",
-    "phone": "Telefon yoki WeChat",
-    "marketplace": "Marketpleys",
-    "volume": "Oylik hajm",
-    "submit": "Soâ€˜rov yuborish",
-    "success": "Soâ€˜rovingiz yuborildi. Tez orada siz bilan bogâ€˜lanamiz.",
-    "error": "Soâ€˜rovni yuborib boâ€˜lmadi. Qayta urinib koâ€˜ring.",
-    "privacy": "Ushbu shaklni yuborish orqali kiritilgan aloqa maâ€™lumotlarini qayta ishlashga rozilik bildirasiz.",
-    "eyebrow": "MJL BILAN ALOQA / 04",
-    "reply": "Odatda bir ish kuni ichida javob beramiz",
-    "confidential": "Maâ€™lumotlaringiz faqat ushbu soâ€˜rovni koâ€˜rib chiqish uchun ishlatiladi",
-    "directLabel": "BOGâ€˜LANING",
-    "directTitle": "Keyingi yukingizni muhokama qiling",
-    "directDescription": "Soâ€˜rov yuboring, jamoamiz tafsilotlarni aniqlashtirib, keyingi qadamni tavsiya qiladi.",
-    "formEyebrow": "HAMKORLIK SOâ€˜ROVI",
-    "formTitle": "Biznesingiz haqida ayting",
-    "formDescription": "Biroz qoâ€˜shimcha maâ€™lumot dastlabki hisobni aniqroq tayyorlashga yordam beradi.",
-    "namePlaceholder": "Ismingiz",
-    "phonePlaceholder": "+998 00 000 00 00",
-    "company": "Kompaniya",
-    "companyPlaceholder": "Kompaniya nomi",
-    "country": "Mamlakat",
-    "countryPlaceholder": "Masalan, Rossiya yoki Xitoy",
-    "productType": "Mahsulot toifasi",
-    "productPlaceholder": "Elektronika, kiyim-kechak, uy-roâ€˜zgâ€˜or buyumlariâ€¦",
-    "volumePlaceholder": "Masalan, 1 000â€“3 000 dona",
-    "marketplaceBoth": "Wildberries va Ozon",
-    "marketplaceOther": "Boshqa marketpleys / hali tanlanmagan",
-    "sending": "Yuborilmoqdaâ€¦",
-    "stepOneTitle": "Ehtiyojlaringizni oâ€˜rganamiz",
-    "stepOneDescription": "Mahsulotlar, hajm, geografiya va mavjud taâ€™minot modelini aniqlaymiz.",
-    "stepTwoTitle": "Ish jarayonini tuzamiz",
-    "stepTwoDescription": "Sizga kerakli ombor operatsiyalari va fulfilment modelini kelishamiz.",
-    "stepThreeTitle": "Hisob tayyorlaymiz",
-    "stepThreeDescription": "Narx, muddat va amaliy keyingi qadamlarni muhokama qilamiz.",
-    "errorNotConfigured": "Soâ€˜rov shakli jamoaga ulanmagan. Soâ€˜rovingiz yuborilmadi â€” keyinroq qayta urinib koâ€˜ring.",
-    "errorDatabase": "Maâ€™lumotlar bazasi bilan vaqtinchalik aloqa yoâ€˜q. Soâ€˜rovingiz hozircha yuborilmadi. Birozdan soâ€˜ng qayta urinib koâ€˜ring.",
-    "errorRateLimited": "Urinishlar soni juda koâ€˜p. Bir necha daqiqa kutib, qayta urinib koâ€˜ring.",
-    "errorInvalid": "Majburiy maydonlarni tekshiring va telefon raqami toâ€˜gâ€˜ri kiritilganiga ishonch hosil qiling.",
-    "errorDelivery": "Soâ€˜rovingizni jamoaga yetkazib boâ€˜lmadi. Kiritilgan maâ€™lumotlar shaklda saqlanib qoladi â€” keyinroq qayta urinib koâ€˜ring.",
-    "optional": "ixtiyoriy",
-    "telegramHint": "Profil havolasini emas, foydalanuvchi nomingizni kiriting. Tasdiqlash uchun Telegram akkauntingizga kirishingiz kerak boâ€˜ladi.",
-    "telegramVerify": "Telegram orqali tasdiqlash",
-    "telegramVerified": "Telegram akkaunti tasdiqlandi",
-    "telegramChecking": "Telegram maâ€™lumotlari tekshirilmoqdaâ€¦",
-    "telegramUnavailable": "Telegram tekshiruvi hali sozlanmagan. Bu maydonni boâ€˜sh qoldirishingiz mumkin.",
-    "telegramInvalid": "Toâ€˜gâ€˜ri @username kiriting: 5â€“32 ta lotin harfi, raqam yoki pastki chiziq.",
-    "telegramNotVerified": "Avval koâ€˜rsatilgan Telegram akkauntini tasdiqlang.",
-    "telegramMismatch": "Siz boshqa Telegram akkauntiga kirdingiz. Ushbu maydonda koâ€˜rsatilgan nom bilan kiring.",
-    "telegramFailed": "Telegram akkauntini tasdiqlab boâ€˜lmadi. Qayta urinib koâ€˜ring.",
-    "telegramCancelled": "Telegram tekshiruvi bekor qilindi. Zarur boâ€˜lsa, qayta urinib koâ€˜ring.",
-    "successTitle": "Soâ€˜rovingiz qabul qilindi!",
-    "successDescription": "MJL Fulfillment bilan bogâ€˜langaningiz uchun rahmat. Maâ€™lumotlaringizni oldik va jamoamiz bir ish kuni ichida siz bilan bogâ€˜lanadi.",
-    "successReference": "Soâ€˜rov raqami",
-    "successClose": "Tayyor",
-    "unitsPerMonth": "dona/oy",
-    "contextTitle": "Kalkulyator parametrlari qoâ€˜shildi",
-    "contextDescription": "Taxminiy hisob parametrlari soâ€˜rovga qoâ€˜shildi. Yuborishdan oldin oylik hajm va marketpleysni tekshiring.",
-    "contextModel": "Model",
-    "contextMarketplace": "Marketpleys",
-    "contextUnits": "Oylik mahsulot soni",
-    "contextEstimate": "Taxminiy summa",
-    "contextDisclaimer": "Hisob namunaviy tariflar asosida tuzilgan va ommaviy oferta emas. Yakuniy narxni menejer tasdiqlaydi.",
-    "sourceChinaTitle": "Xitoydan Rossiyaga yetkazib berish soâ€˜rovi",
-    "sourceChinaDescription": "Yetkazib beruvchi, mahsulot, hajm va Rossiyaga yetkazish yoâ€˜nalishi haqida ayting."
-  },
-  "footer": {
-    "tagline": "Elektron tijorat uchun toâ€˜liq fulfilment va logistika xizmatlari.",
-    "rights": "Barcha huquqlar himoyalangan."
-  }
-}
+    "closingEyebrow": "JOâ€˜NATMANGIZNI MUHOKAMA QIÕÈZ®Ëkºwµçkz»§Â+a…æş
+Ş§ûZŠWè­û¥–‹­¦ëHœ]Y\İ[Ûˆˆ•Ú[™\œšY\È˜HŞ›ÛˆXÚ[ˆ[š[Y[š[X[\›šHø &ˆXÚYØHÛYOÈ‹ˆ˜[œİÙ\ˆˆ–^›X]Ú\˜\ÚHZ^[Ú›\š[™Ú^™ØH›Ùø &\KˆHİ˜\›šHXX[Z[\Ú˜HØ[˜\ÚÚY˜]ZÜÚ\]šKX\šÚ\›İšØKXYÜ[\ÚØ\[\Ú^]\X[\›šHZYø &\Ú[YHX\šÙ]^\ÙØHÜÚ\š\ÚXÚ[ˆ]ZÛ\›šH^^[Ü›\ÚšHø &ˆXÚYØHÛ\ÚH][ZÚ[‹ˆ‚ˆKˆŒˆˆÂˆœ]Y\İ[Ûˆˆ‘“È˜H”Èø &\ÚYYÚH˜\œHš[XOÈ‹ˆ˜[œİÙ\ˆˆ‘“È[Ù[YH^^[Ü›[™Ø[ˆİ˜\ˆX\šÙ]^\ÈÛX›ÜšYØHY]Ø^š[YNÈÙ^Z[ˆX\šÙ]^\È[šHØ\[^YH˜H^]\X[\›šHX^]H\Ú^YKˆ”È[Ù[YHİ˜\ˆÛİ]˜ÚH[ÚÚH[š[™È[š[Y[[ZÛÜšHÛX›ÜšYH[ÛYK^]\X[\ˆ\ØHX\šÙ]^\È[ÚY[\šYØH]]›Ùš\HZYø &[X‹Y]Ø^š\ÚØHÜÚ\š[YKˆ‚ˆKˆŒÈˆÂˆœ]Y\İ[Ûˆˆ–]ŞY[ˆÙ[Ø[ˆÛİ]˜Ú[\ˆ˜HY]Ø^šXˆ™\]˜Ú[\ˆš[[ˆ\Ú^\Ú^›ZOÈ‹ˆ˜[œİÙ\ˆˆ’Kˆš^ˆİ˜\›šHXX[Z[\Ú˜H^^[Ü›\ÚšH]]›Ùš\[\Ú\š\Ú\ØÚK^]ŞXÚH][Ü[İ[YHÙ^Z[™ÚHÙÚ\İZØH›ÜÜZXÚYØHÜÚ\š\ÚH[Ü™[H™\˜[Z^‹ˆ[š\H[ø &˜[\Ú˜H\ÚZ›ZH[ÚYHÙ[\Ú[YKˆ‚ˆKˆˆÂˆœ]Y\İ[Ûˆˆ–^›X]˜\HX[™^H\ÛØ›[˜YOÈ‹ˆ˜[œİÙ\ˆˆ’Ø[İ[X]Üˆ[›[™Ø[ˆ\˜[Y]›\ˆ\ÛÜÚYH^Z[š^H\ÛØˆ™\˜YKˆXZİ[š^H˜\XZİ[İÚY˜\ÚH˜Hø &Ú[ZKZ›KX\šÙ]^\È[X›\šKXYÜ[\ÚØ\[\Ú˜HÙÚ\İZØYØH›Ùø &\NÈÛø &›İ›šHÛø &šXˆÚ\\X[š[Z^™[ˆÛø &™È\Ù\[[˜YKˆ‚ˆBˆBˆBˆKˆ˜Ú[˜HˆÂˆ™^YXœ›İÈˆ”›ÜÜÚ^XHX\šÙ]^\Û\šYØHÚ\Z\Ú[ø &[™Ú^ˆ‹ˆ]Hˆ–]ŞY[ˆÚ[™\œšY\È˜HŞ›Û¸ &YØXÚH8 %XYÛÛ˜HÙÚ\İZØH[ZÛÜšHš[[ˆ‹ˆ™\ØÜš\[Ûˆˆ–˜]›Ù\‹œ™[™\ˆ˜HØ]™ÈÛÛ\[š^X[\šYØH]ZÛ\›šH›ÜÜÚ^XYØH]X›Üš\ÚšH\ÚÚ[]\ÚH[Ü™[H™\˜[Z^ˆ8 %]ZÛ\›šHš\›\Ú\š\Ú[ˆX\šÙ]^\ÙØH^^[Ü›\ÚØXÚKˆ‹ˆ˜İ\İÛ\Èˆ–]ZÈ˜H›ÚÛ˜H˜\˜^[Û›\š[šH]]›Ùš\[\Ú\š\Ú‹ˆ›X[˜YÙ\œÈˆ”\È˜H]ŞH[\šYHÛø &›\Ú]˜ÚHY[™Z™\›\ˆ‹ˆœİ\Üˆ•ÙPÚ]˜H[YÜ˜[HÜœX[H[ÜXH‹ˆ˜İHˆ”›ÜÜÚ^XH›Ş›ÜšYØHÚ\Z\ÚšH]ZÚØ[XHZ[\Ú‹ˆœ›ØÙ\ÜÓ[šÈˆ’\Ú˜\˜^[ÛšH‹ˆ›[™İXYÙTİ\Üˆ”\ØÚK^]ŞXÚH][Ü[İ‹ˆ›X\šÙ]XÙTİ\Üˆ“X\šÙ]^\È[X›\šYØH^^[Ü›\Ú‹ˆš\İX[[ˆ–]ŞY[ˆ›ÜÜÚ^XYØHÙÚ\İZØH[ø &˜[\ÚH‹ˆÚQ^YXœ›İÈˆ“ÔÓÓˆSRÓÔ“RÈ‹ˆÚU]Hˆ–Y]Ø^šXˆ™\]˜Ú[šH]]›Ùš\[\Ú\š\Ú[ˆX\šÙ]^\ÙØH^^[Ü›\ÚØXÚH‹ˆÚQ\ØÜš\[Ûˆˆ“ÛX›Üˆ^^[Ü›\Ú˜\˜^[Û›\š[šH]]›Ùš\[\Ú\˜[Z^ˆ˜HÙ[\Ú[Ø[ˆ\ˆš\ˆ›ÜÜZXÚšH[š\H]\š][Z^‹ˆ‹ˆ˜™[™Yš]ÈˆÂˆ˜š[[™İX[ˆÂˆ]Hˆ’ZÚÚH[H][Ü[İ‹ˆ™\ØÜš\[Ûˆˆ•˜^šY˜[\ˆ˜H]ZÈÛ][šH\È˜H]ŞH[\šYH]]›Ùš\[\Ú\š\Úˆ‚ˆKˆ›X\šÙ]XÙT™XYHˆÂˆ]Hˆ“X\šÙ]^\È[X›\šYØH[ÜÈ^^[Ü›\Ú‹ˆ™\ØÜš\[Ûˆˆ•Ú[™\œšY\È˜HŞ›Ûˆ[X›\šYØH]]›Ùš\HX\šÚ\›İšØKXYÜ[\Ú˜H^]\X[\›šH^^[Ü›\Úˆ‚ˆKˆ˜Ü›ÜÜĞ›Ü™\ˆˆÂˆ]Hˆ–]ZÈ\Ú\ÚšH]]›Ùš\[\Ú\š\Ú‹ˆ™\ØÜš\[Ûˆˆ–]ZÈ\˜ZØ]H˜H[šHÛX›ÜˆX^]H\Ú\Ú›ÜÜZXÚ\šYØHÜÚ\š\ÚšH]]›Ùš\[\Ú\š\Úˆ‚ˆKˆš\ÚXš[]HˆÂˆ]Hˆ[š\H\Ú›ÜÜZXÚ\šH‹ˆ™\ØÜš\[Ûˆˆ’\Ú›ÜÚ[š\ÚY[ˆÛ[ˆÜ\˜]Ú^X[\‹X\ø &][\ˆ˜H]ZÈÛ][šHÙ[\ÚXˆÛ\Úˆ‚ˆBˆKˆœ›ØÙ\ÜÑ^YXœ›İÈˆ–URÑSˆPT’ÑUVTÈPÒSˆVVSÔˆÓUĞPÒH‹ˆœ›ØÙ\ÜÕ]Hˆ’[ZÛÜ›ZÛšH›ÜÚ\Úš[™Èø &›ÜÜZXÚH‹ˆœ›ØÙ\ÜÑ\ØÜš\[Ûˆˆ[š\H^›X]Z›ZH˜HÙ]XKZÙ]YÚHXZİ[İ[ø &˜[\Ú˜HX\šÙ]^\È[X›\šYØH›Ùø &\Kˆ‹ˆœİ\ÈˆÂˆ˜ÛÛœÛÛY][ÛˆˆÂˆ]Hˆ”Ûø &›İˆ˜H™Z˜[\Ú\š\Ú‹ˆ™\ØÜš\[Ûˆˆ“XZİ[İZ›K[ø &˜[\ÚZš˜]\ˆ˜HÙ\˜ZÛH\Ú[Ù[[šH[š\[^[Z^‹ˆ‚ˆKˆœ™\\˜][ÛˆˆÂˆ]Hˆ”XX[Z[\Ú˜H^^[Ü›\Ú‹ˆ™\ØÜš\[Ûˆˆ”XX[Z[\ÚZÜÚ\š\ÚX\šÚ\›İšØH˜HXYÜ[\Ú[X›\š[šHÙ[\Ú[Z^‹ˆ‚ˆKˆ˜ÛÛ\X[˜ÙHˆÂˆ]Hˆ•[X›\›šHZÜÚ\š\Ú‹ˆ™\ØÜš\[Ûˆˆ’›ø &˜]\Ú[ˆÛ[ˆ]ZÈXx &[[[İ\šH˜HX\šÙ]^\È[X›\š[šHZÜÚ\˜[Z^‹ˆ‚ˆKˆ™[]™\HˆÂˆ]Hˆ“ÙÚ\İZÈÜÚ\š\Ú‹ˆ™\ØÜš\[Ûˆˆ–Y]Ø^šXˆ™\š\Ú˜H^^[Üˆİ˜\›\›šHÙ^Z[™ÚH›ÜÜZXÚØHÜÚ\š\ÚšH]]›Ùš\[\Ú\˜[Z^‹ˆ‚ˆBˆKˆ›X\šÙ]XÙQ^YXœ›İÈˆ”“ÔÔÒVPHPT’ÑUVTÓT’H‹ˆ›X\šÙ]XÙU]Hˆ•Ú[™\œšY\È˜HŞ›Û¸ &YØHÚ\Z[™È‹ˆ›X\šÙ]XÙQ\ØÜš\[Ûˆˆ“XZİ[İ\›šHÚ^ˆ[›YØ[ˆX\šÙ]^\ÙØH^^[Ü›^[Z^‹ˆ\Ú›ÜÚ[š\ÚY[ˆÛ[ˆ^›X]Ú\˜\ÚH˜H[X›\ˆ\Ù\[[˜YKˆ‹ˆÚ[™\œšY\Èˆ•Ú[™\œšY\È[X›\šYØH]]›Ùš\HXZİ[İ˜H]ZÛ\›šH^^[Ü›\Úˆ‹ˆ›Ş›Ûˆˆ“Ş›Ûˆ[X›\šYØH]]›Ùš\HXZİ[İ˜H]ZÛ\›šH^^[Ü›\Úˆ‹ˆ˜İQ^YXœ›İÈˆ–URÒS‘ÒV“’HURÒĞSPHRSVSRÈ‹ˆ˜İU]Hˆ”Z\ÜXHÛø &›İ™[ˆ›ÜÚ[™È‹ˆ˜İQ\ØÜš\[Ûˆˆ“XZİ[İ\š[™Ú^‹Z›Z[™Ú^ˆ˜H[ø &˜[\Ú[™Ú^ˆ\ZYH^][™ËˆR“˜[[Ø\ÚHÙ^Z[™ÚHXY[[\›šH™[Ú[\ÚØH[Ü™[H™\˜YKˆ‚ˆKˆ˜X›İ]ˆÂˆ]Hˆ’Ù[™Ø^Z\ÚØH^^[ÜˆÜ\˜]Ú[Ûˆ[™œ˜]^š[XH‹ˆ™\ØÜš\[Ûˆˆ”ÚY˜]˜^›Ü˜]H˜H˜\˜^[Û›\›š[™ÈÛø &š[]˜Ú[›YÚYØH\ÛÜÛ[™Ø[ˆ›ÙÛ›ŞˆZ[[˜YYØ[ˆx &[Z[›İ˜[šš\šKˆ‹ˆØ\™Zİ\ÙHˆ“ÛX›Üˆ[™œ˜]^š[X\ÚH‹ˆœÙXİ\š]Hˆ•šY[Úİ^˜]]ˆ˜HÚ\š\ÚšH˜^›Ü˜]Z[\Ú‹ˆÛ\Èˆ“Ü\˜]Ú^X[\›šHİ^˜]\Ú˜HÓTÈ[YÜ˜]Ú^X\ÚH‹ˆœÛHˆ’Ù[\Ú[Ø[ˆÓH˜H]Y]\ˆ˜^›Ü˜]H‹ˆ›ØØ][Ûˆˆ“[ÜÚİ˜HÙÚ\İZØHX\šØ^šH‹ˆ™^YXœ›İÈˆ“R“TRQHÈÈ‹ˆš\İX[X™[ˆ“ÓP“ÔˆÔTUÒVPST’H‹ˆš\İX[›İHˆ’[™œ˜]^š[X[š[™È˜[][˜]š^HŞ[X\ÚH‹ˆ˜Ø\Xš[]Y\Ñ^YXœ›İÈˆ’TÒTÓP’SRVˆ‹ˆ˜Ø\Xš[]Y\Õ]Hˆ’\ÚÛ˜ÚHX^]H\Ú\Úš[™È\ÛÜÛ\šH‹ˆ˜Ø\Xš[]Y\Ñ\ØÜš\[Ûˆˆ“ÛX›Ü™YÚH\ÛÜÚ^H\Ú[ø &˜[\Ú\š[Z^ˆš[[ˆ[š\Ú[™Ëˆ[š\H]]˜]X]šYZÈ˜H\X›\ˆŞZZH]ZÚØ[X\ÚYH\Ù\[[˜YKˆ‹ˆ˜Ø\Xš[]Y\ÈˆÂˆØ\™Zİ\ÙHˆÂˆ]Hˆ“ÛX›ÜˆÜ\˜]Ú^X[\šH‹ˆ™\ØÜš\[Ûˆˆ•İ˜\›\›šHXX[Z[\Ú›Ş[\Ú\š\ÚØ\[\Ú˜H›ø &˜]\ÚØH^^[Ü›\ÚšH\ÚÚ[]\Úˆ‚ˆKˆœÙXİ\š]HˆÂˆ]Hˆ’Ú\š\Ú˜Hİ˜\›\ˆ˜^›Ü˜]H‹ˆ™\ØÜš\[Ûˆˆ”Ø\[[˜^[İØ[ˆİ˜\›\ˆXÚ[ˆÙ[\Ú[Ø[ˆÚ\š\Ú˜^›Ü˜]H\X›\šH˜H\Úİˆ™\š\Ú[ÚY[\šKˆ‚ˆKˆÛ\ÈˆÂˆ]Hˆ“Ü\˜]Ú^X[\›šHİ^˜]\Ú‹ˆ™\ØÜš\[Ûˆˆ“ÛX›Üˆ[Û\[\šH\˜ZØ][šHX^Y]\Ú˜H\ÛØ›İ›Ü›X]\š[šHÙ[\Ú\Úˆ‚ˆKˆœÛHˆÂˆ]Hˆ“]Y]\ˆ˜HX\ø &][^X]‹ˆ™\ØÜš\[Ûˆˆ’\Ú›ÜÚ[š\ÚY[ˆÛ[ˆX^]H\Ú\Ú›ÜÜZXÚ\šKX\\ØYH]Y]\ˆ˜HX\ø &][\›šHÙ[\Ú\Úˆ‚ˆBˆKˆ™›İÑ^YXœ›İÈˆS’THTÒTVSÓ’H‹ˆ™›İÕ]Hˆ•İ˜\›\ˆÛX›Ü™[ˆX[™^Hø &YH‹ˆ™›İÑ\ØÜš\[ÛˆˆH\ÛÜÚ^H\Ú˜\˜^[ÛšKˆÜ\˜]Ú^X[\ˆ˜H˜^›Ü˜]\][\šHXZİ[İÚY˜[™Ú^™ØH[ÜÛ\Ú\š[YKˆ‹ˆ™›İÈˆÂˆœ™XÙZ]š[™ÈˆÂˆ]Hˆ”XX[Z[\Ú‹ˆ™\ØÜš\[Ûˆˆ’Ù[Ø[ˆİ˜\›\‹Z\YÜˆ˜H[ø &Ú[XÚHXx &[[[İ\›šHZÜÚ\š\Úˆ‚ˆKˆš[œÜXİ[ÛˆˆÂˆ]Hˆ•ZÜÚ\]ˆ‹ˆ™\ØÜš\[Ûˆˆ•š^X[ZÜÚ\]ˆ˜H[š\[[™Ø[ˆY›İ]\›šHX^Y]\Úˆ‚ˆKˆœ›ØÙ\ÜÚ[™ÈˆÂˆ]Hˆ•^^[Ü›\Ú‹ˆ™\ØÜš\[Ûˆˆ’Ù[\Ú[Ø[ˆ˜^šY˜H\ÛÜÚYHX\šÚ\›İšØKXYÜ[\Ú˜Hø &[H^^[Ü›\Úˆ‚ˆKˆœİÜ˜YÙHˆÂˆ]Hˆ”Ø\[\Ú˜H›ø &˜]\Ú‹ˆ™\ØÜš\[Ûˆˆ’›Ş[\Ú\š\Ú[Û\[\›šHİ^˜]\Ú˜HÜÚ\š\ÚØH^^[Ü›\Úˆ‚ˆBˆKˆ›ØØ][Û‘^YXœ›İÈˆ“ÑÒTÕRĞHÑSÑÔQ’VPTÒH‹ˆ›ØØ][Û•]Hˆ“[ÜÚİ˜HÙÚ\İZØHX\šØ^šH‹ˆ›ØØ][Û‘\ØÜš\[Ûˆˆ“ŞZZ[™Ú^›šH]ZÚØ[XHZ[\ÚHY[™Z™\š[Z^ˆÛX›Üˆ›Ş[\Ú]šKX]šY[ø &˜[\Ú\ˆ˜HXX[Z[\ÚÚ\\š[šH\Y[H]YKˆ‹ˆ›ØØ][Û“›İHˆ[š\HX[š[˜H[ø &^[ø &š\HÛø &›İˆ›ø &ZXÚH‹ˆ›X\^YXœ›İÈˆ“ÓP“ÔˆPS–’SH‹ˆ›X\]Hˆ“R“ÛX›Üš[šHÜ[™È‹ˆ›X\\ØÜš\[Ûˆˆ”›ÜÜÚ^XK[ÜÚİ˜Hš[ŞX]K™\ÙYHZ\ÚÙø &K›Û^\Ú[›H›ŞY^™PKˆ™\š[Ø[ˆX[š[›ø &ZXÚHX[™^X\ÈZY\]šHØÚ[YKˆ‹ˆ›X\\ØÛZ[Y\ˆˆš[›È˜HÚ\š\Ú›ŞZ[š[™È[š\H\]\ÚHX[™^X\ÈXx &[[[İ\šYØH›Ùø &\KˆÙ[\Ú[ˆÛ[ˆ˜\]˜H]ZÈ\Ú\š\Ú›ŞZ[šHY[™Z™\ˆš[[ˆ\Ù\[[™Ëˆ‹ˆ›Ü[“X\ˆ–X[™^X\ø &YHØÚ\Ú‹ˆ˜İQ^YXœ›İÈˆ”ÒV“’S‘ÈÔTUÒSÓˆSRÓÔ’S‘ÒVˆ‹ˆ˜İU]Hˆš^›™\ÈZ^[Ú›\š[™Ú^›šH]ZÚØ[XHZ[^[ZÈ‹ˆ˜İQ\ØÜš\[Ûˆˆ“XZİ[İ\ÜÛÜ[Y[KZ›ZH˜HØ]™È[Ù[[™Ú^™ØH[ÜÈ\Ú˜\˜^[Ûš[šH™[Ú[^[Z^‹ˆ‚ˆKˆ˜ÛÛXİÈˆÂˆ]Hˆ“ÙÚ\İZØHZ^[Ú›\š[™Ú^›šH]ZÚØ[XHZ[^[ZÈ‹ˆ™\ØÜš\[Ûˆˆ“XZİ[İ\š[™Ú^ˆ˜HZ›Z[™Ú^ˆ\ZYH^][™Ëˆš^ˆš^›™\Ú[™Ú^ˆXÚ[ˆÜ\˜]Ú[Ûˆ[Ù[^^[Ü›^[Z^‹ˆ‹ˆ›˜[YHˆ’\ÛH‹ˆ[YÜ˜[Hˆ•[YÜ˜[H\Ù\›˜[YH‹ˆœÛ™Hˆ•[Y›Ûˆ[ÚÚHÙPÚ]‹ˆ›X\šÙ]XÙHˆ“X\šÙ]^\È‹ˆ›Û[YHˆ“Ş[ZÈZ›H‹ˆœİX›Z]ˆ”Ûø &›İˆ]X›Üš\Ú‹ˆœİXØÙ\ÜÈˆ”Ûø &›İš[™Ú^ˆ]X›Üš[Kˆ^ˆÜ˜YHÚ^ˆš[[ˆ›Ùø &[˜[Z^‹ˆ‹ˆ™\œ›Üˆˆ”Ûø &›İ›šH]X›ÜšXˆ›ø &XYKˆX^]H\š[šXˆÛø &š[™Ëˆ‹ˆœš]˜XŞHˆ•\ÚHÚZÛšH]X›Üš\ÚÜœX[HÚ\š][Ø[ˆ[ÜXHXx &[[[İ\š[šHX^]H\Ú\ÚØH›Şš[ZÈš[\˜\Ú^‹ˆ‹ˆ™^YXœ›İÈˆ“R“’SSˆSÔPHÈ‹ˆœ™\Hˆ“Ù]Hš\ˆ\Úİ[šHXÚYH˜]›Øˆ™\˜[Z^ˆ‹ˆ˜ÛÛ™šY[X[ˆ“Xx &[[[İ\š[™Ú^ˆ˜\X]\ÚHÛø &›İ›šHÛø &šXˆÚ\Z\ÚXÚ[ˆ\Ú][YH‹ˆ™\™XİX™[ˆ“Ñø &S’S‘È‹ˆ™\™Xİ]Hˆ’Ù^Z[™ÚH]ZÚ[™Ú^›šH]ZÚØ[XHZ[[™È‹ˆ™\™Xİ\ØÜš\[Ûˆˆ”Ûø &›İˆ]X›Üš[™Ë˜[[Ø[Z^ˆYœÚ[İ\›šH[š\[\Ú\šX‹Ù^Z[™ÚHXY[[šH]œÚ^XHZ[YKˆ‹ˆ™›Ü›Q^YXœ›İÈˆ’SRÓÔ“RÈÓø &“Õ’H‹ˆ™›Ü›U]Hˆš^›™\Ú[™Ú^ˆ\ZYH^][™È‹ˆ™›Ü›Q\ØÜš\[Ûˆˆš\›Şˆ[ø &Ú[XÚHXx &[[[İ\İXšÚH\ÛØ›šH[š\\›ÜH^^[Ü›\ÚØH[Ü™[H™\˜YKˆ‹ˆ›˜[YTXÙZÛ\ˆˆ’\ÛZ[™Ú^ˆ‹ˆœÛ™TXÙZÛ\ˆˆŠÎNN‹ˆ˜ÛÛ\[Hˆ’ÛÛ\[š^XH‹ˆ˜ÛÛ\[TXÙZÛ\ˆˆ’ÛÛ\[š^XH›ÛZH‹ˆ˜Ûİ[Hˆ“X[[ZØ]‹ˆ˜Ûİ[TXÙZÛ\ˆˆ“X\Ø[[‹›ÜÜÚ^XH[ÚÚH]ŞH‹ˆœ›ÙXİ\Hˆ“XZİ[İÚY˜\ÚH‹ˆœ›ÙXİXÙZÛ\ˆˆ‘[Zİ›ÛšZØKÚ^Z[KZÙXÚZË^K\›ø &™ø &Üˆ^][[\šx )ˆ‹ˆ›Û[YTXÙZÛ\ˆˆ“X\Ø[[‹H8 $ÌÈÛ˜H‹ˆ›X\šÙ]XÙP›İˆ•Ú[™\œšY\È˜HŞ›Ûˆ‹ˆ›X\šÙ]XÙSİ\ˆˆ›ÜÚXHX\šÙ]^\ÈÈ[H[›[›XYØ[ˆ‹ˆœÙ[™[™Èˆ–]X›Üš[[ÜYx )ˆ‹ˆœİ\Û™U]Hˆ‘Z^[Ú›\š[™Ú^›šHø &™Ø[˜[Z^ˆ‹ˆœİ\Û™Q\ØÜš\[Ûˆˆ“XZİ[İ\‹Z›KÙ[ÙÜ˜Yš^XH˜HX]šYx &[Z[›İ[Ù[[šH[š\[^[Z^‹ˆ‹ˆœİ\ÛÕ]Hˆ’\Ú˜\˜^[Ûš[šH^˜[Z^ˆ‹ˆœİ\ÛÑ\ØÜš\[Ûˆˆ”Ú^™ØHÙ\˜ZÛHÛX›ÜˆÜ\˜]Ú^X[\šH˜H[š[Y[[Ù[[šHÙ[\Ú[Z^‹ˆ‹ˆœİ\™YU]Hˆ’\ÛØˆ^^[Ü›^[Z^ˆ‹ˆœİ\™YQ\ØÜš\[Ûˆˆ“˜\]Y]˜H[X[^HÙ^Z[™ÚHXY[[\›šH]ZÚØ[XHZ[[Z^‹ˆ‹ˆ™\œ›Ü“›İÛÛ™šYİ\™Yˆ”Ûø &›İˆÚZÛH˜[[ØYØH[[›XYØ[‹ˆÛø &›İš[™Ú^ˆ]X›Üš[XYH8 %Ù^Z[œ›ÜHX^]H\š[šXˆÛø &š[™Ëˆ‹ˆ™\œ›Ü‘]X˜\ÙHˆ“Xx &[[[İ\ˆ˜^˜\ÚHš[[ˆ˜\][˜Ú[ZÈ[ÜXH[ø &KˆÛø &›İš[™Ú^ˆŞš\˜ÚH]X›Üš[XYKˆš\›Ş™[ˆÛø &™ÈX^]H\š[šXˆÛø &š[™Ëˆ‹ˆ™\œ›Ü”˜]S[Z]Yˆ•\š[š\Ú\ˆÛÛšHYHÛø &ˆš\ˆ™XÚH\Z\XHİ]X‹X^]H\š[šXˆÛø &š[™Ëˆ‹ˆ™\œ›Ü’[˜[Yˆ“XZ˜\š^HX^YÛ›\›šHZÜÚ\š[™È˜H[Y›Ûˆ˜\X[ZHø &ø &šHÚ\š][Ø[šYØH\ÚÛ˜ÚÜÚ[Z[[™Ëˆ‹ˆ™\œ›Ü‘[]™\Hˆ”Ûø &›İš[™Ú^›šH˜[[ØYØHY]Ø^šXˆ›ø &XYKˆÚ\š][Ø[ˆXx &[[[İ\ˆÚZÛHØ\[[šXˆ[ÛYH8 %Ù^Z[œ›ÜHX^]H\š[šXˆÛø &š[™Ëˆ‹ˆ›Ü[Û˜[ˆš^^[Üš^H‹ˆ[YÜ˜[R[ˆ”›Ùš[]›Û\Ú[šH[X\Ë›ŞY[[]˜ÚH›ÛZ[™Ú^›šHÚ\š][™Ëˆ\Ù\[\ÚXÚ[ˆ[YÜ˜[HZÚØ][[™Ú^™ØHÚ\š\Ú[™Ú^ˆÙ\˜ZÈ›ø &YKˆ‹ˆ[YÜ˜[U™\šYHˆ•[YÜ˜[HÜœX[H\Ù\[\Ú‹ˆ[YÜ˜[U™\šYšYYˆ•[YÜ˜[HZÚØ][H\Ù\[[™H‹ˆ[YÜ˜[PÚXÚÚ[™Èˆ•[YÜ˜[HXx &[[[İ\šHZÜÚ\š[[ÜYx )ˆ‹ˆ[YÜ˜[U[˜]˜Z[X›Hˆ•[YÜ˜[HZÜÚ\]šH[HÛŞ›[›XYØ[‹ˆHX^YÛ›šH›ø &Ú[Û\š\Ú[™Ú^ˆ][ZÚ[‹ˆ‹ˆ[YÜ˜[R[˜[Yˆ•ø &ø &šH\Ù\›˜[YHÚ\š][™Îˆx $ÌÌˆHİ[ˆ\™šK˜\X[H[ÚÚH\İÚHÚ^š\Kˆ‹ˆ[YÜ˜[S›İ™\šYšYYˆ]˜[Ûø &œØ][Ø[ˆ[YÜ˜[HZÚØ][[šH\Ù\[[™Ëˆ‹ˆ[YÜ˜[SZ\ÛX]Úˆ”Ú^ˆ›ÜÚXH[YÜ˜[HZÚØ][YØHÚ\™[™Ú^‹ˆ\ÚHX^YÛ™HÛø &œØ][Ø[ˆ›ÛHš[[ˆÚ\š[™Ëˆ‹ˆ[YÜ˜[Q˜Z[Yˆ•[YÜ˜[HZÚØ][[šH\Ù\[Xˆ›ø &XYKˆX^]H\š[šXˆÛø &š[™Ëˆ‹ˆ[YÜ˜[PØ[˜Ù[Yˆ•[YÜ˜[HZÜÚ\]šH™ZÛÜˆZ[[™Kˆ˜\\ˆ›ø &ØKX^]H\š[šXˆÛø &š[™Ëˆ‹ˆœİXØÙ\ÜÕ]Hˆ”Ûø &›İš[™Ú^ˆXX[Z[[™HH‹ˆœİXØÙ\ÜÑ\ØÜš\[Ûˆˆ“R“[š[Y[š[[ˆ›Ùø &[™Ø[š[™Ú^ˆXÚ[ˆ˜ZX]ˆXx &[[[İ\š[™Ú^›šHÛZÈ˜H˜[[Ø[Z^ˆš\ˆ\Úİ[šHXÚYHÚ^ˆš[[ˆ›Ùø &[˜YKˆ‹ˆœİXØÙ\ÜÔ™Y™\™[˜ÙHˆ”Ûø &›İˆ˜\X[ZH‹ˆœİXØÙ\ÜĞÛÜÙHˆ•^^[Üˆ‹ˆ[š]Ô\“[Ûˆ™Û˜KÛŞH‹ˆ˜ÛÛ^]Hˆ’Ø[İ[X]Üˆ\˜[Y]›\šH[ø &Ú[H‹ˆ˜ÛÛ^\ØÜš\[Ûˆˆ•^Z[š^H\ÛØˆ\˜[Y]›\šHÛø &›İ™ØH[ø &Ú[Kˆ]X›Üš\Ú[ˆÛ[ˆŞ[ZÈZ›H˜HX\šÙ]^\ÛšHZÜÚ\š[™Ëˆ‹ˆ˜ÛÛ^[Ù[ˆ“[Ù[‹ˆ˜ÛÛ^X\šÙ]XÙHˆ“X\šÙ]^\È‹ˆ˜ÛÛ^[š]Èˆ“Ş[ZÈXZİ[İÛÛšH‹ˆ˜ÛÛ^\İ[X]Hˆ•^Z[š^Hİ[[XH‹ˆ˜ÛÛ^\ØÛZ[Y\ˆˆ’\ÛØˆ˜[][˜]š^H\šY›\ˆ\ÛÜÚYH^š[Ø[ˆ˜HÛ[X]š^HÙ™\H[X\ËˆXZİ[š^H˜\šHY[™Z™\ˆ\Ù\[^YKˆ‹ˆœÛİ\˜ÙPÚ[˜U]Hˆ–]ŞY[ˆ›ÜÜÚ^XYØHY]Ø^šXˆ™\š\ÚÛø &›İšH‹ˆœÛİ\˜ÙPÚ[˜Q\ØÜš\[Ûˆˆ–Y]Ø^šXˆ™\]˜ÚKXZİ[İZ›H˜H›ÜÜÚ^XYØHY]Ø^š\Ú[ø &˜[\ÚH\ZYH^][™Ëˆ‚ˆKˆ™›Ûİ\ˆˆÂˆYÛ[™Hˆ‘[Zİ›ÛˆZ›Ü˜]XÚ[ˆø &\H[š[Y[˜HÙÚ\İZØH^›X]\šKˆ‹ˆœšYÚÈˆ˜\˜ÚH\]\[\ˆ[[ŞX[[™Ø[‹ˆ‚ˆBŸB
