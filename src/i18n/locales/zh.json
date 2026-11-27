@@ -24,9 +24,24 @@
     "primaryCta": "计算服务费用",
     "secondaryCta": "咨询发货方案",
     "metrics": {
-      "sla": "运营服务水平协议",
-      "dispatch": "发往电商平台仓库",
-      "marketplaces": "支持 Wildberries 与 Ozon 入仓"
+      "models": "FBO 与 FBS 模式",
+      "siteLanguages": "网站语言版本",
+      "marketplaces": "电商平台",
+      "operations": "仓储操作项目"
+    },
+    "heroNote": "从货物接收到交付电商平台仓库",
+    "visualStatus": "仓储作业流程",
+    "visualReady": "发货前准备",
+    "qualityControl": "质量检查",
+    "dispatchWorkflow": "发货准备",
+    "servicesEyebrow": "仓储作业 / 01",
+    "chinaEyebrow": "中国至俄罗斯供应链 / 02",
+    "closingEyebrow": "讨论您的下一批货物 / 03",
+    "operations": {
+      "receiving": "01 / 收货",
+      "labeling": "02 / 贴标",
+      "packing": "03 / 包装",
+      "dispatch": "04 / 发货"
     }
   },
   "services": {
@@ -313,7 +328,17 @@
     "successTitle": "咨询已成功提交！",
     "successDescription": "感谢您联系 MJL Fulfillment。我们已收到您的信息，团队将在一个工作日内与您联系。",
     "successReference": "咨询编号",
-    "successClose": "完成"
+    "successClose": "完成",
+    "unitsPerMonth": "件/月",
+    "contextTitle": "已带入计算器参数",
+    "contextDescription": "已将预估参数填入咨询表。提交前请核对月度货量和电商平台。",
+    "contextModel": "履约模式",
+    "contextMarketplace": "电商平台",
+    "contextUnits": "月度件数",
+    "contextEstimate": "预估金额",
+    "contextDisclaimer": "此估算基于演示费率，不构成正式报价。最终费用由客户经理确认。",
+    "sourceChinaTitle": "中国至俄罗斯供应链咨询",
+    "sourceChinaDescription": "请介绍供应商、商品、货量以及运往俄罗斯的路线。"
   },
   "footer": {
     "tagline": "面向电子商务的一站式履约与物流服务。",
