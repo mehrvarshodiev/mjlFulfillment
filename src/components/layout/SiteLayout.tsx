@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Instagram, Menu, Moon, Send, Sun, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, Instagram, Languages, Menu, Moon, Send, Sun, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { MjlLogo } from "../brand/MjlLogo";
 import { SEOHead } from "../seo/SEOHead";
@@ -21,28 +21,159 @@ function getInitialTheme(): Theme {
   return "dark";
 }
 
+const languageOptions = [
+  { code: "ru", nativeName: "Русский", englishName: "Russian" },
+  { code: "en", nativeName: "English", englishName: "English" },
+  { code: "zh", nativeName: "中文", englishName: "Chinese" },
+  { code: "ky", nativeName: "Кыргызча", englishName: "Kyrgyz" },
+  { code: "kk", nativeName: "Қазақша", englishName: "Kazakh" },
+  { code: "uz", nativeName: "O‘zbekcha", englishName: "Uzbek" },
+  { code: "tg", nativeName: "Тоҷикӣ", englishName: "Tajik" }
+] as const;
+
+type LanguageCode = (typeof languageOptions)[number]["code"];
+
+const languageSwitcherCopy: Record<LanguageCode, {
+  button: string;
+  title: string;
+  count: string;
+  hint: string;
+}> = {
+  ru: {
+    button: "Выбрать язык сайта",
+    title: "Язык сайта",
+    count: "7 языков",
+    hint: "Выберите язык для всех страниц"
+  },
+  en: {
+    button: "Choose website language",
+    title: "Website language",
+    count: "7 languages",
+    hint: "Choose a language for every page"
+  },
+  zh: {
+    button: "选择网站语言",
+    title: "网站语言",
+    count: "7 种语言",
+    hint: "为所有页面选择语言"
+  },
+  ky: {
+    button: "Сайттын тилин тандоо",
+    title: "Сайттын тили",
+    count: "7 тил",
+    hint: "Бардык барактар үчүн тилди тандаңыз"
+  },
+  kk: {
+    button: "Сайт тілін таңдау",
+    title: "Сайт тілі",
+    count: "7 тіл",
+    hint: "Барлық беттерге арналған тілді таңдаңыз"
+  },
+  uz: {
+    button: "Sayt tilini tanlash",
+    title: "Sayt tili",
+    count: "7 ta til",
+    hint: "Barcha sahifalar uchun tilni tanlang"
+  },
+  tg: {
+    button: "Интихоби забони сомона",
+    title: "Забони сомона",
+    count: "7 забон",
+    hint: "Забонро барои ҳамаи саҳифаҳо интихоб кунед"
+  }
+};
+
 function LanguageSwitcher() {
   const { i18n } = useTranslation();
-  const { pathname, hash } = useLocation();
-  const current = (i18n.resolvedLanguage || "ru").split("-")[0];
+  const { pathname, search, hash } = useLocation();
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuId = useId();
+  const current = (i18n.resolvedLanguage || "ru").split("-")[0] as LanguageCode;
+  const activeLanguage = languageOptions.find((language) => language.code === current) ?? languageOptions[0];
+  const copy = languageSwitcherCopy[current] ?? languageSwitcherCopy.ru;
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (event.target instanceof Node && !rootRef.current?.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        triggerRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open]);
+
+  const getLanguageHref = (language: LanguageCode) => {
+    const prefix = language === "ru" ? "" : `/${language}`;
+    const path = pathname === "/" ? "/" : pathname;
+    return `${prefix}${path}${search}${hash}`;
+  };
 
   return (
-    <div className="language-switcher" aria-label="Select language">
-      {(["ru", "en", "zh", "ky", "kk", "uz", "tg"] as const).map((language) => {
-        const prefix = language === "ru" ? "" : `/${language}`;
-        const href = `${prefix}${pathname === "/" ? "/" : pathname}${hash}`;
+    <div className="language-dropdown" ref={rootRef}>
+      <button
+        ref={triggerRef}
+        className={open ? "language-dropdown-trigger is-open" : "language-dropdown-trigger"}
+        type="button"
+        aria-label={copy.button}
+        aria-expanded={open}
+        aria-controls={menuId}
+        onClick={() => setOpen((isOpen) => !isOpen)}
+      >
+        <Languages className="language-dropdown-trigger-icon" size={16} aria-hidden="true" />
+        <span className="language-dropdown-code">{activeLanguage.code.toUpperCase()}</span>
+        <ChevronDown className="language-dropdown-chevron" size={15} aria-hidden="true" />
+      </button>
 
-        return (
-          <a
-            key={language}
-            href={href}
-            aria-current={current === language ? "page" : undefined}
-            className={current === language ? "language-active" : undefined}
-          >
-            {language}
-          </a>
-        );
-      })}
+      {open && (
+        <nav className="language-dropdown-menu" id={menuId} aria-label={copy.title}>
+          <div className="language-dropdown-heading">
+            <span>{copy.title}</span>
+            <small>{copy.count}</small>
+          </div>
+
+          <div className="language-dropdown-options">
+            {languageOptions.map((language) => {
+              const selected = current === language.code;
+
+              return (
+                <a
+                  key={language.code}
+                  href={getLanguageHref(language.code)}
+                  aria-current={selected ? "page" : undefined}
+                  className={selected ? "language-dropdown-option is-active" : "language-dropdown-option"}
+                  onClick={() => setOpen(false)}
+                >
+                  <span className="language-dropdown-option-code">{language.code.toUpperCase()}</span>
+                  <span className="language-dropdown-option-name">
+                    <strong>{language.nativeName}</strong>
+                    <small>{language.englishName}</small>
+                  </span>
+                  {selected && <Check className="language-dropdown-check" size={17} aria-hidden="true" />}
+                </a>
+              );
+            })}
+          </div>
+
+          <p className="language-dropdown-hint">{copy.hint}</p>
+        </nav>
+      )}
     </div>
   );
 }
