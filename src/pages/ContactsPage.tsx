@@ -286,31 +286,31 @@ export function ContactsPage() {
         <form onSubmit={handleSubmit} aria-busy={status === "sending"}>
           <div className="contacts-field-grid">
             <label>
-              {t("contacts.name")}
+              <span>{t("contacts.name")}<span className="contacts-required-mark" aria-hidden="true"> *</span></span>
               <input required autoComplete="name" maxLength={100} value={form.name} onChange={(e) => update("name", e.target.value)} placeholder={t("contacts.namePlaceholder")}/>
             </label>
             <label>
-              {t("contacts.phone")}
+              <span>{t("contacts.phone")}<span className="contacts-required-mark" aria-hidden="true"> *</span></span>
               <input required type="tel" autoComplete="tel" minLength={7} maxLength={40} value={form.phone} onChange={(e) => update("phone", e.target.value)} placeholder={t("contacts.phonePlaceholder")}/>
             </label>
             <label>
-              {t("contacts.company")}
+              <span>{t("contacts.company")}<span className="contacts-required-mark" aria-hidden="true"> *</span></span>
               <input required autoComplete="organization" maxLength={120} value={form.company} onChange={(e) => update("company", e.target.value)} placeholder={t("contacts.companyPlaceholder")}/>
             </label>
             <label>
-              {t("contacts.country")}
+              <span>{t("contacts.country")}<span className="contacts-required-mark" aria-hidden="true"> *</span></span>
               <input required autoComplete="country-name" maxLength={80} value={form.country} onChange={(e) => update("country", e.target.value)} placeholder={t("contacts.countryPlaceholder")}/>
             </label>
             <label>
-              {t("contacts.productType")}
+              <span>{t("contacts.productType")}<span className="contacts-required-mark" aria-hidden="true"> *</span></span>
               <input required maxLength={120} value={form.productType} onChange={(e) => update("productType", e.target.value)} placeholder={t("contacts.productPlaceholder")}/>
             </label>
             <label>
-              {t("contacts.volume")}
+              <span>{t("contacts.volume")}<span className="contacts-required-mark" aria-hidden="true"> *</span></span>
               <input required maxLength={80} value={form.volume} onChange={(e) => update("volume", e.target.value)} placeholder={t("contacts.volumePlaceholder")}/>
             </label>
             <label>
-              {t("contacts.marketplace")}
+              <span>{t("contacts.marketplace")}<span className="contacts-required-mark" aria-hidden="true"> *</span></span>
               <select required value={form.marketplace} onChange={(e) => update("marketplace", e.target.value)}>
                 <option value="both">{t("contacts.marketplaceBoth")}</option>
                 <option value="wildberries">Wildberries</option>
