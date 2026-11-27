@@ -27,6 +27,13 @@
       "sla": "Operatsion SLA",
       "dispatch": "Marketpleys omborlariga jo‘natish",
       "marketplaces": "Wildberries va Ozon uchun yuklarni tayyorlash"
+    },
+    "workflowStatus": "ISH JARAYONI SXEMASI",
+    "facts": {
+      "models": "FULFILMENT MODELLARI",
+      "operations": "ASOSIY OPERATSIYALAR",
+      "marketplaces": "MARKETPLEYSLAR",
+      "geography": "SOTUVCHILAR UCHUN MAQSADLI BOZORLAR"
     }
   },
   "services": {
@@ -313,7 +320,12 @@
     "successTitle": "So‘rovingiz qabul qilindi!",
     "successDescription": "MJL Fulfillment bilan bog‘langaningiz uchun rahmat. Ma’lumotlaringizni oldik va jamoamiz bir ish kuni ichida siz bilan bog‘lanadi.",
     "successReference": "So‘rov raqami",
-    "successClose": "Tayyor"
+    "successClose": "Tayyor",
+    "calculatorSummaryTitle": "Dastlabki hisob parametrlari",
+    "calculatorSummaryDescription": "Summa namunaviy tariflar asosida hisoblangan va rasmiy oferta emas. Menejer mahsulot hamda logistika tafsilotlarini aniqlashtirgach yakuniy narxni tasdiqlaydi.",
+    "calculatorVolume": "Kalkulyator bo‘yicha {{count}} dona",
+    "calculatorSummaryIncluded": "Qo‘shilgan",
+    "calculatorSummaryNotIncluded": "Tanlanmagan"
   },
   "footer": {
     "tagline": "Elektron tijorat uchun to‘liq fulfilment va logistika xizmatlari.",
