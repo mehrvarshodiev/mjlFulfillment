@@ -77,13 +77,25 @@ function isCalculatorContext(value: unknown): value is CalculatorContext {
 
 function readCalculatorContext(params: URLSearchParams): CalculatorContext | null {
   if (params.get("quote") !== "1") return null;
+  const marketplace = params.get("marketplace");
+  const model = params.get("model");
+  const units = params.get("units");
+  const packaging = params.get("packaging");
+  const marking = params.get("marking");
+  const storageDays = params.get("storageDays");
+  if (
+    marketplace === null || model === null || units === null ||
+    packaging === null || marking === null || storageDays === null ||
+    !["0", "1"].includes(marking)
+  ) return null;
+
   const candidate = {
-    marketplace: params.get("marketplace"),
-    model: params.get("model"),
-    units: Number(params.get("units")),
-    packaging: params.get("packaging"),
-    marking: params.get("marking") === "1",
-    storageDays: Number(params.get("storageDays"))
+    marketplace,
+    model,
+    units: Number(units),
+    packaging,
+    marking: marking === "1",
+    storageDays: Number(storageDays)
   };
   return isCalculatorContext(candidate) ? candidate : null;
 }
@@ -105,7 +117,8 @@ function getLeadErrorKey(code: string | null): string {
     case "telegram_not_configured": return "contacts.errorNotConfigured";
     case "database_unavailable": return "contacts.errorDatabase";
     case "rate_limited": return "contacts.errorRateLimited";
-    case "invalid_fields": return "contacts.errorInvalid";
+    case "invalid_fields":
+    case "invalid_calculator_context": return "contacts.errorInvalid";
     case "invalid_telegram_username": return "contacts.telegramInvalid";
     case "telegram_not_verified": return "contacts.telegramNotVerified";
     case "timeout":
@@ -348,6 +361,7 @@ export function ContactsPage() {
           setVerifiedUsername("");
           setTelegramVerification("idle");
         }
+        if (result.code === "invalid_calculator_context") setCalculatorContext(null);
         setStatus("error");
         return;
       }
