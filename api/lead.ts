@@ -98,7 +98,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     !lead.country ||
     !lead.productType ||
     !lead.volume ||
-    !lead.marketplace ||
+    !["both", "wildberries", "ozon", "other"].includes(lead.marketplace) ||
     !isValidPhone(lead.phone)
   ) {
     return res.status(400).json({ ok: false, code: "invalid_fields" });
@@ -109,7 +109,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     if (!telegramUsername) {
       return res.status(400).json({ ok: false, code: "invalid_telegram_username" });
     }
-    if (!verifyTelegramProof(payload.telegramProof, telegramUsername)) {
+    if (!verifyTelegramProof(req.headers.cookie, telegramUsername)) {
       return res.status(400).json({ ok: false, code: "telegram_not_verified" });
     }
     lead.telegram = `@${telegramUsername}`;
