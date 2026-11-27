@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
+import { calculateEstimate } from "../features/calculator/calculateEstimate";
+import type { FulfillmentModel, PackagingType } from "../data/pricing";
 import {
   BadgeCheck,
   CheckCircle2,
@@ -34,14 +36,63 @@ type FormState = {
   website: string;
 };
 
+type CalculatorContext = {
+  marketplace: "wb" | "ozon" | "both";
+  model: FulfillmentModel;
+  units: number;
+  packaging: PackagingType;
+  marking: boolean;
+  storageDays: number;
+};
+
 type SavedForm = {
   form: FormState;
   consent: boolean;
+  calculator?: CalculatorContext | null;
 };
 
 type TelegramVerification = "idle" | "loading" | "verified" | "invalid" | "error" | "cancelled" | "mismatch";
 
 const FORM_STORAGE_KEY = "mjl-contact-form-v1";
+
+function isCalculatorContext(value: unknown): value is CalculatorContext {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const candidate = value as Record<string, unknown>;
+  return (
+    ["wb", "ozon", "both"].includes(String(candidate.marketplace)) &&
+    ["FBO", "FBS"].includes(String(candidate.model)) &&
+    ["standard", "protective", "custom"].includes(String(candidate.packaging)) &&
+    typeof candidate.units === "number" &&
+    Number.isInteger(candidate.units) &&
+    candidate.units >= 10 &&
+    candidate.units <= 5000 &&
+    candidate.units % 10 === 0 &&
+    typeof candidate.storageDays === "number" &&
+    Number.isInteger(candidate.storageDays) &&
+    candidate.storageDays >= 0 &&
+    candidate.storageDays <= 60 &&
+    typeof candidate.marking === "boolean"
+  );
+}
+
+function readCalculatorContext(params: URLSearchParams): CalculatorContext | null {
+  if (params.get("quote") !== "1") return null;
+  const candidate = {
+    marketplace: params.get("marketplace"),
+    model: params.get("model"),
+    units: Number(params.get("units")),
+    packaging: params.get("packaging"),
+    marking: params.get("marking") === "1",
+    storageDays: Number(params.get("storageDays"))
+  };
+  return isCalculatorContext(candidate) ? candidate : null;
+}
+
+function formMarketplaceFromQuote(marketplace: CalculatorContext["marketplace"]): string {
+  if (marketplace === "wb") return "wildberries";
+  if (marketplace === "ozon") return "ozon";
+  return "both";
+}
 const TELEGRAM_USERNAME_PATTERN = /^[A-Za-z][A-Za-z0-9_]{4,31}$/;
 
 function normalizeTelegramUsername(value: string): string | null {
@@ -77,7 +128,7 @@ const initialForm: FormState = {
 };
 
 export function ContactsPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [form, setForm] = useState<FormState>(initialForm);
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -87,6 +138,22 @@ export function ContactsPage() {
   const [verifiedUsername, setVerifiedUsername] = useState("");
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [leadId, setLeadId] = useState("");
+  const [calculatorContext, setCalculatorContext] = useState<CalculatorContext | null>(null);
+  const calculatorEstimate = useMemo(
+    () => calculatorContext ? calculateEstimate(calculatorContext) : null,
+    [calculatorContext]
+  );
+  const locale = i18n.resolvedLanguage === "zh"
+    ? "zh-CN"
+    : i18n.resolvedLanguage === "en" ? "en-US" : "ru-RU";
+  const quoteMoney = useMemo(
+    () => new Intl.NumberFormat(locale, { style: "currency", currency: "RUB", maximumFractionDigits: 0 }),
+    [locale]
+  );
+  const quoteCount = useMemo(
+    () => new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }),
+    [locale]
+  );
   const modalCloseRef = useRef<HTMLButtonElement>(null);
   const successModalRef = useRef<HTMLElement>(null);
 
@@ -103,6 +170,8 @@ export function ContactsPage() {
 
     const params = new URLSearchParams(window.location.search);
     const verificationResult = params.get("telegramVerification");
+    const hasCalculatorQuery = params.get("quote") === "1";
+
     if (verificationResult) {
       try {
         const saved = sessionStorage.getItem(FORM_STORAGE_KEY);
@@ -110,6 +179,7 @@ export function ContactsPage() {
           const parsed = JSON.parse(saved) as SavedForm;
           if (parsed.form && typeof parsed.form === "object") setForm({ ...initialForm, ...parsed.form });
           if (typeof parsed.consent === "boolean") setConsent(parsed.consent);
+          if (isCalculatorContext(parsed.calculator)) setCalculatorContext(parsed.calculator);
         }
       } catch {
         // Keep the form usable even when session storage is unavailable or malformed.
@@ -132,9 +202,22 @@ export function ContactsPage() {
       } catch {
         // Ignore storage cleanup errors.
       }
+    } else {
+      const quote = readCalculatorContext(params);
+      if (quote) {
+        setCalculatorContext(quote);
+        const count = new Intl.NumberFormat(locale).format(quote.units);
+        setForm((current) => ({
+          ...current,
+          volume: current.volume.trim() ? current.volume : t("contacts.calculatorVolume", { count }),
+          marketplace: formMarketplaceFromQuote(quote.marketplace)
+        }));
+      }
+    }
 
-      params.delete("telegramVerification");
-      params.delete("telegramUsername");
+    ["telegramVerification", "telegramUsername", "quote", "marketplace", "model", "units", "packaging", "marking", "storageDays"]
+      .forEach((key) => params.delete(key));
+    if (verificationResult || hasCalculatorQuery) {
       const query = params.toString();
       window.history.replaceState(
         window.history.state,
@@ -146,7 +229,7 @@ export function ContactsPage() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [t, locale]);
 
   useEffect(() => {
     if (!showSuccessModal) return;
@@ -194,6 +277,7 @@ export function ContactsPage() {
     setForm((current) => ({ ...current, [field]: value }));
     if (status === "error" || status === "success") setStatus("idle");
     setErrorCode(null);
+    if (field === "volume" || field === "marketplace") setCalculatorContext(null);
 
     if (field === "telegram") {
       setVerifiedUsername("");
@@ -217,7 +301,7 @@ export function ContactsPage() {
     }
 
     try {
-      sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify({ form, consent } satisfies SavedForm));
+      sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify({ form, consent, calculator: calculatorContext } satisfies SavedForm));
     } catch {
       setTelegramVerification("error");
       return;
@@ -253,7 +337,7 @@ export function ContactsPage() {
       const response = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, ...(calculatorContext ? { calculator: calculatorContext } : {}) }),
         signal: AbortSignal.timeout(12_000)
       });
       const result = await response.json().catch(() => ({})) as LeadApiResult;
@@ -272,6 +356,7 @@ export function ContactsPage() {
       setStatus("success");
       setShowSuccessModal(true);
       setForm(initialForm);
+      setCalculatorContext(null);
       setConsent(false);
       setVerifiedUsername("");
       setTelegramVerification("idle");
@@ -309,6 +394,41 @@ export function ContactsPage() {
           <h2>{t("contacts.formTitle")}</h2>
           <p>{t("contacts.formDescription")}</p>
         </div>
+
+        {calculatorContext && calculatorEstimate && (
+          <aside className="contacts-calculator-summary" aria-live="polite">
+            <div className="contacts-calculator-summary-heading">
+              <div>
+                <span>{t("contacts.calculatorSummaryTitle")}</span>
+                <strong>{quoteMoney.format(calculatorEstimate.total)}</strong>
+              </div>
+              <span className="contacts-calculator-summary-model">{calculatorContext.model}</span>
+            </div>
+            <dl className="contacts-calculator-summary-grid">
+              <div>
+                <dt>{t("services.calculator.items")}</dt>
+                <dd>{quoteCount.format(calculatorContext.units)}</dd>
+              </div>
+              <div>
+                <dt>{t("services.calculator.marketplace")}</dt>
+                <dd>{t(`services.calculator.marketplaces.${calculatorContext.marketplace}`)}</dd>
+              </div>
+              <div>
+                <dt>{t("services.calculator.packaging")}</dt>
+                <dd>{t(`services.calculator.${calculatorContext.packaging}`)}</dd>
+              </div>
+              <div>
+                <dt>{t("services.calculator.storageDays")}</dt>
+                <dd>{calculatorContext.storageDays} {t("services.calculator.days")}</dd>
+              </div>
+              <div>
+                <dt>{t("services.calculator.marking")}</dt>
+                <dd>{t(calculatorContext.marking ? "contacts.calculatorSummaryIncluded" : "contacts.calculatorSummaryNotIncluded")}</dd>
+              </div>
+            </dl>
+            <p>{t("contacts.calculatorSummaryDescription")}</p>
+          </aside>
+        )}
 
         <form onSubmit={handleSubmit} aria-busy={status === "sending"}>
           <div className="contacts-field-grid">
