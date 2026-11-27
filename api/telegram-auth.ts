@@ -99,7 +99,7 @@ function config() {
   }
 }
 
-function normalizeUsername(value: string): string | null {
+export function normalizeTelegramUsername(value: string): string | null {
   const username = value.trim().replace(/^@/, "");
   return USERNAME_PATTERN.test(username) ? username.toLowerCase() : null;
 }
@@ -127,11 +127,11 @@ function decodeJson<T>(value: string): T | null {
 function createCookie(session: AuthSession, secret: string): string {
   const payload = encodeJson(session);
   const signature = hmac(payload, secret).toString("base64url");
-  return `${COOKIE_NAME}=${payload}.${signature}; Max-Age=${SESSION_TTL_SECONDS}; Path=/api/telegram-auth; HttpOnly; Secure; SameSite=Lax`;
+  return `${COOKIE_NAME}=${payload}.${signature}; Max-Age=${SESSION_TTL_SECONDS}; Path=/api; HttpOnly; Secure; SameSite=Lax`;
 }
 
 function clearCookie(): string {
-  return `${COOKIE_NAME}=; Max-Age=0; Path=/api/telegram-auth; HttpOnly; Secure; SameSite=Lax`;
+  return `${COOKIE_NAME}=; Max-Age=0; Path=/api; HttpOnly; Secure; SameSite=Lax`;
 }
 
 function readCookie(req: AuthRequest, secret: string): AuthSession | null {
@@ -171,14 +171,15 @@ function returnToForm(
   origin: string,
   returnTo: string,
   result: string,
-  extra: Record<string, string> = {}
+  extra: Record<string, string> = {},
+  cookie = clearCookie()
 ): void {
   const destination = new URL(returnTo, origin);
   destination.searchParams.set("telegramVerification", result);
   for (const [key, value] of Object.entries(extra)) {
     destination.searchParams.set(key, value);
   }
-  redirect(res, destination.toString(), clearCookie());
+  redirect(res, destination.toString(), cookie);
 }
 
 async function getJwks(): Promise<Jwk[]> {
@@ -239,11 +240,26 @@ async function verifyIdToken(
   return claims;
 }
 
-export function verifyTelegramProof(value: unknown, expectedUsername: string): boolean {
-  const secret = process.env.TELEGRAM_LOGIN_CLIENT_SECRET?.trim();
-  if (!secret || typeof value !== "string") return false;
+function createProofCookie(username: string, secret: string): string {
+  const payload = encodeJson({
+    username,
+    exp: Math.floor(Date.now() / 1000) + PROOF_TTL_SECONDS
+  });
+  const signature = hmac(payload, secret).toString("base64url");
+  return `${COOKIE_NAME}=${payload}.${signature}; Max-Age=${PROOF_TTL_SECONDS}; Path=/api; HttpOnly; Secure; SameSite=Lax`;
+}
 
-  const [payload, signature] = value.split(".");
+export function verifyTelegramProof(cookieHeader: string | string[] | undefined, expectedUsername: string): boolean {
+  const secret = process.env.TELEGRAM_LOGIN_CLIENT_SECRET?.trim();
+  if (!secret) return false;
+
+  const cookies = headerValue(cookieHeader);
+  const encoded = cookies.split(";").map((part) => part.trim())
+    .find((part) => part.startsWith(`${COOKIE_NAME}=`))
+    ?.slice(COOKIE_NAME.length + 1);
+  if (!encoded) return false;
+
+  const [payload, signature] = encoded.split(".");
   if (!payload || !signature) return false;
   const actual = Buffer.from(signature, "base64url");
   if (!safeEqual(hmac(payload, secret), actual)) return false;
@@ -289,7 +305,7 @@ export default async function handler(req: AuthRequest, res: AuthResponse) {
 
   const callbackRequest = url.searchParams.has("code") || url.searchParams.has("error");
   if (!callbackRequest) {
-    const username = normalizeUsername(url.searchParams.get("username") ?? "");
+    const username = normalizeTelegramUsername(url.searchParams.get("username") ?? "");
     const returnTo = safeReturnPath(url.searchParams.get("returnTo"));
     if (!username) {
       return res.status(400).json({ ok: false, code: "invalid_telegram_username" });
@@ -357,7 +373,7 @@ export default async function handler(req: AuthRequest, res: AuthResponse) {
     }
 
     const claims = await verifyIdToken(tokenData.id_token, session.nonce, settings.clientId);
-    const verifiedUsername = normalizeUsername(claims?.preferred_username ?? "");
+    const verifiedUsername = normalizeTelegramUsername(claims?.preferred_username ?? "");
     if (!claims || !verifiedUsername) {
       return returnToForm(res, settings.redirectOrigin, session.returnTo, "failed");
     }
@@ -365,15 +381,14 @@ export default async function handler(req: AuthRequest, res: AuthResponse) {
       return returnToForm(res, settings.redirectOrigin, session.returnTo, "mismatch");
     }
 
-    const ticket = encodeJson({
-      username: verifiedUsername,
-      exp: Math.floor(Date.now() / 1000) + PROOF_TTL_SECONDS
-    });
-    const proof = `${ticket}.${hmac(ticket, settings.clientSecret).toString("base64url")}`;
-    return returnToForm(res, settings.redirectOrigin, session.returnTo, "success", {
-      telegramUsername: verifiedUsername,
-      telegramProof: proof
-    });
+    return returnToForm(
+      res,
+      settings.redirectOrigin,
+      session.returnTo,
+      "success",
+      { telegramUsername: verifiedUsername },
+      createProofCookie(verifiedUsername, settings.clientSecret)
+    );
   } catch {
     return returnToForm(res, settings.redirectOrigin, session.returnTo, "failed");
   }
