@@ -40,6 +40,18 @@ export function ServicesPage() {
   const formatMoney = (value: number) => numberFormatters.money.format(value);
   const formatCount = (value: number) => numberFormatters.count.format(value);
   const selectedMarketplace = t(`services.calculator.marketplaces.${marketplace}`);
+  const quoteHref = useMemo(() => {
+    const params = new URLSearchParams({
+      quote: "1",
+      marketplace,
+      model,
+      units: String(units),
+      packaging,
+      marking: marking ? "1" : "0",
+      storageDays: String(storageDays)
+    });
+    return `/contacts?${params.toString()}`;
+  }, [marketplace, model, units, packaging, marking, storageDays]);
 
   return (
     <main className="services-page">
@@ -109,7 +121,7 @@ export function ServicesPage() {
             <div className="result-lines">{estimate.lines.map(line => <div className="result-line" key={line.key}><span>{t(line.key)}</span><strong>{formatMoney(line.amount)}</strong></div>)}</div>
             <div className="result-total-line"><span>{t("services.calculator.total")}</span><strong>{formatMoney(estimate.total)}</strong></div>
             <p className="calculator-disclaimer">{t("services.calculator.disclaimer")}</p>
-            <Link to="/contacts" className="button-primary calculator-cta">{t("services.calculator.requestQuote")} <ArrowUpRight size={17}/></Link>
+            <Link to={quoteHref} className="button-primary calculator-cta">{t("services.calculator.requestQuote")} <ArrowUpRight size={17}/></Link>
           </aside>
         </div>
       </section>
