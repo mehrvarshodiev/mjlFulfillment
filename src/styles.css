@@ -1404,3 +1404,259 @@ textarea:focus-visible {
     animation: none;
   }
 }
+
+
+/* Contact form: optional Telegram identity check and confirmation modal. */
+.contacts-telegram-field {
+  display: grid;
+  min-width: 0;
+  align-content: start;
+  gap: 8px;
+}
+.contacts-telegram-field label {
+  display: grid;
+  gap: 8px;
+  color: #dce6f3;
+  font-size: 10px;
+  font-weight: 700;
+}
+.contacts-telegram-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.contacts-telegram-label small {
+  color: #71839b;
+  font-size: 9px;
+  font-weight: 550;
+}
+.contacts-telegram-field input {
+  width: 100%;
+  min-width: 0;
+  min-height: 47px;
+  padding: 12px 13px;
+  border: 1px solid rgb(148 163 184 / 18%);
+  border-radius: 10px;
+  outline: none;
+  background: #0c1727;
+  color: #e5edf8;
+  font: inherit;
+  font-size: 11px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.contacts-telegram-field input::placeholder { color: #657992; }
+.contacts-telegram-field input:focus {
+  border-color: #4389f5;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 13%);
+}
+.contacts-telegram-field input[aria-invalid="true"] { border-color: #e87979; }
+.contacts-telegram-help,
+.contacts-telegram-status {
+  margin: 0;
+  color: #8295ae;
+  font-size: 9px;
+  line-height: 1.6;
+}
+.contacts-telegram-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.contacts-telegram-status.is-verified { color: #6fd3a8; }
+.contacts-telegram-status.is-error { color: #ff9696; }
+.contacts-telegram-verify {
+  display: inline-flex;
+  min-height: 36px;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 12px;
+  border: 1px solid rgb(96 165 250 / 27%);
+  border-radius: 10px;
+  background: rgb(37 99 235 / 12%);
+  color: #b6d2ff;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: border-color .18s, background .18s, transform .18s;
+}
+.contacts-telegram-verify:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgb(96 165 250 / 55%);
+  background: rgb(37 99 235 / 20%);
+}
+.contacts-telegram-verify:focus-visible,
+.contacts-success-close:focus-visible,
+.contacts-success-action:focus-visible {
+  outline: 2px solid #60a5fa;
+  outline-offset: 3px;
+}
+.contacts-telegram-verify:disabled { opacity: .65; cursor: wait; }
+
+.contacts-success-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: 22px;
+  background: rgb(3 9 18 / 76%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: contacts-modal-fade .2s ease both;
+}
+.contacts-success-modal {
+  position: relative;
+  width: min(100%, 460px);
+  padding: 42px 36px 34px;
+  border: 1px solid rgb(125 169 229 / 24%);
+  border-radius: 25px;
+  background:
+    radial-gradient(circle at 50% 0%, rgb(45 108 201 / 18%), transparent 42%),
+    linear-gradient(150deg, #172a43, #0e1929 75%);
+  box-shadow: 0 35px 110px rgb(0 0 0 / 48%), inset 0 1px 0 rgb(255 255 255 / 5%);
+  color: #eef5ff;
+  text-align: center;
+  animation: contacts-modal-rise .28s cubic-bezier(.2,.8,.2,1) both;
+}
+.contacts-success-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid rgb(148 163 184 / 16%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 4%);
+  color: #a9bad0;
+  cursor: pointer;
+  transition: color .18s, background .18s, border-color .18s;
+}
+.contacts-success-close:hover {
+  border-color: rgb(148 163 184 / 32%);
+  background: rgb(255 255 255 / 9%);
+  color: #fff;
+}
+.contacts-success-icon {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  margin: 0 auto 20px;
+  border: 1px solid rgb(95 211 165 / 32%);
+  border-radius: 23px;
+  background: linear-gradient(145deg, rgb(29 185 125 / 20%), rgb(29 185 125 / 7%));
+  box-shadow: 0 13px 38px rgb(16 185 129 / 12%), inset 0 1px 0 rgb(255 255 255 / 8%);
+  color: #6fe0b0;
+}
+.contacts-success-eyebrow {
+  color: #83b6ff;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .19em;
+}
+.contacts-success-modal h2 {
+  margin: 13px 0 11px;
+  color: #f3f7ff;
+  font-size: clamp(25px, 5vw, 32px);
+  line-height: 1.15;
+  letter-spacing: -.05em;
+}
+.contacts-success-modal>p {
+  max-width: 345px;
+  margin: 0 auto;
+  color: #a5b6cc;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.contacts-success-reference {
+  display: grid;
+  gap: 7px;
+  margin: 24px 0 18px;
+  padding: 14px 18px;
+  border: 1px solid rgb(96 165 250 / 17%);
+  border-radius: 13px;
+  background: rgb(7 18 34 / 48%);
+}
+.contacts-success-reference span {
+  color: #7f94b0;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.contacts-success-reference strong {
+  color: #c8ddff;
+  font-size: 18px;
+  letter-spacing: .04em;
+}
+.contacts-success-action {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 17px;
+  justify-content: center;
+}
+@keyframes contacts-modal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes contacts-modal-rise {
+  from { opacity: 0; transform: translateY(12px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+:root[data-theme="light"] .contacts-telegram-field label { color: #334155; }
+:root[data-theme="light"] .contacts-telegram-label small,
+:root[data-theme="light"] .contacts-telegram-help { color: #8291a6; }
+:root[data-theme="light"] .contacts-telegram-field input {
+  border-color: #dbe3ee;
+  background: #f8fafc;
+  color: #172033;
+}
+:root[data-theme="light"] .contacts-telegram-field input::placeholder { color: #94a3b8; }
+:root[data-theme="light"] .contacts-telegram-status { color: #64748b; }
+:root[data-theme="light"] .contacts-telegram-status.is-verified { color: #16845c; }
+:root[data-theme="light"] .contacts-telegram-status.is-error { color: #c24141; }
+:root[data-theme="light"] .contacts-telegram-verify {
+  border-color: #c9ddfa;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+:root[data-theme="light"] .contacts-success-modal {
+  border-color: #dbe6f4;
+  background:
+    radial-gradient(circle at 50% 0%, rgb(59 130 246 / 9%), transparent 44%),
+    linear-gradient(150deg, #fff, #f4f8fd 80%);
+  box-shadow: 0 35px 100px rgb(15 23 42 / 22%), inset 0 1px 0 #fff;
+  color: #172033;
+}
+:root[data-theme="light"] .contacts-success-close {
+  border-color: #e2e8f0;
+  background: #f8fafc;
+  color: #64748b;
+}
+:root[data-theme="light"] .contacts-success-modal h2 { color: #172033; }
+:root[data-theme="light"] .contacts-success-modal>p { color: #64748b; }
+:root[data-theme="light"] .contacts-success-reference {
+  border-color: #dce8f8;
+  background: #edf4ff;
+}
+:root[data-theme="light"] .contacts-success-reference span { color: #64748b; }
+:root[data-theme="light"] .contacts-success-reference strong { color: #1d4ed8; }
+
+@media (max-width: 600px) {
+  .contacts-success-overlay { align-items: center; padding: 16px; }
+  .contacts-success-modal { padding: 38px 23px 25px; border-radius: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contacts-telegram-field input,
+  .contacts-telegram-verify,
+  .contacts-success-close { transition: none; }
+  .contacts-success-overlay,
+  .contacts-success-modal { animation: none; }
+}
