@@ -15,7 +15,7 @@ import { ServicesPage } from "./pages/ServicesPage";
 import { ChinaSellersPage } from "./pages/ChinaSellersPage";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactsPage } from "./pages/ContactsPage";
-import { localizedSeoUrl, origin, pageMeta } from "./components/seo/SEOHead";
+import { localizedSeoUrl, origin, pageMeta } from "./components/seo/metadata";
 
 type SupportedLanguage = "ru" | "en" | "zh" | "ky" | "kk" | "uz" | "tg";
 const supportedLanguages: SupportedLanguage[] = ["ru", "en", "zh", "ky", "kk", "uz", "tg"];
