@@ -84,6 +84,10 @@ export function ServicesPage() {
         </div>
       </section>
 
+      <section className="pricing-factors section-wrap">
+        <div className="section-heading"><div><span className="section-kicker">{t("services.pricingEyebrow")}</span><h2>{t("services.pricingTitle")}</h2></div><p>{t("services.pricingDescription")}</p></div>
+        <div className="pricing-factor-grid">{(t("services.pricingFactors", { returnObjects: true }) as { title: string; description: string }[]).map((factor, index) => <article className="pricing-factor-card" key={factor.title}><span>0{index + 1}</span><h3>{factor.title}</h3><p>{factor.description}</p></article>)}</div>
+      </section>
       <section className="fulfillment-models">
         <div className="section-wrap">
           <div className="section-heading">

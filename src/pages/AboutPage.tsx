@@ -35,6 +35,10 @@ export function AboutPage() {
 
       <section className="about-flow"><div className="section-wrap"><div className="section-heading"><div><span className="section-kicker">{t("about.flowEyebrow")}</span><h2>{t("about.flowTitle")}</h2></div><p>{t("about.flowDescription")}</p></div><div className="about-flow-grid">{flow.map(({icon:Icon,key},index)=><article className="about-flow-step" key={key}><span className="about-flow-number">0{index+1}</span><span className="about-flow-icon"><Icon size={22}/></span><h3>{t(`about.flow.${key}.title`)}</h3><p>{t(`about.flow.${key}.description`)}</p></article>)}</div></div></section>
 
+      <section className="warehouse-gallery section-wrap" aria-labelledby="warehouse-gallery-title">
+        <div className="section-heading"><div><span className="section-kicker">{t("about.galleryEyebrow")}</span><h2 id="warehouse-gallery-title">{t("about.galleryTitle")}</h2></div><p>{t("about.galleryDescription")}</p></div>
+        <div className="warehouse-gallery-pending"><Warehouse size={25}/><span>{t("about.galleryPending")}</span></div>
+      </section>
       <section className="about-location section-wrap">
         <div className="location-symbol"><MapPin size={25}/></div>
         <div>

@@ -42,7 +42,24 @@
       "labeling": "02 / MARKIROVKA",
       "packing": "03 / QADOQLASH",
       "dispatch": "04 / JO‘NATISH"
-    }
+    },
+    "sellerEyebrow": "MARKETPLACE SOTUVCHILARI UCHUN",
+    "sellerTitle": "Logistikaga kamroq vaqt, savdoga ko‘proq e’tibor.",
+    "sellerIntro": "Ombordagi takroriy vazifalarni yagona jarayonga birlashtirib, xizmatlar tarkibi va dastlabki narxni tushunarli qilamiz.",
+    "sellerBenefits": [
+      {
+        "title": "Yagona aloqa nuqtasi",
+        "description": "Qabul qilish, tekshirish, markirovkalash, qadoqlash va jo‘natishni bitta jamoa bilan kelishing."
+      },
+      {
+        "title": "FBO va FBS",
+        "description": "Savdo modelingiz va platforma talablariga mos ish usulini tanlang."
+      },
+      {
+        "title": "Tushunarli narx",
+        "description": "Dastlabki hisobni ko‘ring va individual taklif so‘rang."
+      }
+    ]
   },
   "services": {
     "title": "Biznesingiz ish jarayoniga mos fulfilment",
@@ -57,40 +74,8 @@
     "picking": "Buyurtmalarni yig‘ish",
     "dispatch": "WB va Ozon omborlariga yetkazish",
     "calculator": {
-      "eyebrow": "XARAJATLARNI REJALASHTIRING",
-      "intro": "Asosiy ombor operatsiyalari uchun taxminiy hisob olish maqsadida yuk parametrlari va hajmini kiriting.",
-      "model": "Fulfilment modeli",
-      "marketplaces": {
-        "wb": "Wildberries",
-        "ozon": "Ozon",
-        "both": "Ikkalasi"
-      },
-      "models": {
-        "fbo": "Marketpleys omboriga jo‘natish",
-        "fbs": "Buyurtmalarni bajarish"
-      },
-      "storageDays": "Saqlash muddati",
-      "days": "kun",
-      "markingHint": "Har bir mahsulotga zarur kodlarni qo‘yish uchun taxminiy xizmat haqini qo‘shadi.",
-      "estimateLabel": "Taxminiy hisob",
-      "live": "Onlayn hisoblash",
-      "resultCaption": "{{marketplace}} · {{count}} dona uchun taxminiy hisob",
-      "breakdown": "Xarajatlar tarkibi",
-      "total": "Taxminiy jami",
-      "requestQuote": "Aniq taklif so‘rash",
-      "receiving": "Qabul qilish va sanash",
-      "inspection": "Sifat tekshiruvi",
-      "packaging": "Qadoqlash",
-      "marking": "Chestny ZNAK markirovkasi",
-      "storage": "Saqlash",
-      "dispatch": "Qayta ishlash va jo‘natish",
-      "disclaimer": "Bu faqat taxminiy hisob uchun namunaviy tariflar bo‘lib, ommaviy oferta hisoblanmaydi. Tanlangan marketpleys hisob doirasida ko‘rsatiladi; hozircha Wildberries va Ozon uchun namunaviy ombor tariflari bir xil. Yakuniy narx mahsulot o‘lchami, toifasi, marketpleys qoidalari, hajm va logistikaga bog‘liq. Amaldagi tariflarni jamoamiz bilan tasdiqlang.",
-      "title": "Xizmat narxini hisoblash",
-      "marketplace": "Marketpleys",
-      "items": "Mahsulotlar soni",
-      "standard": "Standart qadoqlash",
-      "protective": "Himoyalovchi qadoqlash",
-      "custom": "Maxsus qadoqlash"
+      "intro": "Marketplace, FBO/FBS modeli va ishlov berish parametrlarini tanlab, dastlabki hisobni oling. Menejer tafsilotlarni aniqlashtirib, tarifni tasdiqlaydi.",
+      "disclaimer": "Namunaviy tariflar asosidagi dastlabki hisob, rasmiy oferta emas. Tasdiqlanmagan tashish va qo‘shimcha xizmatlar kiritilmagan. Yakuniy narx mahsulot, hajm va yo‘nalish aniqlashtirilgach kelishiladi."
     },
     "eyebrow": "TO‘LIQ OPERATSION XIZMATLAR / 01",
     "heroNote": "Bitta hamkor — qabul qilishdan marketpleys omboriga jo‘natishgacha",
@@ -139,12 +124,33 @@
           "answer": "Kalkulyator tanlangan parametrlar asosida taxminiy hisob beradi. Yakuniy narx mahsulot toifasi va o‘lchami, hajm, marketpleys talablari, qadoqlash, saqlash va logistikaga bog‘liq; so‘rovni ko‘rib chiqqanimizdan so‘ng tasdiqlanadi."
         }
       }
-    }
+    },
+    "pricingEyebrow": "NARX TARKIBI",
+    "pricingTitle": "Tarif nimalarga bog‘liq",
+    "pricingDescription": "Narx mahsulot, partiya hajmi, operatsiyalar, saqlash va yetkazib berish yo‘nalishiga bog‘liq.",
+    "pricingFactors": [
+      {
+        "title": "Mahsulot va o‘lchamlar",
+        "description": "Kategoriya, o‘lcham, vazn va ishlov berish talablari."
+      },
+      {
+        "title": "Partiya hajmi",
+        "description": "Dona soni, qutilar va kelib tushish chastotasi."
+      },
+      {
+        "title": "Tayyorlash ishlari",
+        "description": "Tekshiruv, markirovkalash, qadoqlash va komplektlash."
+      },
+      {
+        "title": "Saqlash va yetkazib berish",
+        "description": "Saqlash muddati, manzil va logistika yo‘nalishi."
+      }
+    ]
   },
   "china": {
-    "eyebrow": "Rossiya marketpleyslariga chiqish yo‘lingiz",
-    "title": "Xitoydan Wildberries va Ozon’gacha — yagona logistika hamkori bilan",
-    "description": "Zavodlar, brendlar va savdo kompaniyalariga yuklarni Rossiyaga yuborishni tashkil etishda yordam beramiz — yuklarni birlashtirishdan marketpleysga tayyorlashgacha.",
+    "eyebrow": "XITOY FABRIKALARI VA YETKAZIB BERUVCHILARI UCHUN",
+    "title": "Xitoy mahsulotlarini Rossiya marketplace’lariga tayyorlaymiz",
+    "description": "MJL fabrikalar, eksportchilar va brendlar uchun ombor jarayonlarini muvofiqlashtiradi. Mahsulot, hajm, hujjatlar va yetkazib berish modelini rus yoki xitoy tilida muhokama qilamiz.",
     "customs": "Yuk va bojxona jarayonlarini muvofiqlashtirish",
     "managers": "Rus va xitoy tillarida so‘zlashuvchi menejerlar",
     "support": "WeChat va Telegram orqali aloqa",
@@ -154,24 +160,24 @@
     "marketplaceSupport": "Marketpleys talablariga tayyorlash",
     "visualAlt": "Xitoydan Rossiyaga logistika yo‘nalishi",
     "whyEyebrow": "OSON HAMKORLIK",
-    "whyTitle": "Yetkazib beruvchini muvofiqlashtirishdan marketpleysga tayyorlashgacha",
-    "whyDescription": "Ombor tayyorlash jarayonlarini muvofiqlashtiramiz va kelishilgan har bir bosqichni aniq yuritamiz.",
+    "whyTitle": "Rossiya tomonida operatsion hamkor",
+    "whyDescription": "Yuk jo‘natilishidan oldin mahsulot talablari va ombor ishlarining ketma-ketligini kelishamiz.",
     "benefits": {
       "bilingual": {
-        "title": "Ikki tilda muloqot",
-        "description": "Vazifalar va yuk holatini rus va xitoy tillarida muvofiqlashtirish."
+        "title": "Ruscha va xitoycha muloqot",
+        "description": "Talablar va yuk holatini ikki tilda muhokama qilish."
       },
       "marketplaceReady": {
-        "title": "Marketpleys talablariga mos tayyorlash",
-        "description": "Wildberries va Ozon talablariga muvofiq markirovka, qadoqlash va buyurtmalarni tayyorlash."
+        "title": "Wildberries va Ozon uchun tayyorlash",
+        "description": "Platforma talablariga mos markirovkalash va qadoqlashni kelishish."
       },
       "crossBorder": {
-        "title": "Yuk tashishni muvofiqlashtirish",
-        "description": "Yuk harakati va uni ombor qayta ishlash bosqichlariga topshirishni muvofiqlashtirish."
+        "title": "Yetkazib berishni muvofiqlashtirish",
+        "description": "Yuk ma’lumotlari, topshirish nuqtalari va mas’uliyatni aniqlashtirish."
       },
       "visibility": {
-        "title": "Aniq ish bosqichlari",
-        "description": "Ish boshlanishidan oldin operatsiyalar, mas’ullar va yuk holatini kelishib olish."
+        "title": "Oldindan ish rejasi",
+        "description": "Operatsiyalar, materiallar va muddatlarni kelishish."
       }
     },
     "processEyebrow": "YUKDAN MARKETPLEYS UCHUN TAYYOR HOLATGACHA",
@@ -201,8 +207,8 @@
     "wildberries": "Wildberries talablariga muvofiq mahsulot va yuklarni tayyorlash.",
     "ozon": "Ozon talablariga muvofiq mahsulot va yuklarni tayyorlash.",
     "ctaEyebrow": "YUKINGIZNI MUHOKAMA QILAYLIK",
-    "ctaTitle": "Qisqa so‘rovdan boshlang",
-    "ctaDescription": "Mahsulotlaringiz, hajmingiz va yo‘nalishingiz haqida ayting. MJL jamoasi keyingi qadamlarni belgilashga yordam beradi."
+    "ctaTitle": "Fabrikangiz yoki yukingiz haqida aytib bering",
+    "ctaDescription": "Mahsulot, partiya hajmi, jo‘natish shahri va platformani yuboring. MJL bajara oladigan ishlarni aniqlashtiramiz."
   },
   "about": {
     "title": "Kengayishga tayyor operatsion infratuzilma",
@@ -268,11 +274,15 @@
     "openMap": "Yandex Maps’da ochish",
     "ctaEyebrow": "SIZNING OPERATSION HAMKORINGIZ",
     "ctaTitle": "Biznes ehtiyojlaringizni muhokama qilaylik",
-    "ctaDescription": "Mahsulot assortimenti, hajmi va savdo modelingizga mos ish jarayonini belgilaymiz."
+    "ctaDescription": "Mahsulot assortimenti, hajmi va savdo modelingizga mos ish jarayonini belgilaymiz.",
+    "galleryEyebrow": "OMBOR VA JARAYONLAR",
+    "galleryTitle": "Haqiqiy ombor va ish jarayonlarini ko‘rsatamiz",
+    "galleryDescription": "Original fotosuratlar olingach, ombor, qabul qilish, saqlash, qadoqlash va jo‘natishga tayyorlash tasvirlari joylanadi.",
+    "galleryPending": "Fotosuratlar tekshirilgach galereya e’lon qilinadi."
   },
   "contacts": {
     "title": "Logistika ehtiyojlaringizni muhokama qilaylik",
-    "description": "Mahsulotlaringiz va hajmingiz haqida ayting. Biz biznesingiz uchun operatsion model tayyorlaymiz.",
+    "description": "Mahsulot, hajm va platformani yozing — menejer tafsilotlarni aniqlashtirib, dastlabki hisobni ko‘rib chiqadi.",
     "name": "Ism",
     "telegram": "Telegram @username",
     "phone": "Telefon yoki WeChat",
@@ -283,14 +293,14 @@
     "error": "So‘rovni yuborib bo‘lmadi. Qayta urinib ko‘ring.",
     "privacy": "Ushbu shaklni yuborish orqali kiritilgan aloqa ma’lumotlarini qayta ishlashga rozilik bildirasiz.",
     "eyebrow": "MJL BILAN ALOQA / 04",
-    "reply": "Odatda bir ish kuni ichida javob beramiz",
+    "reply": "Odatda bir ish kuni ichida javob beramiz. Muddat ma’lumotlarning to‘liqligiga bog‘liq.",
     "confidential": "Ma’lumotlaringiz faqat ushbu so‘rovni ko‘rib chiqish uchun ishlatiladi",
     "directLabel": "BOG‘LANING",
-    "directTitle": "Keyingi yukingizni muhokama qiling",
-    "directDescription": "So‘rov yuboring, jamoamiz tafsilotlarni aniqlashtirib, keyingi qadamni tavsiya qiladi.",
+    "directTitle": "Yetkazib berishingiz uchun hisob oling",
+    "directDescription": "Qisqa shaklni to‘ldiring. Aniq ma’lumotlar foydali javob tayyorlashga yordam beradi.",
     "formEyebrow": "HAMKORLIK SO‘ROVI",
     "formTitle": "Biznesingiz haqida ayting",
-    "formDescription": "Biroz qo‘shimcha ma’lumot dastlabki hisobni aniqroq tayyorlashga yordam beradi.",
+    "formDescription": "Kalkulyatordan kelgan bo‘lsangiz, tanlangan parametrlar arizaga qo‘shiladi.",
     "namePlaceholder": "Ismingiz",
     "phonePlaceholder": "+998 00 000 00 00",
     "company": "Kompaniya",
@@ -303,12 +313,12 @@
     "marketplaceBoth": "Wildberries va Ozon",
     "marketplaceOther": "Boshqa marketpleys / hali tanlanmagan",
     "sending": "Yuborilmoqda…",
-    "stepOneTitle": "Ehtiyojlaringizni o‘rganamiz",
-    "stepOneDescription": "Mahsulotlar, hajm, geografiya va mavjud ta’minot modelini aniqlaymiz.",
-    "stepTwoTitle": "Ish jarayonini tuzamiz",
-    "stepTwoDescription": "Sizga kerakli ombor operatsiyalari va fulfilment modelini kelishamiz.",
-    "stepThreeTitle": "Hisob tayyorlaymiz",
-    "stepThreeDescription": "Narx, muddat va amaliy keyingi qadamlarni muhokama qilamiz.",
+    "stepOneTitle": "Ma’lumotlarni ko‘rib chiqamiz",
+    "stepOneDescription": "Mahsulot, hajm, o‘lchamlar, platforma va yo‘nalishni aniqlashtiramiz.",
+    "stepTwoTitle": "Ishlar tarkibini kelishamiz",
+    "stepTwoDescription": "Operatsiyalar, FBO/FBS modeli va qo‘shimcha talablarni belgilaymiz.",
+    "stepThreeTitle": "Taklif tayyorlaymiz",
+    "stepThreeDescription": "Aniqlashtirilgan hisob va keyingi qadamlar bilan qaytamiz.",
     "errorNotConfigured": "So‘rov shakli jamoaga ulanmagan. So‘rovingiz yuborilmadi — keyinroq qayta urinib ko‘ring.",
     "errorDatabase": "Ma’lumotlar bazasi bilan vaqtinchalik aloqa yo‘q. So‘rovingiz hozircha yuborilmadi. Birozdan so‘ng qayta urinib ko‘ring.",
     "errorRateLimited": "Urinishlar soni juda ko‘p. Bir necha daqiqa kutib, qayta urinib ko‘ring.",

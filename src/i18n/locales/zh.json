@@ -42,7 +42,24 @@
       "labeling": "02 / 贴标",
       "packing": "03 / 包装",
       "dispatch": "04 / 发货"
-    }
+    },
+    "sellerEyebrow": "面向电商平台卖家",
+    "sellerTitle": "减少繁琐物流，专注业务销售",
+    "sellerIntro": "将日常仓库任务纳入统一流程，并在合作前明确服务范围与预估费用。",
+    "sellerBenefits": [
+      {
+        "title": "统一协调窗口",
+        "description": "由一个团队协调收货、检查、贴标、包装和发运准备。"
+      },
+      {
+        "title": "支持 FBO 与 FBS",
+        "description": "根据销售模式和平台要求选择合适的操作方式。"
+      },
+      {
+        "title": "费用更清晰",
+        "description": "查看初步费用估算，并申请个性化商务报价。"
+      }
+    ]
   },
   "services": {
     "title": "贴合业务需求的电商履约服务",
@@ -57,40 +74,8 @@
     "picking": "订单拣货与配货",
     "dispatch": "配送至 WB 和 Ozon 仓库",
     "calculator": {
-      "eyebrow": "提前规划成本",
-      "intro": "设置发货参数，即可获得主要仓储操作的预估费用。",
-      "model": "履约模式",
-      "marketplaces": {
-        "wb": "Wildberries",
-        "ozon": "Ozon",
-        "both": "两个平台"
-      },
-      "models": {
-        "fbo": "送至平台仓库",
-        "fbs": "订单履约"
-      },
-      "storageDays": "仓储天数",
-      "days": "天",
-      "markingHint": "按件增加商品所需标识码的预估贴标费用。",
-      "estimateLabel": "预估费用",
-      "live": "实时计算",
-      "resultCaption": "{{marketplace}} · {{count}} 件商品的预估费用",
-      "breakdown": "费用明细",
-      "total": "预估合计",
-      "requestQuote": "获取正式报价",
-      "receiving": "收货与清点",
-      "inspection": "质量检查",
-      "packaging": "商品包装",
-      "marking": "Честный ЗНАК 标识",
-      "storage": "仓储",
-      "dispatch": "订单处理与发货",
-      "disclaimer": "以上为演示估算费率，不构成正式报价。所选平台会显示在报价范围中；目前 Wildberries 与 Ozon 使用相同的演示仓储费率。最终价格取决于商品尺寸、品类、平台要求、货量及物流方案。请向客户经理确认最新费率。",
-      "title": "服务费用计算器",
-      "marketplace": "电商平台",
-      "items": "商品数量",
-      "standard": "标准包装",
-      "protective": "防护包装",
-      "custom": "定制包装"
+      "intro": "选择平台、FBO/FBS 模式及处理选项，获取初步估算。经理将在确认细节后核实最终价格。",
+      "disclaimer": "本估算基于演示费率，仅供参考，不构成正式报价。未包含尚未确认的运输、平台收货及额外服务费用。最终价格需根据商品、尺寸、数量和路线另行确认。"
     },
     "eyebrow": "一站式履约服务 / 01",
     "heroNote": "从货物接收到平台仓发货，一个合作伙伴全程负责",
@@ -139,12 +124,33 @@
           "answer": "计算器根据所选参数提供初步估算。最终费用取决于商品类别与尺寸、货量、电商平台要求、包装、仓储及物流，并在了解具体需求后确认。"
         }
       }
-    }
+    },
+    "pricingEyebrow": "费用构成",
+    "pricingTitle": "哪些因素影响服务价格",
+    "pricingDescription": "费用取决于商品信息、批量、所需操作、仓储和运输路线。",
+    "pricingFactors": [
+      {
+        "title": "商品与尺寸",
+        "description": "品类、尺寸、重量、易碎程度及操作要求。"
+      },
+      {
+        "title": "批次规模",
+        "description": "商品件数、箱数及入库频率。"
+      },
+      {
+        "title": "处理范围",
+        "description": "质检、贴标、包装、组套及其他操作。"
+      },
+      {
+        "title": "仓储与配送",
+        "description": "仓储周期、目的地、发运方式和物流路线。"
+      }
+    ]
   },
   "china": {
-    "eyebrow": "开启俄罗斯电商市场之路",
-    "title": "从中国直达 Wildberries 与 Ozon，一个物流合作伙伴全程支持",
-    "description": "为中国工厂、品牌及贸易公司提供俄罗斯市场供应链服务，从货物集运到商品入仓准备，一站式协助。",
+    "eyebrow": "面向中国工厂与供应商",
+    "title": "协助中国商品进入俄罗斯电商市场",
+    "description": "MJL 为工厂、出口商、贸易公司和品牌协调仓库处理及运营交接。可使用中文或俄语沟通商品、批量、文件和履约模式。",
     "customs": "货运及清关流程协助",
     "managers": "俄语及中文客户经理",
     "support": "支持 WeChat 与 Telegram 沟通",
@@ -154,24 +160,24 @@
     "marketplaceSupport": "电商平台入仓准备",
     "visualAlt": "从中国到俄罗斯的物流路线示意图",
     "whyEyebrow": "跨境合作，更顺畅",
-    "whyTitle": "从供应商对接到平台入仓准备",
-    "whyDescription": "协调仓储及商品准备流程，让每个已确认的环节更加清晰。",
+    "whyTitle": "您在俄罗斯的运营协作伙伴",
+    "whyDescription": "在货物发出前，协助确认商品要求和仓库处理步骤。",
     "benefits": {
       "bilingual": {
         "title": "中俄双语沟通",
-        "description": "使用中文和俄语沟通任务、需求及货运状态。"
+        "description": "使用中文和俄语讨论需求、规格和货物状态。"
       },
       "marketplaceReady": {
-        "title": "符合平台要求的准备",
-        "description": "根据 Wildberries 和 Ozon 的要求进行贴标、包装及订单准备。"
+        "title": "Wildberries 与 Ozon 备货",
+        "description": "根据平台要求协调贴标、包装和组套。"
       },
       "crossBorder": {
-        "title": "货运流程协调",
-        "description": "协助协调货物运输及进入仓库处理环节的交接。"
+        "title": "协调供应链环节",
+        "description": "核对货物信息、交接节点及运输路线中的责任分工。"
       },
       "visibility": {
-        "title": "清晰的操作阶段",
-        "description": "在开始工作前确认操作内容、负责人及货物状态。"
+        "title": "提前明确工作计划",
+        "description": "开始操作前确认服务范围、材料、时间安排和待确认事项。"
       }
     },
     "processEyebrow": "从货物到平台备货",
@@ -201,8 +207,8 @@
     "wildberries": "按照 Wildberries 要求进行商品及入仓准备。",
     "ozon": "按照 Ozon 要求进行商品及入仓准备。",
     "ctaEyebrow": "讨论您的货运需求",
-    "ctaTitle": "从简单咨询开始",
-    "ctaDescription": "告诉我们商品、数量及运输路线，MJL 团队将协助规划下一步。"
+    "ctaTitle": "介绍您的工厂或货物批次",
+    "ctaDescription": "请提供商品、批量、发货城市和目标平台，我们将确认 MJL 可以承接哪些操作。"
   },
   "about": {
     "title": "支持业务规模化发展的运营基础设施",
@@ -268,11 +274,15 @@
     "openMap": "在 Yandex 地图中打开",
     "ctaEyebrow": "您的运营合作伙伴",
     "ctaTitle": "一起讨论您的业务需求",
-    "ctaDescription": "根据您的商品种类、数量及销售模式规划服务流程。"
+    "ctaDescription": "根据您的商品种类、数量及销售模式规划服务流程。",
+    "galleryEyebrow": "仓库与操作现场",
+    "galleryTitle": "展示真实仓库与实际流程",
+    "galleryDescription": "收到 MJL 团队提供的原始照片后，将在此展示收货区、存储区、包装和发货准备过程。",
+    "galleryPending": "收到并审核原始照片后发布图片集。"
   },
   "contacts": {
     "title": "让我们聊聊您的物流需求",
-    "description": "请介绍您的商品及月度货量，我们将为您制定合适的运营方案。",
+    "description": "请介绍商品、数量和目标平台。经理将进一步确认细节并核对初步估算。",
     "name": "姓名",
     "telegram": "Telegram 用户名",
     "phone": "电话或 WeChat",
@@ -283,14 +293,14 @@
     "error": "提交失败，请稍后重试。",
     "privacy": "提交表单即表示您同意我们处理所填写的联系方式。",
     "eyebrow": "联系 MJL / 04",
-    "reply": "通常会在一个工作日内回复",
+    "reply": "通常在一个工作日内回复，具体时间取决于资料完整度和时区。",
     "confidential": "您的信息仅用于处理本次咨询",
     "directLabel": "直接沟通",
-    "directTitle": "讨论您的下一批货物",
-    "directDescription": "提交咨询后，我们的团队会确认需求并建议下一步方案。",
+    "directTitle": "获取您的货物报价",
+    "directDescription": "填写简短表单。商品和数量信息越准确，首次回复就越有针对性。",
     "formEyebrow": "合作咨询",
     "formTitle": "介绍一下您的业务",
-    "formDescription": "提供更多信息，有助于我们给出更准确的初步方案。",
+    "formDescription": "如果您从计算器进入，已选参数会自动附加到申请中。",
     "namePlaceholder": "您的姓名",
     "phonePlaceholder": "+86 000 0000 0000",
     "company": "公司名称",
@@ -303,12 +313,12 @@
     "marketplaceBoth": "Wildberries 和 Ozon",
     "marketplaceOther": "其他平台 / 尚未确定",
     "sending": "正在提交……",
-    "stepOneTitle": "了解您的需求",
-    "stepOneDescription": "确认商品、货量、地区和当前供应链模式。",
-    "stepTwoTitle": "制定操作流程",
-    "stepTwoDescription": "确定所需仓储操作和履约合作模式。",
-    "stepThreeTitle": "准备费用方案",
-    "stepThreeDescription": "沟通费用、时效和后续合作步骤。",
+    "stepOneTitle": "确认需求信息",
+    "stepOneDescription": "了解商品类别、数量、尺寸、平台和路线。",
+    "stepTwoTitle": "确认服务范围",
+    "stepTwoDescription": "确定所需操作、FBO/FBS 模式及其他要求。",
+    "stepThreeTitle": "准备商务方案",
+    "stepThreeDescription": "提供进一步估算、待确认问题和后续步骤。",
     "errorNotConfigured": "咨询表单尚未连接到业务团队。您的请求尚未发送，请稍后再试。",
     "errorRateLimited": "提交次数过多，请等待几分钟后重试。",
     "errorInvalid": "请检查必填项目，并确认电话号码格式正确。",
