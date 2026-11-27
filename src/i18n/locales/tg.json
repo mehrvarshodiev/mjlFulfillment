@@ -24,9 +24,24 @@
     "primaryCta": "Ҳисоб кардани нарх",
     "secondaryCta": "Муҳокимаи интиқол",
     "metrics": {
-      "sla": "SLA-и амалиётӣ",
-      "dispatch": "Ирсол ба анборҳои маркетплейсҳо",
-      "marketplaces": "Омода кардани бор барои Wildberries ва Ozon"
+      "models": "МОДЕЛҲОИ FBO ВА FBS",
+      "siteLanguages": "ЗАБОНҲОИ СОМОНА",
+      "marketplaces": "МАРКЕТПЛЕЙС",
+      "operations": "АМАЛИЁТҲОИ АНБОР"
+    },
+    "heroNote": "Аз қабули мол то супоридани он ба анбори маркетплейс",
+    "visualStatus": "РАВАНДИ КОРИ АНБОР",
+    "visualReady": "ОМОДАСОЗӢ БАРОИ ИРСОЛ",
+    "qualityControl": "Назорати сифат",
+    "dispatchWorkflow": "Омодасозии бор",
+    "servicesEyebrow": "АМАЛИЁТҲОИ АНБОР / 01",
+    "chinaEyebrow": "БОРҲО АЗ ЧИН / 02",
+    "closingEyebrow": "ИНТИҚОЛИ ШУМОРО МУҲОКИМА МЕКУНЕМ / 03",
+    "operations": {
+      "receiving": "01 / ҚАБУЛ",
+      "labeling": "02 / ТАМҒАГУЗОРӢ",
+      "packing": "03 / БАСТАБАНДӢ",
+      "dispatch": "04 / ИРСОЛ"
     }
   },
   "services": {
@@ -313,7 +328,17 @@
     "successTitle": "Дархости шумо қабул шуд!",
     "successDescription": "Ташаккур барои муроҷиат ба MJL Fulfillment. Мо маълумоти шуморо гирифтем ва дар давоми як рӯзи корӣ бо шумо тамос мегирем.",
     "successReference": "Рақами дархост",
-    "successClose": "Тайёр"
+    "successClose": "Тайёр",
+    "unitsPerMonth": "адад/моҳ",
+    "contextTitle": "Параметрҳои ҳисобкунак илова шуданд",
+    "contextDescription": "Параметрҳои ҳисоб ба дархост гузаронида шуданд. Пеш аз фиристодан ҳаҷм ва маркетплейсро санҷед.",
+    "contextModel": "Модел",
+    "contextMarketplace": "Маркетплейс",
+    "contextUnits": "Ҳаҷми моҳона",
+    "contextEstimate": "Арзиши тахминӣ",
+    "contextDisclaimer": "Ҳисоб аз рӯи тарифҳои намунавӣ аст ва пешниҳоди оммавӣ нест. Нархи ниҳоиро менеҷер тасдиқ мекунад.",
+    "sourceChinaTitle": "Дархост барои интиқол аз Чин ба Русия",
+    "sourceChinaDescription": "Дар бораи таъминкунанда, мол, ҳаҷм ва масири интиқол ба Русия нақл кунед."
   },
   "footer": {
     "tagline": "Хизматрасониҳои пурраи фулфилмент ва логистика барои тиҷорати электронӣ.",
