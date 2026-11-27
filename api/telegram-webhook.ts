@@ -158,6 +158,7 @@ async function showLead(
     `<b>Объём:</b> ${escapeHtml(lead.volume)}`,
     `<b>Маркетплейс:</b> ${escapeHtml(lead.marketplace || "Не указан")}`,
     `<b>Telegram:</b> ${escapeHtml(lead.telegram || "Не указан")}`,
+    ...(lead.request_context ? [`<b>Контекст запроса:</b>\n${escapeHtml(lead.request_context)}`] : []),
     `<b>Создана:</b> ${formatDate(lead.created_at)}`,
     `<b>Уведомление:</b> ${lead.notification_status === "sent" ? "доставлено" : "не доставлено / ожидает"}`,
     "",
