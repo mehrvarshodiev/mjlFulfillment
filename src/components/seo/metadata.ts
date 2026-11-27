@@ -1,4 +1,4 @@
-type SupportedLanguage = "ru" | "en" | "zh" | "ky" | "kk" | "uz" | "tg";
+export type SupportedLanguage = "ru" | "en" | "zh" | "ky" | "kk" | "uz" | "tg";
 
 export const pageMeta: Record<SupportedLanguage, Record<string, [string, string]>> = {
   ru: {
