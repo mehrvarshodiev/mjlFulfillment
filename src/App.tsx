@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { SiteLayout } from "./components/layout/SiteLayout";
 import { HomePage } from "./pages/HomePage";
+// These pages are prerendered; eager imports keep the initial hydration tree identical.
 import { ServicesPage } from "./pages/ServicesPage";
 import { ChinaSellersPage } from "./pages/ChinaSellersPage";
 import { AboutPage } from "./pages/AboutPage";
