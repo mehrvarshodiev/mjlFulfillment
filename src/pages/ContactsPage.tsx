@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "react-i18next";
+import { calculateEstimate } from "../features/calculator/calculateEstimate";
 import {
   BadgeCheck,
   CheckCircle2,
@@ -34,9 +35,22 @@ type FormState = {
   website: string;
 };
 
+type QuoteSummary = {
+  model: "FBO" | "FBS";
+  marketplace: "both" | "wildberries" | "ozon";
+  units: number;
+  packaging: "standard" | "protective" | "custom";
+  marking: boolean;
+  storageDays: number;
+  estimate: number;
+};
+
 type SavedForm = {
   form: FormState;
   consent: boolean;
+  requestContext?: string;
+  quoteSummary?: QuoteSummary | null;
+  sourceContext?: "china" | null;
 };
 
 type TelegramVerification = "idle" | "loading" | "verified" | "invalid" | "error" | "cancelled" | "mismatch";
@@ -77,9 +91,12 @@ const initialForm: FormState = {
 };
 
 export function ContactsPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [form, setForm] = useState<FormState>(initialForm);
   const [consent, setConsent] = useState(false);
+  const [requestContext, setRequestContext] = useState("");
+  const [quoteSummary, setQuoteSummary] = useState<QuoteSummary | null>(null);
+  const [sourceContext, setSourceContext] = useState<"china" | null>(null);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorCode, setErrorCode] = useState<string | null>(null);
   const [telegramAvailable, setTelegramAvailable] = useState<boolean | null>(null);
@@ -110,6 +127,9 @@ export function ContactsPage() {
           const parsed = JSON.parse(saved) as SavedForm;
           if (parsed.form && typeof parsed.form === "object") setForm({ ...initialForm, ...parsed.form });
           if (typeof parsed.consent === "boolean") setConsent(parsed.consent);
+          if (typeof parsed.requestContext === "string") setRequestContext(parsed.requestContext);
+          if (parsed.quoteSummary) setQuoteSummary(parsed.quoteSummary);
+          if (parsed.sourceContext === "china") setSourceContext("china");
         }
       } catch {
         // Keep the form usable even when session storage is unavailable or malformed.
@@ -139,10 +159,71 @@ export function ContactsPage() {
       window.history.replaceState(
         window.history.state,
         "",
-        `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`
+        window.location.pathname + (query ? "?" + query : "") + window.location.hash
+      );
+    } else {
+      const source = params.get("source");
+      if (source === "calculator") {
+        const units = Number(params.get("units"));
+        const storageDays = Number(params.get("storageDays"));
+        const model = params.get("model");
+        const marketplace = params.get("marketplace");
+        const packaging = params.get("packaging");
+        const markingValue = params.get("marking");
+        const marking = markingValue === "1";
+        const valid = Number.isInteger(units) && units >= 10 && units <= 5000
+          && Number.isInteger(storageDays) && storageDays >= 0 && storageDays <= 60
+          && (model === "FBO" || model === "FBS")
+          && (marketplace === "both" || marketplace === "wildberries" || marketplace === "ozon")
+          && (packaging === "standard" || packaging === "protective" || packaging === "custom")
+          && (markingValue === "0" || markingValue === "1");
+
+        if (valid) {
+          const quote: QuoteSummary = {
+            model,
+            marketplace,
+            units,
+            packaging,
+            marking,
+            storageDays,
+            estimate: calculateEstimate({ units, model, packaging, marking, storageDays }).total
+          };
+          const locale = i18n.resolvedLanguage === "zh" ? "zh-CN"
+            : i18n.resolvedLanguage === "en" ? "en-US" : "ru-RU";
+          const formattedUnits = new Intl.NumberFormat(locale).format(units);
+          setForm((current) => ({
+            ...current,
+            volume: formattedUnits + " " + t("contacts.unitsPerMonth"),
+            marketplace
+          }));
+          setQuoteSummary(quote);
+          setRequestContext([
+            "source=calculator",
+            "model=" + model,
+            "marketplace=" + marketplace,
+            "units_per_month=" + units,
+            "packaging=" + packaging,
+            "marking=" + marking,
+            "storage_days=" + storageDays,
+            "indicative_demo_estimate_rub=" + quote.estimate,
+            "pricing_status=demonstration_rates_not_public_offer"
+          ].join("; "));
+        }
+      } else if (source === "china") {
+        setSourceContext("china");
+        setRequestContext("source=china; inquiry=China-to-Russia marketplace shipment");
+      } else if (source === "about" || source === "home") {
+        setRequestContext("source=" + source + "; inquiry=general fulfillment request");
+      }
+
+      ["source", "marketplace", "units", "model", "packaging", "marking", "storageDays"].forEach((key) => params.delete(key));
+      const query = params.toString();
+      window.history.replaceState(
+        window.history.state,
+        "",
+        window.location.pathname + (query ? "?" + query : "") + window.location.hash
       );
     }
-
     return () => {
       active = false;
     };
