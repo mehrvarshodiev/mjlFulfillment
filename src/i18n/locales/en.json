@@ -27,6 +27,13 @@
       "sla": "Operational SLA",
       "dispatch": "Dispatch to marketplace warehouses",
       "marketplaces": "Shipment preparation for Wildberries and Ozon"
+    },
+    "workflowStatus": "WORKFLOW OVERVIEW",
+    "facts": {
+      "models": "FULFILLMENT MODELS",
+      "operations": "CORE OPERATIONS",
+      "marketplaces": "MARKETPLACES",
+      "geography": "SELLER FOCUS MARKETS"
     }
   },
   "services": {
@@ -313,7 +320,12 @@
     "successTitle": "Your inquiry is received!",
     "successDescription": "Thank you for contacting MJL Fulfillment. We have received your details and our team will get back to you within one business day.",
     "successReference": "Your inquiry reference",
-    "successClose": "Done"
+    "successClose": "Done",
+    "calculatorSummaryTitle": "Your estimate details",
+    "calculatorSummaryDescription": "This is an indicative calculation using demo rates, not a binding offer. Our manager will confirm the final price after reviewing your products and logistics.",
+    "calculatorVolume": "{{count}} units (from calculator)",
+    "calculatorSummaryIncluded": "Included",
+    "calculatorSummaryNotIncluded": "Not selected"
   },
   "footer": {
     "tagline": "End-to-end fulfillment and logistics for e-commerce.",
