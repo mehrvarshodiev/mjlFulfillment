@@ -132,7 +132,6 @@ function LanguageSwitcher() {
         className={open ? "language-dropdown-trigger is-open" : "language-dropdown-trigger"}
         type="button"
         aria-label={copy.button}
-        aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((isOpen) => !isOpen)}
@@ -143,7 +142,7 @@ function LanguageSwitcher() {
       </button>
 
       {open && (
-        <div className="language-dropdown-menu" id={menuId} role="menu" aria-label={copy.title}>
+        <nav className="language-dropdown-menu" id={menuId} aria-label={copy.title}>
           <div className="language-dropdown-heading">
             <span>{copy.title}</span>
             <small>{copy.count}</small>
@@ -157,7 +156,6 @@ function LanguageSwitcher() {
                 <a
                   key={language.code}
                   href={getLanguageHref(language.code)}
-                  role="menuitem"
                   aria-current={selected ? "page" : undefined}
                   className={selected ? "language-dropdown-option is-active" : "language-dropdown-option"}
                   onClick={() => setOpen(false)}
@@ -174,7 +172,7 @@ function LanguageSwitcher() {
           </div>
 
           <p className="language-dropdown-hint">{copy.hint}</p>
-        </div>
+        </nav>
       )}
     </div>
   );
