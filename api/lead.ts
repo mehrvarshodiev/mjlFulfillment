@@ -54,7 +54,7 @@ function isAllowedOrigin(req: ApiRequest): boolean {
 
 function rateLimited(req: ApiRequest): boolean {
   const forwarded = req.headers["x-forwarded-for"];
-  const ip = (typeof forwarded === "string" ? forwarded.split(",")[0] : "unknown").trim();
+  const ip = (typeof forwarded === "string" ? forwarded.split(",")[0] ?? "unknown" : "unknown").trim();
   const now = Date.now();
   const active = (recentRequests.get(ip) ?? []).filter((time) => now - time < WINDOW_MS);
   if (active.length >= MAX_REQUESTS) {
