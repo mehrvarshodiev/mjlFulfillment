@@ -27,6 +27,61 @@
       "sla": "Operatsion SLA",
       "dispatch": "Marketpleys omborlariga jo‘natish",
       "marketplaces": "Wildberries va Ozon uchun yuklarni tayyorlash"
+    },
+    "serviceStages": {
+      "inbound": "01 / QABUL QILISH",
+      "preparation": "02 / TAYYORLASH",
+      "packing": "03 / QADOQLASH",
+      "delivery": "04 / JO‘NATISH"
+    },
+    "visual": {
+      "processLabel": "OMBOR JARAYONI SXEMASI",
+      "statusLabel": "ISH JARAYONI",
+      "artAlt": "Ombor va tovar harakati tasviriy sxemasi",
+      "marketplaceReady": "MARKETPLEYSGA TAYYORLASH",
+      "operationStages": "QAYTA ISHLASH BOSQICHLARI",
+      "qualityControl": "Sifat nazorati",
+      "dispatchWorkflow": "Jo‘natishga tayyorlash"
+    },
+    "proof": {
+      "ariaLabel": "Xizmatlar haqida ma’lumot",
+      "operationsValue": "06",
+      "operationsLabel": "QAYTA ISHLASH BOSQICHLARI",
+      "modelsValue": "02",
+      "modelsLabel": "FBO / FBS MODELI",
+      "channelsValue": "02",
+      "channelsLabel": "MARKETPLEYS",
+      "languagesValue": "07",
+      "languagesLabel": "SAYT TILI"
+    },
+    "process": {
+      "eyebrow": "TUSHUNARLI ISH TARTIBI / 02",
+      "title": "Birinchi so‘rovdan yetkazib berish rejasigacha",
+      "description": "Avval mahsulot va hajmni aniqlaymiz, keyin xizmatlar tarkibi, hisob-kitob va operatsiyalar ketma-ketligini kelishamiz.",
+      "cta": "Loyihani muhokama qilish",
+      "steps": {
+        "request": {
+          "title": "Vazifangizni tushuntiring",
+          "description": "Mahsulot, toifa, hajm, marketpleys va kerakli fulfilment modelini ko‘rsating."
+        },
+        "scope": {
+          "title": "Reja va hisobni kelishamiz",
+          "description": "Kerakli ishlar, mahsulot talablari, logistika va dastlabki narxni aniqlaymiz."
+        },
+        "prepare": {
+          "title": "Tovarni qabul qilib tayyorlaymiz",
+          "description": "Kelishilgan tekshiruv, markirovka, qadoqlash va buyurtmalarni yig‘ish ishlarini bajaramiz."
+        },
+        "handoff": {
+          "title": "Keyingi bosqichga topshiramiz",
+          "description": "Jo‘natishni kelishib, tayyor tovarni logistikaning keyingi bosqichiga topshiramiz."
+        }
+      }
+    },
+    "sectionLabels": {
+      "services": "BIZ NIMA QILAMIZ / 01",
+      "china": "XITOYDAN YETKAZISH / 03",
+      "contact": "LOYIHANGIZNI MUHOKAMA QILAYLIK / 04"
     }
   },
   "services": {

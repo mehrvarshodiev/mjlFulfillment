@@ -27,6 +27,61 @@
       "sla": "Operational SLA",
       "dispatch": "Dispatch to marketplace warehouses",
       "marketplaces": "Shipment preparation for Wildberries and Ozon"
+    },
+    "serviceStages": {
+      "inbound": "01 / RECEIVING",
+      "preparation": "02 / PREPARATION",
+      "packing": "03 / PACKING",
+      "delivery": "04 / DISPATCH"
+    },
+    "visual": {
+      "processLabel": "WAREHOUSE WORKFLOW OVERVIEW",
+      "statusLabel": "PROCESS OVERVIEW",
+      "artAlt": "Illustrative warehouse and goods-flow diagram",
+      "marketplaceReady": "MARKETPLACE PREPARATION",
+      "operationStages": "PROCESS STAGES",
+      "qualityControl": "Quality checks",
+      "dispatchWorkflow": "Shipment preparation"
+    },
+    "proof": {
+      "ariaLabel": "Service overview",
+      "operationsValue": "06",
+      "operationsLabel": "FULFILLMENT STAGES",
+      "modelsValue": "02",
+      "modelsLabel": "FBO / FBS MODELS",
+      "channelsValue": "02",
+      "channelsLabel": "MARKETPLACES",
+      "languagesValue": "07",
+      "languagesLabel": "WEBSITE LANGUAGES"
+    },
+    "process": {
+      "eyebrow": "A CLEAR WORKFLOW / 02",
+      "title": "From the first brief to a shipment plan",
+      "description": "We start by understanding your products and volumes, then agree on the service scope, estimate and sequence of operations.",
+      "cta": "Discuss your project",
+      "steps": {
+        "request": {
+          "title": "Tell us what you need",
+          "description": "Share your product, category, volume, marketplace and preferred fulfillment model."
+        },
+        "scope": {
+          "title": "Agree on scope and estimate",
+          "description": "We clarify required operations, product requirements, logistics and the preliminary cost."
+        },
+        "prepare": {
+          "title": "Receive and prepare goods",
+          "description": "We carry out the agreed checks, labeling, packing and order preparation."
+        },
+        "handoff": {
+          "title": "Prepare for handoff",
+          "description": "We coordinate dispatch and hand over prepared goods to the next logistics stage."
+        }
+      }
+    },
+    "sectionLabels": {
+      "services": "WHAT WE DO / 01",
+      "china": "CHINA SUPPLY / 03",
+      "contact": "LET’S DISCUSS YOUR NEED / 04"
     }
   },
   "services": {
