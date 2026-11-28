@@ -15,6 +15,7 @@ export function AccountMenu({ onNavigate }: { onNavigate?: () => void } = {}) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
+  const [signOutError, setSignOutError] = useState(false);
   const { data: session, isPending } = authClient.useSession();
 
   useEffect(() => {
@@ -35,11 +36,18 @@ export function AccountMenu({ onNavigate }: { onNavigate?: () => void } = {}) {
 
   async function signOut() {
     setSigningOut(true);
+    setSignOutError(false);
     try {
-      await authClient.signOut();
+      const result = await authClient.signOut();
+      if (result.error) {
+        setSignOutError(true);
+        return;
+      }
       setOpen(false);
       onNavigate?.();
       navigate("/login", { replace: true });
+    } catch {
+      setSignOutError(true);
     } finally {
       setSigningOut(false);
     }
@@ -92,6 +100,7 @@ export function AccountMenu({ onNavigate }: { onNavigate?: () => void } = {}) {
           </button>
         </div>
       )}
+      {open && signOutError && <p className="account-dropdown-error" role="alert">{t("auth.login.error")}</p>}
     </div>
   );
 }
