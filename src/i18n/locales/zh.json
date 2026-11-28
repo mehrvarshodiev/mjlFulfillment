@@ -51,8 +51,8 @@
       "modelsLabel": "种 FBO / FBS 模式",
       "channelsValue": "02",
       "channelsLabel": "个电商平台",
-      "languagesValue": "07",
-      "languagesLabel": "种网站语言"
+      "planValue": "01",
+      "planLabel": "套协商一致的作业方案"
     },
     "process": {
       "eyebrow": "清晰的合作流程 / 02",
@@ -82,6 +82,26 @@
       "services": "我们的服务 / 01",
       "china": "中国供应链 / 03",
       "contact": "沟通您的需求 / 04"
+    },
+    "sellerValue": {
+      "eyebrow": "面向电商平台卖家",
+      "title": "把更多精力放在销售上，减少仓储协调工作",
+      "description": "MJL 将商品准备的关键环节整合为清晰、事先协商的工作流程。作业范围、时间安排及初步费用会在处理前沟通确认。",
+      "cta": "查看服务",
+      "items": {
+        "oneWorkflow": {
+          "title": "统一的作业流程",
+          "description": "按清晰顺序完成收货、检查、贴标、包装及交接准备。"
+        },
+        "marketplaceModels": {
+          "title": "适配 FBO 与 FBS",
+          "description": "根据目标平台，沟通 FBO 入仓准备或 FBS 订单处理方式。"
+        },
+        "preparedHandoff": {
+          "title": "明确的交接安排",
+          "description": "发货前确认批次内容、所需操作及下一物流环节。"
+        }
+      }
     }
   },
   "services": {
@@ -179,6 +199,18 @@
           "answer": "计算器根据所选参数提供初步估算。最终费用取决于商品类别与尺寸、货量、电商平台要求、包装、仓储及物流，并在了解具体需求后确认。"
         }
       }
+    },
+    "tariffs": {
+      "eyebrow": "了解费用构成",
+      "title": "服务费用由哪些环节组成",
+      "description": "下方为计算器中使用的演示费率，并非 MJL 已确认的正式商业价目表。",
+      "operation": "操作项目",
+      "included": "服务内容",
+      "exampleRate": "示例费率",
+      "perItem": "每件",
+      "perItemDay": "每件 / 每天",
+      "dispatchRates": "FBO：{{fbo}} · FBS：{{fbs}} / {{unit}}",
+      "disclaimer": "以上数字仅用于说明计算器的计算逻辑，不构成公开报价或已确认的商业费率。最终报价需根据商品、数量、平台要求及物流方案确认。"
     }
   },
   "china": {

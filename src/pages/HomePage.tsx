@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUpRight, Boxes, Calculator, Check, ClipboardList, FileText, PackageCheck, ScanLine, Truck, Warehouse } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Boxes, Calculator, Check, ClipboardCheck, ClipboardList, FileText, PackageCheck, ScanLine, Truck, Warehouse } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -9,6 +9,11 @@ export function HomePage() {
     { icon: ScanLine, title: t("services.labeling"), detail: t("home.serviceStages.preparation") },
     { icon: Boxes, title: t("services.packing"), detail: t("home.serviceStages.packing") },
     { icon: Truck, title: t("services.dispatch"), detail: t("home.serviceStages.delivery") }
+  ];
+  const sellerBenefits = [
+    { icon: ClipboardCheck, key: "oneWorkflow" },
+    { icon: PackageCheck, key: "marketplaceModels" },
+    { icon: Truck, key: "preparedHandoff" }
   ];
   const process = [
     { icon: FileText, number: "01", key: "request" },
@@ -43,8 +48,26 @@ export function HomePage() {
       <div><strong>{t("home.proof.operationsValue")}</strong><small>{t("home.proof.operationsLabel")}</small></div>
       <div><strong>{t("home.proof.modelsValue")}</strong><small>{t("home.proof.modelsLabel")}</small></div>
       <div><strong>{t("home.proof.channelsValue")}</strong><small>{t("home.proof.channelsLabel")}</small></div>
-      <div><strong>{t("home.proof.languagesValue")}</strong><small>{t("home.proof.languagesLabel")}</small></div>
+      <div><strong>{t("home.proof.planValue")}</strong><small>{t("home.proof.planLabel")}</small></div>
     </div></section>
+
+    <section className="seller-value-section section-wrap" aria-labelledby="seller-value-title">
+      <div className="seller-value-heading">
+        <span className="section-kicker">{t("home.sellerValue.eyebrow")}</span>
+        <h2 id="seller-value-title">{t("home.sellerValue.title")}</h2>
+        <p>{t("home.sellerValue.description")}</p>
+      </div>
+      <div className="seller-value-grid">
+        {sellerBenefits.map(({ icon: Icon, key }, index) => (
+          <article className="seller-value-card" key={key}>
+            <div className="seller-value-card-top"><Icon size={22} aria-hidden="true"/><span>0{index + 1}</span></div>
+            <h3>{t(`home.sellerValue.items.${key}.title`)}</h3>
+            <p>{t(`home.sellerValue.items.${key}.description`)}</p>
+          </article>
+        ))}
+      </div>
+      <Link to="/services" className="text-link seller-value-link">{t("home.sellerValue.cta")}<ArrowUpRight size={16}/></Link>
+    </section>
 
     <section className="services-preview section-wrap">
       <div className="section-heading"><div><span className="section-kicker">{t("home.sectionLabels.services")}</span><h2>{t("services.title")}</h2></div><Link to="/services" className="text-link">{t("common.learnMore")}<ArrowUpRight size={16}/></Link></div>

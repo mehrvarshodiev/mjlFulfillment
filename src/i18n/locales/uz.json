@@ -51,8 +51,8 @@
       "modelsLabel": "FBO / FBS MODELI",
       "channelsValue": "02",
       "channelsLabel": "MARKETPLEYS",
-      "languagesValue": "07",
-      "languagesLabel": "SAYT TILI"
+      "planValue": "01",
+      "planLabel": "KELISHILGAN ISH REJASI"
     },
     "process": {
       "eyebrow": "TUSHUNARLI ISH TARTIBI / 02",
@@ -82,6 +82,26 @@
       "services": "BIZ NIMA QILAMIZ / 01",
       "china": "XITOYDAN YETKAZISH / 03",
       "contact": "LOYIHANGIZNI MUHOKAMA QILAYLIK / 04"
+    },
+    "sellerValue": {
+      "eyebrow": "MARKETPLEYS SOTUVCHILARI UCHUN",
+      "title": "Savdoga ko‘proq e’tibor qarating, ombor ishlarini muvofiqlashtirishga kamroq vaqt sarflang",
+      "description": "MJL tovarni tayyorlashning asosiy bosqichlarini oldindan kelishilgan yagona jarayonga birlashtiradi. Ish hajmi, muddatlar va dastlabki hisob qayta ishlash boshlanishidan avval kelishiladi.",
+      "cta": "Xizmatlarni ko‘rish",
+      "items": {
+        "oneWorkflow": {
+          "title": "Yagona ish jarayoni",
+          "description": "Qabul qilish, tekshirish, markirovkalash, qadoqlash va topshirishga tayyorlash aniq ketma-ketlikda."
+        },
+        "marketplaceModels": {
+          "title": "FBO va FBS modellari",
+          "description": "Tanlangan marketpleysga qarab FBO yetkazib berishiga tayyorgarlik yoki FBS buyurtmalarini qayta ishlashni muhokama qilamiz."
+        },
+        "preparedHandoff": {
+          "title": "Aniq topshirish rejasi",
+          "description": "Jo‘natishdan oldin partiya tarkibi, kerakli operatsiyalar va keyingi logistika bosqichini kelishamiz."
+        }
+      }
     }
   },
   "services": {
@@ -179,6 +199,18 @@
           "answer": "Kalkulyator tanlangan parametrlar asosida taxminiy hisob beradi. Yakuniy narx mahsulot toifasi va o‘lchami, hajm, marketpleys talablari, qadoqlash, saqlash va logistikaga bog‘liq; so‘rovni ko‘rib chiqqanimizdan so‘ng tasdiqlanadi."
         }
       }
+    },
+    "tariffs": {
+      "eyebrow": "HISOB TARKIBI",
+      "title": "Xizmat narxi nimalardan tuziladi",
+      "description": "Quyida kalkulyatorda ishlatiladigan namuna stavkalari ko‘rsatilgan. Bu MJL tasdiqlagan tijoriy narxlar ro‘yxati emas.",
+      "operation": "Operatsiya",
+      "included": "Xizmat tarkibi",
+      "exampleRate": "Namuna stavka",
+      "perItem": "har bir dona uchun",
+      "perItemDay": "dona / kun uchun",
+      "dispatchRates": "FBO: {{fbo}} · FBS: {{fbs}} / {{unit}}",
+      "disclaimer": "Raqamlar faqat kalkulyator ishlash tamoyilini ko‘rsatish uchun keltirilgan. Ular ommaviy oferta yoki tasdiqlangan tarif emas. Yakuniy taklif mahsulot, hajm, marketpleys talablari va logistika aniqlashtirilgandan keyin tayyorlanadi."
     }
   },
   "china": {

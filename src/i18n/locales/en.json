@@ -51,8 +51,8 @@
       "modelsLabel": "FBO / FBS MODELS",
       "channelsValue": "02",
       "channelsLabel": "MARKETPLACES",
-      "languagesValue": "07",
-      "languagesLabel": "WEBSITE LANGUAGES"
+      "planValue": "01",
+      "planLabel": "AGREED WORK PLAN"
     },
     "process": {
       "eyebrow": "A CLEAR WORKFLOW / 02",
@@ -82,6 +82,26 @@
       "services": "WHAT WE DO / 01",
       "china": "CHINA SUPPLY / 03",
       "contact": "LET’S DISCUSS YOUR NEED / 04"
+    },
+    "sellerValue": {
+      "eyebrow": "FOR MARKETPLACE SELLERS",
+      "title": "Spend more time on sales and less on warehouse coordination",
+      "description": "MJL brings key product-preparation stages into one agreed workflow. The scope, timing and preliminary estimate are discussed before processing begins.",
+      "cta": "Explore services",
+      "items": {
+        "oneWorkflow": {
+          "title": "One coordinated workflow",
+          "description": "Receiving, inspection, labeling, packing and handoff preparation in a clear sequence."
+        },
+        "marketplaceModels": {
+          "title": "FBO and FBS workflows",
+          "description": "Discuss inbound FBO preparation and FBS order processing around your selected marketplace."
+        },
+        "preparedHandoff": {
+          "title": "A clear handoff plan",
+          "description": "Agree on the shipment contents, required operations and next logistics stage before dispatch."
+        }
+      }
     }
   },
   "services": {
@@ -179,6 +199,18 @@
           "answer": "The calculator provides an indicative estimate based on selected inputs. The final price depends on product category and dimensions, volume, marketplace requirements, packaging, storage and logistics, and is confirmed after reviewing the request."
         }
       }
+    },
+    "tariffs": {
+      "eyebrow": "HOW THE ESTIMATE WORKS",
+      "title": "What goes into the estimate",
+      "description": "The rates below are demonstration values used by the calculator. They are not an approved MJL commercial price list.",
+      "operation": "Operation",
+      "included": "What is included",
+      "exampleRate": "Example rate",
+      "perItem": "per item",
+      "perItemDay": "per item / day",
+      "dispatchRates": "FBO: {{fbo}} · FBS: {{fbs}} / {{unit}}",
+      "disclaimer": "Figures are shown only to demonstrate the calculator logic. They are not a public offer or confirmed commercial tariff. A final quote is prepared after product, volume, marketplace requirements and logistics are reviewed."
     }
   },
   "china": {

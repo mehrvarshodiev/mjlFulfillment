@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowDown, ArrowUpRight, Check, ClipboardCheck, Package, ScanSearch, ShieldCheck, Truck, Warehouse } from "lucide-react";
 import { Link } from "react-router-dom";
-import type { FulfillmentModel, PackagingType } from "../data/pricing";
+import { pricing, type FulfillmentModel, type PackagingType } from "../data/pricing";
 import { calculateEstimate } from "../features/calculator/calculateEstimate";
 
 const services = [
@@ -29,7 +29,16 @@ export function ServicesPage() {
     [units, packaging, marking, storageDays, model]
   );
 
-  const locale = i18n.resolvedLanguage === "zh" ? "zh-CN" : i18n.resolvedLanguage === "en" ? "en-US" : "ru-RU";
+  const localeByLanguage: Record<string, string> = {
+    ru: "ru-RU",
+    en: "en-US",
+    zh: "zh-CN",
+    ky: "ky-KG",
+    kk: "kk-KZ",
+    uz: "uz-UZ",
+    tg: "tg-TJ",
+  };
+  const locale = localeByLanguage[i18n.resolvedLanguage ?? "ru"] ?? "ru-RU";
   const numberFormatters = useMemo(
     () => ({
       money: new Intl.NumberFormat(locale, { style: "currency", currency: "RUB", maximumFractionDigits: 0 }),
@@ -38,8 +47,55 @@ export function ServicesPage() {
     [locale]
   );
   const formatMoney = (value: number) => numberFormatters.money.format(value);
+  const formatRateMoney = (value: number) => new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: "RUB",
+    maximumFractionDigits: 2,
+  }).format(value);
   const formatCount = (value: number) => numberFormatters.count.format(value);
   const selectedMarketplace = t(`services.calculator.marketplaces.${marketplace}`);
+  const tariffRows = [
+    {
+      key: "receiving",
+      label: t("services.receiving"),
+      detail: t("services.details.receiving"),
+      rate: `${formatRateMoney(pricing.receivingPerUnit)} / ${t("services.tariffs.perItem")}`,
+    },
+    {
+      key: "inspection",
+      label: t("services.inspection"),
+      detail: t("services.details.inspection"),
+      rate: `${formatRateMoney(pricing.inspectionPerUnit)} / ${t("services.tariffs.perItem")}`,
+    },
+    ...(["standard", "protective", "custom"] as const).map((type) => ({
+      key: `packaging-${type}`,
+      label: `${t("services.packing")} · ${t(`services.calculator.${type}`)}`,
+      detail: t("services.details.packing"),
+      rate: `${formatRateMoney(pricing.packagingPerUnit[type])} / ${t("services.tariffs.perItem")}`,
+    })),
+    {
+      key: "labeling",
+      label: t("services.labeling"),
+      detail: t("services.details.labeling"),
+      rate: `${formatRateMoney(pricing.markingPerUnit)} / ${t("services.tariffs.perItem")}`,
+    },
+    {
+      key: "storage",
+      label: t("services.storage"),
+      detail: t("services.details.storage"),
+      rate: `${formatRateMoney(pricing.storagePerUnitPerDay)} / ${t("services.tariffs.perItemDay")}`,
+    },
+    {
+      key: "dispatch",
+      label: t("services.dispatch"),
+      detail: t("services.details.dispatch"),
+      rate: t("services.tariffs.dispatchRates", {
+        fbo: formatRateMoney(pricing.dispatchPerUnit.FBO),
+        fbs: formatRateMoney(pricing.dispatchPerUnit.FBS),
+        unit: t("services.tariffs.perItem"),
+      }),
+    },
+  ];
 
   return (
     <main className="services-page">
@@ -83,6 +139,31 @@ export function ServicesPage() {
             <article className="model-card model-card-accent"><span className="model-code">FBS / 02</span><h3>{t("services.fbs")}</h3><p>{t("services.modelDetails.fbs")}</p><ul><li><Check size={15}/>{t("services.modelPoints.storage")}</li><li><Check size={15}/>{t("services.modelPoints.picking")}</li><li><Check size={15}/>{t("services.modelPoints.dispatch")}</li></ul></article>
           </div>
         </div>
+      </section>
+
+      <section className="tariffs-section section-wrap" aria-labelledby="tariffs-title">
+        <div className="section-heading tariffs-heading">
+          <div>
+            <span className="section-kicker">{t("services.tariffs.eyebrow")}</span>
+            <h2 id="tariffs-title">{t("services.tariffs.title")}</h2>
+          </div>
+          <p>{t("services.tariffs.description")}</p>
+        </div>
+        <div className="tariffs-table" role="table" aria-label={t("services.tariffs.title")}>
+          <div className="tariffs-table-head" role="row">
+            <span role="columnheader">{t("services.tariffs.operation")}</span>
+            <span role="columnheader">{t("services.tariffs.included")}</span>
+            <span role="columnheader">{t("services.tariffs.exampleRate")}</span>
+          </div>
+          {tariffRows.map(({ key, label, detail, rate }) => (
+            <div className="tariffs-table-row" role="row" key={key}>
+              <strong role="cell">{label}</strong>
+              <p role="cell">{detail}</p>
+              <span role="cell" className="tariffs-rate">{rate}</span>
+            </div>
+          ))}
+        </div>
+        <p className="tariffs-disclaimer"><ShieldCheck size={16} aria-hidden="true"/>{t("services.tariffs.disclaimer")}</p>
       </section>
 
       <section className="calculator-section section-wrap" id="calculator">
