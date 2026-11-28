@@ -39,14 +39,14 @@
       "statusLabel": "ИШ ЭТАПТАРЫ",
       "artAlt": "Кампанын жана товар кыймылынын иллюстрациялык схемасы",
       "marketplaceReady": "МАРКЕТПЛЕЙСКЕ ДАЯРДОО",
-      "operationStages": "ИШТЕТҮҮ ЭТАБЫ",
+      "operationStages": "ИШТЕТҮҮ ЭТАПТАРЫ",
       "qualityControl": "Сапатты текшерүү",
       "dispatchWorkflow": "Жөнөтүүгө даярдоо"
     },
     "proof": {
       "ariaLabel": "Кызматтар жөнүндө маалымат",
       "operationsValue": "06",
-      "operationsLabel": "ИШТЕТҮҮ ЭТАБЫ",
+      "operationsLabel": "ИШТЕТҮҮ ЭТАПТАРЫ",
       "modelsValue": "02",
       "modelsLabel": "FBO / FBS МОДЕЛИ",
       "channelsValue": "02",
