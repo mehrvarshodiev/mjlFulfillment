@@ -110,7 +110,11 @@ export async function prerender(data: { url: string }) {
 
   const html = renderToString(app);
   const fallbackMetadata: [string, string] = pageMeta.ru["/"]!;
-  const metadata = pageMeta[language][routePath] ?? pageMeta[language]["/"] ?? fallbackMetadata;
+  const metadata: [string, string] = routePath === "/login"
+    ? [instance.t("auth.login.title") + " | MJL Fulfillment", instance.t("auth.login.description")]
+    : routePath === "/userprofile"
+      ? [instance.t("auth.profile.title") + " | MJL Fulfillment", instance.t("auth.profile.description")]
+      : pageMeta[language][routePath] ?? pageMeta[language]["/"] ?? fallbackMetadata;
   const [title, description] = metadata;
 
   const organizationSchema = {
