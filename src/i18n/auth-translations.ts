@@ -18,6 +18,8 @@ export const authTranslations = {
       error: "Не удалось выполнить вход. Проверьте подключение и настройки авторизации.",
       emailRequired: "Введите корректный адрес электронной почты.",
       providerUnavailable: "Этот способ входа пока не настроен. Обратитесь к менеджеру MJL.",
+      accountCreation: "Первый вход через Google автоматически создаст аккаунт. Для следующих входов используйте тот же Google-аккаунт.",
+
       security: "Без пароля и лишних действий. Ваши данные передаются по защищённому соединению.",
       back: "Вернуться на сайт"
     },
@@ -89,6 +91,8 @@ export const authTranslations = {
       error: "Sign-in failed. Check your connection and authentication settings.",
       emailRequired: "Enter a valid email address.",
       providerUnavailable: "This sign-in method is not configured yet. Please contact MJL.",
+      accountCreation: "Your first Google sign-in automatically creates an account. Use the same Google account next time.",
+
       security: "No password or extra steps. Your information is sent over a secure connection.",
       back: "Back to website"
     },
@@ -160,6 +164,8 @@ export const authTranslations = {
       error: "登录失败。请检查网络连接和身份验证设置。",
       emailRequired: "请输入有效的电子邮件地址。",
       providerUnavailable: "此登录方式尚未配置，请联系 MJL。",
+      accountCreation: "首次使用 Google 登录时会自动创建账户。下次请使用同一个 Google 账户登录。",
+
       security: "无需密码和多余步骤。您的信息通过安全连接传输。",
       back: "返回网站"
     },
@@ -231,6 +237,8 @@ export const authTranslations = {
       error: "Кирүү ишке ашкан жок. Тармакты жана авторизация жөндөөлөрүн текшериңиз.",
       emailRequired: "Туура электрондук почта дарегин киргизиңиз.",
       providerUnavailable: "Бул кирүү ыкмасы азырынча жөндөлө элек. MJL менен байланышыңыз.",
+      accountCreation: "Google аркылуу биринчи жолу киргенде аккаунт автоматтык түрдө түзүлөт. Кийинкиде ошол эле Google аккаунтун колдонуңуз.",
+
       security: "Сырсөзсүз жана ашыкча кадамдарсыз. Маалыматыңыз коопсуз байланыш аркылуу берилет.",
       back: "Сайтка кайтуу"
     },
@@ -302,6 +310,8 @@ export const authTranslations = {
       error: "Кіру сәтсіз аяқталды. Желі мен авторизация параметрлерін тексеріңіз.",
       emailRequired: "Дұрыс электрондық пошта мекенжайын енгізіңіз.",
       providerUnavailable: "Бұл кіру әдісі әлі бапталмаған. MJL компаниясына хабарласыңыз.",
+      accountCreation: "Google арқылы алғаш кіргенде аккаунт автоматты түрде жасалады. Кейін сол Google аккаунтын пайдаланыңыз.",
+
       security: "Құпиясөзсіз және артық қадамдарсыз. Деректеріңіз қауіпсіз байланыс арқылы жіберіледі.",
       back: "Сайтқа оралу"
     },
@@ -373,6 +383,8 @@ export const authTranslations = {
       error: "Kirish amalga oshmadi. Tarmoq va autentifikatsiya sozlamalarini tekshiring.",
       emailRequired: "Toʻgʻri elektron pochta manzilini kiriting.",
       providerUnavailable: "Bu kirish usuli hali sozlanmagan. MJL bilan bogʻlaning.",
+      accountCreation: "Google orqali birinchi kirishda hisob avtomatik yaratiladi. Keyingi safar shu Google hisobidan foydalaning.",
+
       security: "Parolsiz va ortiqcha qadamlarsiz. Maʼlumotlaringiz xavfsiz ulanish orqali uzatiladi.",
       back: "Saytga qaytish"
     },
@@ -444,6 +456,8 @@ export const authTranslations = {
       error: "Воридшавӣ муваффақ нашуд. Пайвастшавӣ ва танзимоти иҷозатро санҷед.",
       emailRequired: "Суроғаи дурусти почтаи электрониро ворид кунед.",
       providerUnavailable: "Ин усули воридшавӣ ҳоло танзим нашудааст. Бо MJL тамос гиред.",
+      accountCreation: "Ҳангоми бори аввал ворид шудан бо Google ҳисоб ба таври худкор сохта мешавад. Дафъаи дигар ҳамон ҳисоби Google-ро истифода баред.",
+
       security: "Бе рамз ва қадамҳои зиёдатӣ. Маълумоти шумо тавассути пайвасти муҳофизатшуда фиристода мешавад.",
       back: "Бозгашт ба сомона"
     },
