@@ -121,10 +121,10 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
 
     if (req.method === "GET") {
       await sql`INSERT INTO mjl_customer_profiles (user_id, contact_name)
-        VALUES (\${session.user.id}, \${session.user.name || ""})
+        VALUES (${session.user.id}, ${session.user.name || ""})
         ON CONFLICT (user_id) DO NOTHING`;
       const rows = await sql`SELECT contact_name, company_name, inn, phone, telegram, marketplaces, fulfillment_model
-        FROM mjl_customer_profiles WHERE user_id = \${session.user.id} LIMIT 1`;
+        FROM mjl_customer_profiles WHERE user_id = ${session.user.id} LIMIT 1`;
       if (!rows[0]) return res.status(404).json({ ok: false, code: "profile_not_found" });
       return res.status(200).json({ ok: true, profile: toProfile(rows[0] as Record<string, unknown>) });
     }
@@ -159,9 +159,9 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
 
     const rows = await sql`INSERT INTO mjl_customer_profiles
       (user_id, contact_name, company_name, inn, phone, telegram, marketplaces, fulfillment_model, updated_at)
-      VALUES (\${session.user.id}, \${profile.contactName}, \${profile.companyName}, \${profile.inn || null},
-        \${profile.phone}, \${profile.telegram}, \${JSON.stringify(profile.marketplaces)}::jsonb,
-        \${profile.fulfillmentModel}, NOW())
+      VALUES (${session.user.id}, ${profile.contactName}, ${profile.companyName}, ${profile.inn || null},
+        ${profile.phone}, ${profile.telegram}, ${JSON.stringify(profile.marketplaces)}::jsonb,
+        ${profile.fulfillmentModel}, NOW())
       ON CONFLICT (user_id) DO UPDATE SET
         contact_name = EXCLUDED.contact_name,
         company_name = EXCLUDED.company_name,
