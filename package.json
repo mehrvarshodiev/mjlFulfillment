@@ -8,9 +8,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/prerender-locales.mjs",
+    "build": "tsc -b && tsc -p tsconfig.server.json && vite build && node scripts/prerender-locales.mjs",
     "preview": "vite preview",
-    "typecheck": "tsc -b --pretty",
+    "typecheck": "tsc -b --pretty && tsc -p tsconfig.server.json --pretty",
     "lint": "eslint ."
   },
   "dependencies": {
