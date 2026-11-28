@@ -18,11 +18,11 @@
     "contacts": "联系方式"
   },
   "home": {
-    "eyebrow": "专注 Wildberries 与 Ozon 电商履约",
-    "title": "高效物流，助力您的电商业务持续增长",
-    "description": "提供货物收货、质检、贴标、包装及配送至 Wildberries 和 Ozon 仓库的一站式服务。为俄罗斯、独联体及中国卖家提供专业运营支持。",
-    "primaryCta": "计算服务费用",
-    "secondaryCta": "咨询发货方案",
+    "eyebrow": "面向 Wildberries 和 Ozon 卖家的履约服务",
+    "title": "通过统一流程完成商品的平台销售准备",
+    "description": "MJL 可协调 Wildberries 和 Ozon 所需的收货、清点、检查、贴标、包装、仓储及发货准备。服务范围、时间和责任将在开始前确认。",
+    "primaryCta": "获取预估费用",
+    "secondaryCta": "沟通发货需求",
     "metrics": {
       "sla": "运营服务水平协议",
       "dispatch": "发往电商平台仓库",
@@ -37,8 +37,8 @@
     }
   },
   "services": {
-    "title": "贴合业务需求的电商履约服务",
-    "description": "从收货到发运，全流程透明管理，费用清晰可查。",
+    "title": "清晰的 Wildberries 和 Ozon 仓储操作",
+    "description": "将每批货物拆分为明确步骤：商品将如何处理、哪些参数影响费用，以及开始前需要确认什么。",
     "fbo": "FBO — 配送至平台仓库",
     "fbs": "FBS — 仓储及订单处理",
     "receiving": "货物接收与数量清点",
@@ -49,55 +49,25 @@
     "picking": "订单拣货与配货",
     "dispatch": "配送至 WB 和 Ozon 仓库",
     "calculator": {
-      "eyebrow": "提前规划成本",
-      "intro": "设置发货参数，即可获得主要仓储操作的预估费用。",
-      "model": "履约模式",
-      "marketplaces": {
-        "wb": "Wildberries",
-        "ozon": "Ozon",
-        "both": "两个平台"
-      },
-      "models": {
-        "fbo": "送至平台仓库",
-        "fbs": "订单履约"
-      },
-      "storageDays": "仓储天数",
-      "days": "天",
-      "markingHint": "按件增加商品所需标识码的预估贴标费用。",
-      "estimateLabel": "预估费用",
-      "live": "实时计算",
-      "resultCaption": "{{marketplace}} · {{count}} 件商品的预估费用",
-      "breakdown": "费用明细",
-      "total": "预估合计",
-      "requestQuote": "获取正式报价",
-      "receiving": "收货与清点",
-      "inspection": "质量检查",
-      "packaging": "商品包装",
-      "marking": "Честный ЗНАК 标识",
-      "storage": "仓储",
-      "dispatch": "订单处理与发货",
-      "disclaimer": "以上为演示估算费率，不构成正式报价。所选平台会显示在报价范围中；目前 Wildberries 与 Ozon 使用相同的演示仓储费率。最终价格取决于商品尺寸、品类、平台要求、货量及物流方案。请向客户经理确认最新费率。",
-      "title": "服务费用计算器",
-      "marketplace": "电商平台",
-      "items": "商品数量",
-      "standard": "标准包装",
-      "protective": "防护包装",
-      "custom": "定制包装"
+      "intro": "调整货物参数，查看按演示费率计算的费用结构。此结果不是正式报价。",
+      "live": "演示估算",
+      "disclaimer": "演示费率仅供参考。此估算不构成正式报价，最终费用将在经理确认商品、数量、平台要求和物流后确定。",
+      "requestQuote": "申请个性化报价"
     },
     "eyebrow": "一站式履约服务 / 01",
-    "heroNote": "从货物接收到平台仓发货，一个合作伙伴全程负责",
+    "heroNote": "根据您的货物选择操作流程。",
     "catalogEyebrow": "服务内容",
-    "catalogTitle": "每个环节，清晰可控",
-    "catalogDescription": "我们负责日常仓储履约流程，让您专注于产品与销售。",
+    "catalogTitle": "您的商品将经历哪些环节",
+    "catalogDescription": "具体操作根据商品类别、平台要求以及 FBO 或 FBS 模式确定。",
     "modelsEyebrow": "两种运营模式",
     "modelsTitle": "FBO 或 FBS，匹配您的销售流程",
     "details": {
-      "receiving": "接收入库货物，核对数量，记录差异并登记库存。",
-      "inspection": "检查商品外观与配件完整性，在发货前发现损坏及不符情况。",
-      "labeling": "按照平台要求准备标签、条码及商品标识。",
-      "packing": "根据商品类别及 Wildberries、Ozon 规则选择包装并做好防护。",
-      "storage": "规划库位，管理库存数量并妥善保管商品。",
-      "dispatch": "完成拣货、打包并安排送至电商平台仓库。"
+      "receiving": "接收货物，并根据随货信息核对数量，记录发现的差异。",
+      "inspection": "按约定进行外观检查，并记录可见损坏或不符之处。",
+      "labeling": "根据商品类别要求，粘贴已确认的标签和标识码。",
+      "packing": "结合商品特性及所选平台要求准备包装。",
+      "storage": "在拣货或发货前确认存储条件和期限。",
+      "dispatch": "将批次或订单准备好，交接至约定的收货点或物流路线。"
     },
     "modelDetails": {
       "fbo": "我们负责商品批次的准备、贴标、包装并送至平台仓库，之后由平台负责存储及订单履约。",
