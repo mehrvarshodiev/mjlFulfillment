@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, LogOut, UserRound } from "lucide-react";
+import { ArrowUpRight, ChevronDown, LogOut, UserRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { authClient } from "./auth-client";
@@ -61,7 +61,8 @@ export function AccountMenu({ onNavigate }: { onNavigate?: () => void } = {}) {
     return (
       <Link to="/login" className="header-account-login" onClick={onNavigate}>
         <UserRound size={15} aria-hidden="true" />
-        <span>{t("auth.menu.signIn")}</span>
+        <span className="header-account-login-label">{t("auth.menu.signIn")}</span>
+        <ArrowUpRight className="header-account-login-arrow" size={15} aria-hidden="true" />
       </Link>
     );
   }
