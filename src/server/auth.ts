@@ -14,8 +14,8 @@ const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 const deploymentHost = process.env.VERCEL_URL;
 const baseURL =
   process.env.BETTER_AUTH_URL ||
-  (productionHost ? "https://" + productionHost : undefined) ||
   (process.env.VERCEL_ENV === "preview" && deploymentHost ? "https://" + deploymentHost : undefined) ||
+  (productionHost ? "https://" + productionHost : undefined) ||
   "http://localhost:5173";
 
 const trustedOrigins = [
@@ -65,7 +65,7 @@ async function sendMagicLink(email: string, url: string): Promise<void> {
         "<p style=\"margin-top:28px;color:#7f91aa;font-size:12px;line-height:1.6\">Ссылка одноразовая и действует 10 минут. Если вы не запрашивали вход, просто проигнорируйте это письмо.</p>",
         "</div></div>"
       ].join(""),
-      text: "Вход в личный кабинет MJL Fulfillment\\n\\nОткройте ссылку для входа (действует 10 минут):\\n" + url + "\\n\\nЕсли вы не запрашивали вход, проигнорируйте это письмо."
+      text: "Вход в личный кабинет MJL Fulfillment\n\nОткройте ссылку для входа (действует 10 минут):\n" + url + "\n\nЕсли вы не запрашивали вход, проигнорируйте это письмо."
     })
   });
 
