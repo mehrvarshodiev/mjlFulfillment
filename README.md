@@ -77,8 +77,8 @@ Copy `.env.example` to `.env.local` for local development. Use `BETTER_AUTH_URL=
 Register these exact callback URLs in the OAuth provider consoles (the Yandex URI uses Better Auth’s Generic OAuth callback route):
 
 - Google: `https://mjlfulfillment.vercel.app/api/auth/callback/google`
-- Yandex ID: `https://mjlfulfillment.vercel.app/api/auth/oauth2/callback/yandex`
-- Local development (optional): `http://localhost:3000/api/auth/callback/google` and `http://localhost:3000/api/auth/oauth2/callback/yandex`
+- Yandex ID: `https://mjlfulfillment.vercel.app/api/auth/callback/yandex`
+- Local development (optional): `http://localhost:3000/api/auth/callback/google` and `http://localhost:3000/api/auth/callback/yandex`
 
 For Google, add `https://mjlfulfillment.vercel.app` as an authorized JavaScript origin. For Yandex ID, enable the `login:info` and `login:email` scopes. Add each Preview URL separately if OAuth is also required on Preview deployments.
 
