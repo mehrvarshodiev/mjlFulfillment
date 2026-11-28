@@ -155,6 +155,7 @@ export function UserProfilePage() {
   const providerLabels: Record<string, string> = {
     email: t("auth.profile.linkedEmail"),
     credential: t("auth.profile.linkedEmail"),
+    "magic-link": t("auth.profile.linkedEmail"),
     google: t("auth.profile.linkedGoogle"),
     yandex: t("auth.profile.linkedYandex")
   };
