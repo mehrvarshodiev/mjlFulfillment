@@ -38,7 +38,6 @@ export function AccountMenu({ onNavigate }: { onNavigate?: () => void } = {}) {
     try {
       await authClient.signOut();
       setOpen(false);
-      setOpen(false);
       onNavigate?.();
       navigate("/login", { replace: true });
     } finally {
