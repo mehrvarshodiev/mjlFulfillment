@@ -9,19 +9,28 @@ import ky from "./i18n/locales/ky.json";
 import kk from "./i18n/locales/kk.json";
 import uz from "./i18n/locales/uz.json";
 import tg from "./i18n/locales/tg.json";
+import { authTranslations } from "./i18n/auth-translations";
 import { SiteLayout } from "./components/layout/SiteLayout";
 import { HomePage } from "./pages/HomePage";
 import { ServicesPage } from "./pages/ServicesPage";
 import { ChinaSellersPage } from "./pages/ChinaSellersPage";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactsPage } from "./pages/ContactsPage";
+import { LoginPage } from "./pages/LoginPage";
+import { UserProfilePage } from "./pages/UserProfilePage";
+import { RequireAuth } from "./auth/RequireAuth";
 import { localizedSeoUrl, origin, pageMeta } from "./components/seo/metadata";
 
 type SupportedLanguage = "ru" | "en" | "zh" | "ky" | "kk" | "uz" | "tg";
 const supportedLanguages: SupportedLanguage[] = ["ru", "en", "zh", "ky", "kk", "uz", "tg"];
 const resources = {
-  ru: { translation: ru }, en: { translation: en }, zh: { translation: zh },
-  ky: { translation: ky }, kk: { translation: kk }, uz: { translation: uz }, tg: { translation: tg }
+  ru: { translation: { ...ru, auth: authTranslations.ru } },
+  en: { translation: { ...en, auth: authTranslations.en } },
+  zh: { translation: { ...zh, auth: authTranslations.zh } },
+  ky: { translation: { ...ky, auth: authTranslations.ky } },
+  kk: { translation: { ...kk, auth: authTranslations.kk } },
+  uz: { translation: { ...uz, auth: authTranslations.uz } },
+  tg: { translation: { ...tg, auth: authTranslations.tg } }
 };
 
 function detectRoute(pathname: string): { language: SupportedLanguage; routePath: string; basename: string } {
@@ -50,7 +59,7 @@ function getHeadElements(language: SupportedLanguage, path: string, title: strin
 
   return new Set([
     { type: "meta", props: { name: "description", content: description } },
-    { type: "meta", props: { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" } },
+    { type: "meta", props: { name: "robots", content: path === "/login" || path === "/userprofile" ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" } },
     { type: "meta", props: { property: "og:type", content: "website" } },
     { type: "meta", props: { property: "og:site_name", content: "mjlFulfillment" } },
     { type: "meta", props: { property: "og:title", content: title } },
@@ -89,6 +98,10 @@ export async function prerender(data: { url: string }) {
             <Route path="china" element={<ChinaSellersPage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="contacts" element={<ContactsPage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route element={<RequireAuth />}>
+              <Route path="userprofile" element={<UserProfilePage />} />
+            </Route>
           </Route>
         </Routes>
       </StaticRouter>
