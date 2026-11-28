@@ -210,7 +210,7 @@ async function showList(
 
 async function handleCommand(sql: ReturnType<typeof createDatabase>, message: TelegramMessage): Promise<void> {
   const chatId = message.chat.id;
-  const command = (message.text ?? "").trim().split(/\s+/, 1)[0].toLowerCase();
+  const command = (message.text ?? "").trim().split(/\s+/, 1)[0]?.toLowerCase() ?? "";
   if (command === "/start" || command === "/menu") {
     await sendMenu(chatId);
   } else if (command === "/leads") {
