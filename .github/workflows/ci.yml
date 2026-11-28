@@ -2,21 +2,26 @@ name: CI
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
   push:
-    branches: [main, "feat/**"]
+    branches:
+      - main
+      - feat/better-auth-user-profile
+  workflow_dispatch:
 
 permissions:
   contents: read
-
-concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   verify:
     name: Typecheck, build and lint
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
