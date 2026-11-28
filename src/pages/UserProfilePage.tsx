@@ -83,8 +83,8 @@ export function UserProfilePage() {
       try {
         const result = await authClient.listAccounts();
         if (active && result.data) {
-          const methods = result.data.map((account) => account.providerId);
-          setLinkedProviders([...new Set(methods)]);
+          const methods = result.data.map((account: { providerId: string }) => account.providerId);
+          setLinkedProviders([...new Set<string>(methods)]);
         }
       } catch {
         if (active) setLinkedProviders([]);
