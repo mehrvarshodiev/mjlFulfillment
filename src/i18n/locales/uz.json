@@ -39,14 +39,14 @@
       "statusLabel": "ISH JARAYONI",
       "artAlt": "Ombor va tovar harakati tasviriy sxemasi",
       "marketplaceReady": "MARKETPLEYSGA TAYYORLASH",
-      "operationStages": "QAYTA ISHLASH BOSQICHI",
+      "operationStages": "QAYTA ISHLASH BOSQICHLARI",
       "qualityControl": "Sifat nazorati",
       "dispatchWorkflow": "Jo‘natishga tayyorlash"
     },
     "proof": {
       "ariaLabel": "Xizmatlar haqida ma’lumot",
       "operationsValue": "06",
-      "operationsLabel": "QAYTA ISHLASH BOSQICHI",
+      "operationsLabel": "QAYTA ISHLASH BOSQICHLARI",
       "modelsValue": "02",
       "modelsLabel": "FBO / FBS MODELI",
       "channelsValue": "02",
