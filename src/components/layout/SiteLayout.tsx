@@ -403,7 +403,7 @@ export function SiteLayout() {
           <div className="header-actions">
             <LanguageSwitcher />
             <ThemeSwitcher theme={theme} onToggle={toggleTheme} />
-            <AccountMenu />
+            <AccountMenu onNavigate={closeMenu} />
             <Link to="/contacts" className="header-cta">
               {t("common.contact")}
               <ArrowUpRight size={15} />
@@ -483,7 +483,7 @@ export function SiteLayout() {
                 <LanguageSwitcher />
                 <ThemeSwitcher theme={theme} onToggle={toggleTheme} />
               </div>
-              <div className="mobile-account-entry"><AccountMenu /></div>
+              <div className="mobile-account-entry"><AccountMenu onNavigate={closeMenu} /></div>
               <Link to="/contacts" className="mobile-menu-cta" onClick={closeMenu}>
                 <span>{t("common.contact")}</span>
                 <ArrowUpRight size={18} aria-hidden="true" />
