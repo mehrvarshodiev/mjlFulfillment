@@ -9,7 +9,7 @@ function getInitials(name: string, email: string): string {
   return source.split(/[\s._-]+/).filter(Boolean).slice(0, 2).map((part) => part[0]!.toUpperCase()).join("");
 }
 
-export function AccountMenu() {
+export function AccountMenu({ onNavigate }: { onNavigate?: () => void } = {}) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -38,6 +38,8 @@ export function AccountMenu() {
     try {
       await authClient.signOut();
       setOpen(false);
+      setOpen(false);
+      onNavigate?.();
       navigate("/login", { replace: true });
     } finally {
       setSigningOut(false);
@@ -50,7 +52,7 @@ export function AccountMenu() {
 
   if (!session) {
     return (
-      <Link to="/login" className="header-account-login">
+      <Link to="/login" className="header-account-login" onClick={onNavigate}>
         <UserRound size={15} aria-hidden="true" />
         <span>{t("auth.menu.signIn")}</span>
       </Link>
@@ -81,7 +83,7 @@ export function AccountMenu() {
             <strong>{name}</strong>
             <span>{session.user.email}</span>
           </div>
-          <Link to="/userprofile" className="account-dropdown-link" role="menuitem" onClick={() => setOpen(false)}>
+          <Link to="/userprofile" className="account-dropdown-link" role="menuitem" onClick={() => { setOpen(false); onNavigate?.(); }}>
             <UserRound size={16} aria-hidden="true" />
             {t("auth.menu.profile")}
           </Link>
