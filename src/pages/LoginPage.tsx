@@ -213,6 +213,7 @@ export function LoginPage() {
 
           {(error || providerError) && <p className="auth-error-message" role="alert">{error || t("auth.login.error")}</p>}
           <p className="auth-security-note">{t("auth.login.security")}</p>
+          <p className="auth-security-note">{t("auth.login.accountCreation")}</p>
         </div>
       </section>
       <p className="auth-page-footer">© {new Date().getFullYear()} MJL FULFILLMENT · CLIENT PORTAL</p>
