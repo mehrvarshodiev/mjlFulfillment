@@ -39,14 +39,14 @@
       "statusLabel": "МАРҲИЛАҲОИ КОР",
       "artAlt": "Нақшаи тасвирии анбор ва ҳаракати мол",
       "marketplaceReady": "ОМОДАСОЗӢ БАРОИ МАРКЕТПЛЕЙСҲО",
-      "operationStages": "МАРҲИЛАИ КОРКАРД",
+      "operationStages": "МАРҲИЛАҲОИ КОРКАРД",
       "qualityControl": "Назорати сифат",
       "dispatchWorkflow": "Омодагӣ ба ирсол"
     },
     "proof": {
       "ariaLabel": "Маълумот дар бораи хизматрасонӣ",
       "operationsValue": "06",
-      "operationsLabel": "МАРҲИЛАИ КОРКАРД",
+      "operationsLabel": "МАРҲИЛАҲОИ КОРКАРД",
       "modelsValue": "02",
       "modelsLabel": "МОДЕЛИ FBO / FBS",
       "channelsValue": "02",
