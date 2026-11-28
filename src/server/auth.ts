@@ -13,10 +13,10 @@ if (!authSecret || authSecret.length < 32) {
 const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 const deploymentHost = process.env.VERCEL_URL;
 const baseURL =
-  process.env.BETTER_AUTH_URL ||
   (process.env.VERCEL_ENV === "preview" && deploymentHost ? "https://" + deploymentHost : undefined) ||
+  process.env.BETTER_AUTH_URL ||
   (productionHost ? "https://" + productionHost : undefined) ||
-  "http://localhost:5173";
+  "http://localhost:3000";
 
 const trustedOrigins = [
   baseURL,
