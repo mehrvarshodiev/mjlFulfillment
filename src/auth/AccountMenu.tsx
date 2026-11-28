@@ -3,6 +3,7 @@ import { ArrowUpRight, ChevronDown, LogOut, UserRound } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { authClient } from "./auth-client";
+import "../styles/navigation-auth.css";
 
 function getInitials(name: string, email: string): string {
   const source = name.trim() || email.split("@")[0] || "MJL";
