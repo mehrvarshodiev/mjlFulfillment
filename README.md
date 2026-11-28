@@ -53,3 +53,54 @@ Add these server-only Vercel Production environment variables:
 - `TELEGRAM_LOGIN_REDIRECT_URI=https://mjlfulfillment.vercel.app/api/telegram-auth`
 
 Never expose the client secret in a `VITE_*` variable. Redeploy after adding the variables. Preview URLs require their own Allowed URL entries and matching environment configuration; the production redirect must not be reused with a different host.
+
+## Client authentication and account portal
+
+The website uses **Better Auth** with the existing Neon PostgreSQL database. The sign-in page is available at `/login`; the protected client portal is `/userprofile`. Authentication runs in Vercel serverless functions and uses HttpOnly session cookies. The customer profile API validates the session for every request and never trusts a user ID supplied by the browser.
+
+### Configure environment variables
+
+Copy `.env.example` to `.env.local` for local development. Use `BETTER_AUTH_URL=http://localhost:3000` when running the Vercel development server. Run `npx vercel dev` to serve the Vite frontend and `/api/*` functions together; plain `npm run dev` starts Vite only and does not execute Vercel serverless functions. Add the same variables to Vercel → Project → Settings → Environment Variables (Production and Preview as appropriate):
+
+- `DATABASE_URL` — the existing Neon PostgreSQL connection string.
+- `BETTER_AUTH_SECRET` — a unique random secret of at least 32 characters. Generate one with `openssl rand -base64 32`.
+- `BETTER_AUTH_URL` — `https://mjlfulfillment.vercel.app` in Production; use `http://localhost:3000` locally. For Preview, the auth server automatically prefers Vercel's unique deployment URL; do not set a Production-only `BETTER_AUTH_URL` override in Preview.
+- `BETTER_AUTH_TRUSTED_ORIGINS` — optional comma-separated extra origins for trusted preview domains.
+- `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` — Google OAuth credentials.
+- `YANDEX_CLIENT_ID` and `YANDEX_CLIENT_SECRET` — Yandex ID OAuth credentials.
+- `RESEND_API_KEY` and `AUTH_FROM_EMAIL` — Resend API key and a sender address on a verified domain, used to deliver one-time email sign-in links.
+
+**Never expose these values as `VITE_*` variables.** Keep OAuth secrets, database URLs, Resend keys and the Better Auth secret server-only.
+
+### OAuth callback URLs
+
+Register these exact callback URLs in the OAuth provider consoles (the Yandex URI uses Better Auth’s Generic OAuth callback route):
+
+- Google: `https://mjlfulfillment.vercel.app/api/auth/callback/google`
+- Yandex ID: `https://mjlfulfillment.vercel.app/api/auth/callback/yandex`
+- Local development (optional): `http://localhost:3000/api/auth/callback/google` and `http://localhost:3000/api/auth/callback/yandex`
+
+For Google, add `https://mjlfulfillment.vercel.app` as an authorized JavaScript origin. For Yandex ID, enable the `login:info` and `login:email` scopes. Add each Preview URL separately if OAuth is also required on Preview deployments.
+
+### Initialize authentication tables
+
+After installing dependencies and setting `DATABASE_URL` and `BETTER_AUTH_SECRET`, run the Better Auth migration from the repository root:
+
+```bash
+npm install
+npx auth@latest migrate --yes --config ./src/server/auth.ts
+```
+
+This creates Better Auth's user, session, account and verification tables in Neon. The customer profile table (`mjl_customer_profiles`) is created idempotently by the authenticated profile API on first use. Do not remove or rename the existing CRM tables.
+
+After adding or changing Vercel environment variables and completing the database migration, redeploy the application. The OAuth buttons work after their corresponding provider credentials are configured. Email sign-in requires a verified Resend sender.
+
+### Authentication behavior
+
+- Google OAuth and Yandex ID OAuth create or sign in a customer account.
+- Email sign-in uses a single-use Magic Link that expires after 10 minutes; no password is stored or required.
+- The frontend route guard redirects visitors without a valid session to `/login`; the profile API independently validates the session before reading or writing customer data.
+- Profile fields include contact name, company, optional INN, phone, Telegram username, marketplaces and FBO/FBS model.
+- Requests and shipment history are currently a UI placeholder. A future CRM/shipment API can populate that section without changing authentication.
+- Account profile and sign-out controls appear in the desktop header and mobile navigation.
+- Login and profile labels are localized in RU, EN, ZH, KY, KK, UZ and TG.

@@ -7,6 +7,7 @@ import ky from "./locales/ky.json";
 import kk from "./locales/kk.json";
 import uz from "./locales/uz.json";
 import tg from "./locales/tg.json";
+import { authTranslations } from "./auth-translations";
 
 export const supportedLanguages = ["ru", "en", "zh", "ky", "kk", "uz", "tg"] as const;
 export type SupportedLanguage = (typeof supportedLanguages)[number];
@@ -22,13 +23,13 @@ function resolveInitialLanguage(): SupportedLanguage {
 }
 
 const resources = {
-  ru: { translation: ru },
-  en: { translation: en },
-  zh: { translation: zh },
-  ky: { translation: ky },
-  kk: { translation: kk },
-  uz: { translation: uz },
-  tg: { translation: tg }
+  ru: { translation: { ...ru, auth: authTranslations.ru } },
+  en: { translation: { ...en, auth: authTranslations.en } },
+  zh: { translation: { ...zh, auth: authTranslations.zh } },
+  ky: { translation: { ...ky, auth: authTranslations.ky } },
+  kk: { translation: { ...kk, auth: authTranslations.kk } },
+  uz: { translation: { ...uz, auth: authTranslations.uz } },
+  tg: { translation: { ...tg, auth: authTranslations.tg } }
 };
 
 void i18n.use(initReactI18next).init({

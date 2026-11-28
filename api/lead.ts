@@ -31,11 +31,22 @@ const MAX_REQUESTS = 5;
 
 function isAllowedOrigin(req: ApiRequest): boolean {
   const origin = req.headers.origin;
-  if (typeof origin !== "string" || !origin) return true;
-  const host = req.headers["x-forwarded-host"] ?? req.headers.host;
-  if (typeof host !== "string" || !host) return false;
+  if (typeof origin !== "string" || !origin) return false;
+
+  const forwardedHost = req.headers["x-forwarded-host"];
+  const fallbackHost = req.headers.host;
+  const rawHost = Array.isArray(forwardedHost)
+    ? forwardedHost[0]
+    : forwardedHost ?? (Array.isArray(fallbackHost) ? fallbackHost[0] : fallbackHost);
+  const host = rawHost?.split(",")[0]?.trim().toLowerCase();
+  if (!host) return false;
+
+  const forwardedProto = req.headers["x-forwarded-proto"];
+  const protocol = (typeof forwardedProto === "string" ? forwardedProto.split(",")[0]?.trim() : "")
+    || (host.startsWith("localhost") || host.startsWith("127.0.0.1") ? "http" : "https");
+
   try {
-    return new URL(origin).host.toLowerCase() === host.split(",")[0].trim().toLowerCase();
+    return new URL(origin).origin === new URL(protocol + "://" + host).origin;
   } catch {
     return false;
   }
@@ -43,7 +54,7 @@ function isAllowedOrigin(req: ApiRequest): boolean {
 
 function rateLimited(req: ApiRequest): boolean {
   const forwarded = req.headers["x-forwarded-for"];
-  const ip = (typeof forwarded === "string" ? forwarded.split(",")[0] : "unknown").trim();
+  const ip = (typeof forwarded === "string" ? forwarded.split(",")[0] ?? "unknown" : "unknown").trim();
   const now = Date.now();
   const active = (recentRequests.get(ip) ?? []).filter((time) => now - time < WINDOW_MS);
   if (active.length >= MAX_REQUESTS) {

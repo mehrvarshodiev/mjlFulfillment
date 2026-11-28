@@ -1,0 +1,74 @@
+/* Premium sign-in action in the global MJL navigation */
+.header-account-login {
+  position: relative;
+  min-height: 44px;
+  gap: 10px;
+  padding: 0 15px 0 16px;
+  overflow: hidden;
+  border: 1px solid rgb(117 169 255 / 48%);
+  background:
+    linear-gradient(115deg, rgb(48 112 231 / 98%), rgb(31 82 178 / 96%) 58%, rgb(25 66 145 / 98%));
+  color: #fff;
+  box-shadow:
+    0 8px 22px rgb(22 83 190 / 24%),
+    inset 0 1px 0 rgb(255 255 255 / 19%);
+  letter-spacing: -.01em;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, filter .22s ease;
+}
+
+.header-account-login::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgb(255 255 255 / 13%) 48%, transparent 76%);
+  transform: translateX(-120%);
+  transition: transform .55s ease;
+  pointer-events: none;
+}
+
+.header-account-login:hover {
+  transform: translateY(-2px);
+  border-color: rgb(170 204 255 / 82%);
+  background: linear-gradient(115deg, #397ff0, #245fc4 60%, #1c4f9f);
+  color: #fff;
+  box-shadow:
+    0 12px 28px rgb(22 83 190 / 34%),
+    0 0 0 3px rgb(59 130 246 / 10%),
+    inset 0 1px 0 rgb(255 255 255 / 22%);
+}
+
+.header-account-login:hover::before { transform: translateX(120%); }
+.header-account-login:active { transform: translateY(0) scale(.985); }
+.header-account-login svg:first-child { color: #eaf2ff; }
+.header-account-login-label { position: relative; z-index: 1; }
+.header-account-login-arrow {
+  position: relative;
+  z-index: 1;
+  color: #d8e8ff;
+  transition: transform .2s ease;
+}
+.header-account-login:hover .header-account-login-arrow { transform: translate(2px, -2px); }
+
+.header-account-login:focus-visible {
+  outline: 3px solid rgb(147 197 253 / 85%);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-account-login,
+  .header-account-login::before,
+  .header-account-login-arrow { transition: none; }
+}
+
+:root[data-theme="light"] .header-account-login {
+  border-color: rgb(37 99 235 / 24%);
+  box-shadow: 0 8px 20px rgb(37 99 235 / 17%), inset 0 1px 0 rgb(255 255 255 / 28%);
+}
+
+.mobile-account-entry .header-account-login {
+  min-height: 50px;
+  justify-content: space-between;
+  padding-inline: 17px;
+  border-radius: 14px;
+  font-size: 12px;
+}
