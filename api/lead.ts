@@ -31,11 +31,19 @@ const MAX_REQUESTS = 5;
 
 function isAllowedOrigin(req: ApiRequest): boolean {
   const origin = req.headers.origin;
-  if (typeof origin !== "string" || !origin) return true;
-  const host = req.headers["x-forwarded-host"] ?? req.headers.host;
-  if (typeof host !== "string" || !host) return false;
+  if (typeof origin !== "string" || !origin) return false;
+
+  const forwardedHost = req.headers["x-forwarded-host"];
+  const host = (typeof forwardedHost === "string" ? forwardedHost : req.headers.host)
+    ?.split(",")[0]?.trim().toLowerCase();
+  if (!host) return false;
+
+  const forwardedProto = req.headers["x-forwarded-proto"];
+  const protocol = (typeof forwardedProto === "string" ? forwardedProto.split(",")[0]?.trim() : "")
+    || (host.startsWith("localhost") || host.startsWith("127.0.0.1") ? "http" : "https");
+
   try {
-    return new URL(origin).host.toLowerCase() === host.split(",")[0].trim().toLowerCase();
+    return new URL(origin).origin === new URL(protocol + "://" + host).origin;
   } catch {
     return false;
   }
