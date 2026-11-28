@@ -22,7 +22,7 @@ export function LoginPage() {
   const [error, setError] = useState("");
   const [validationError, setValidationError] = useState("");
 
-  if (!sessionPending && session) return <Navigate to={state?.from || "/userprofile"} replace />;
+  if (!sessionPending && session) return <Navigate to={state?.from || profilePath} replace />;
 
   async function signInWithGoogle() {
     setError("");
