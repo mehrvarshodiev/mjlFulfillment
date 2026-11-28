@@ -39,14 +39,14 @@
       "statusLabel": "ЖҰМЫС КЕЗЕҢДЕРІ",
       "artAlt": "Қойма мен тауар қозғалысының иллюстрациялық схемасы",
       "marketplaceReady": "МАРКЕТПЛЕЙСКЕ ДАЙЫНДАУ",
-      "operationStages": "ӨҢДЕУ КЕЗЕҢІ",
+      "operationStages": "ӨҢДЕУ КЕЗЕҢДЕРІ",
       "qualityControl": "Сапаны тексеру",
       "dispatchWorkflow": "Жөнелтуге дайындау"
     },
     "proof": {
       "ariaLabel": "Қызметтер туралы ақпарат",
       "operationsValue": "06",
-      "operationsLabel": "ӨҢДЕУ КЕЗЕҢІ",
+      "operationsLabel": "ӨҢДЕУ КЕЗЕҢДЕРІ",
       "modelsValue": "02",
       "modelsLabel": "FBO / FBS МОДЕЛІ",
       "channelsValue": "02",
