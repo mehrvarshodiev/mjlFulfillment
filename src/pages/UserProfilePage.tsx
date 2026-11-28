@@ -54,6 +54,8 @@ export function UserProfilePage() {
   const [profile, setProfile] = useState<CustomerProfile>(emptyProfile);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [signingOut, setSigningOut] = useState(false);
+  const [signOutError, setSignOutError] = useState(false);
   const [feedback, setFeedback] = useState<"saved" | "loadError" | "saveError" | "required" | "">("");
   const [linkedProviders, setLinkedProviders] = useState<string[]>([]);
 
@@ -131,8 +133,20 @@ export function UserProfilePage() {
   }
 
   async function signOut() {
-    await authClient.signOut();
-    navigate("/login", { replace: true });
+    setSigningOut(true);
+    setSignOutError(false);
+    try {
+      const result = await authClient.signOut();
+      if (result.error) {
+        setSignOutError(true);
+        return;
+      }
+      navigate("/login", { replace: true });
+    } catch {
+      setSignOutError(true);
+    } finally {
+      setSigningOut(false);
+    }
   }
 
   const userName = session?.user.name || session?.user.email?.split("@")[0] || "MJL";
@@ -289,8 +303,10 @@ export function UserProfilePage() {
                 </div>
               ))}
             </div>
-            <button type="button" className="profile-signout-button" onClick={signOut}>
-              <LogOut size={16} />{t("auth.profile.signOut")}
+            {signOutError && <p className="profile-feedback is-error" role="alert">{t("auth.login.error")}</p>}
+            <button type="button" className="profile-signout-button" onClick={signOut} disabled={signingOut}>
+              {signingOut ? <span className="auth-spinner auth-spinner--small" /> : <LogOut size={16} />}
+              {signingOut ? t("auth.profile.saving") : t("auth.profile.signOut")}
             </button>
           </section>
           <div className="profile-security-card">
