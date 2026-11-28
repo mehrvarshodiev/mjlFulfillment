@@ -67,21 +67,6 @@ function normalizeMarketplaces(value: unknown): Marketplace[] {
   ))];
 }
 
-async function ensureProfileTable(sql: ReturnType<typeof neon>) {
-  await sql`CREATE TABLE IF NOT EXISTS mjl_customer_profiles (
-    user_id TEXT PRIMARY KEY,
-    contact_name VARCHAR(160) NOT NULL DEFAULT '',
-    company_name VARCHAR(180) NOT NULL DEFAULT '',
-    inn VARCHAR(12),
-    phone VARCHAR(40) NOT NULL DEFAULT '',
-    telegram VARCHAR(40) NOT NULL DEFAULT '',
-    marketplaces JSONB NOT NULL DEFAULT '[]'::jsonb,
-    fulfillment_model VARCHAR(3) NOT NULL DEFAULT 'FBO',
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-  )`;
-}
-
 function toProfile(row: Record<string, unknown>): CustomerProfile {
   let marketplaces: unknown = row.marketplaces;
   if (typeof marketplaces === "string") {
@@ -117,7 +102,18 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
 
   try {
     const sql = neon(databaseUrl);
-    await ensureProfileTable(sql);
+    await sql`CREATE TABLE IF NOT EXISTS mjl_customer_profiles (
+      user_id TEXT PRIMARY KEY,
+      contact_name VARCHAR(160) NOT NULL DEFAULT '',
+      company_name VARCHAR(180) NOT NULL DEFAULT '',
+      inn VARCHAR(12),
+      phone VARCHAR(40) NOT NULL DEFAULT '',
+      telegram VARCHAR(40) NOT NULL DEFAULT '',
+      marketplaces JSONB NOT NULL DEFAULT '[]'::jsonb,
+      fulfillment_model VARCHAR(3) NOT NULL DEFAULT 'FBO',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )`;
 
     if (req.method === "GET") {
       await sql`INSERT INTO mjl_customer_profiles (user_id, contact_name)
