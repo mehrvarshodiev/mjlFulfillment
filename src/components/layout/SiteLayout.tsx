@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { MjlLogo } from "../brand/MjlLogo";
 import { SEOHead } from "../seo/SEOHead";
 import { ScrollExperience } from "./ScrollExperience";
+import { AccountMenu } from "../../auth/AccountMenu";
 
 const links = [
   { to: "/", key: "navigation.home", end: true },
@@ -402,6 +403,7 @@ export function SiteLayout() {
           <div className="header-actions">
             <LanguageSwitcher />
             <ThemeSwitcher theme={theme} onToggle={toggleTheme} />
+            <AccountMenu />
             <Link to="/contacts" className="header-cta">
               {t("common.contact")}
               <ArrowUpRight size={15} />
@@ -481,6 +483,7 @@ export function SiteLayout() {
                 <LanguageSwitcher />
                 <ThemeSwitcher theme={theme} onToggle={toggleTheme} />
               </div>
+              <div className="mobile-account-entry"><AccountMenu /></div>
               <Link to="/contacts" className="mobile-menu-cta" onClick={closeMenu}>
                 <span>{t("common.contact")}</span>
                 <ArrowUpRight size={18} aria-hidden="true" />
