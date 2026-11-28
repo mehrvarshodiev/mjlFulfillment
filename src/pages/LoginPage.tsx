@@ -55,7 +55,7 @@ export function LoginPage() {
         errorCallbackURL: localizedLoginPath,
         newUserCallbackURL: profilePath
       });
-      if (result.error) setError(result.error.message || t("auth.login.error"));
+      if (result.error) setError(t("auth.login.error"));
     } catch {
       setError(t("auth.login.providerUnavailable"));
     } finally {
