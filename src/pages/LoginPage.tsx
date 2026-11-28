@@ -33,7 +33,11 @@ export function LoginPage() {
         callbackURL: profilePath,
         errorCallbackURL: localizedLoginPath
       });
-      if (result.error) setError(result.error.message || t("auth.login.error"));
+      if (result.error) setError(
+        result.error.code === "PROVIDER_NOT_FOUND"
+          ? t("auth.login.providerUnavailable")
+          : t("auth.login.error")
+      );
     } catch {
       setError(t("auth.login.providerUnavailable"));
     } finally {
@@ -77,7 +81,7 @@ export function LoginPage() {
         errorCallbackURL: localizedLoginPath
       });
       if (result.error) {
-        setError(result.error.message || t("auth.login.error"));
+        setError(t("auth.login.error"));
       } else {
         setSent(true);
       }
