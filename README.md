@@ -60,7 +60,7 @@ The website uses **Better Auth** with the existing Neon PostgreSQL database. The
 
 ### Configure environment variables
 
-Copy `.env.example` to `.env.local` for local development. Add the same variables to Vercel → Project → Settings → Environment Variables (Production and Preview as appropriate):
+Copy `.env.example` to `.env.local` for local development. Use `BETTER_AUTH_URL=http://localhost:3000` when running the Vercel development server. Run `npx vercel dev` to serve the Vite frontend and `/api/*` functions together; plain `npm run dev` starts Vite only and does not execute Vercel serverless functions. Add the same variables to Vercel → Project → Settings → Environment Variables (Production and Preview as appropriate):
 
 - `DATABASE_URL` — the existing Neon PostgreSQL connection string.
 - `BETTER_AUTH_SECRET` — a unique random secret of at least 32 characters. Generate one with `openssl rand -base64 32`.
@@ -78,6 +78,7 @@ Register these exact callback URLs in the OAuth provider consoles:
 
 - Google: `https://mjlfulfillment.vercel.app/api/auth/callback/google`
 - Yandex ID: `https://mjlfulfillment.vercel.app/api/auth/oauth2/callback/yandex`
+- Local development (optional): `http://localhost:3000/api/auth/callback/google` and `http://localhost:3000/api/auth/oauth2/callback/yandex`
 
 For Google, add `https://mjlfulfillment.vercel.app` as an authorized JavaScript origin. For Yandex ID, enable the `login:info` and `login:email` scopes. Add each Preview URL separately if OAuth is also required on Preview deployments.
 
