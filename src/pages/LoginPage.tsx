@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { ArrowLeft, ArrowUpRight, CheckCircle2, LoaderCircle, Mail } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Link, Navigate, useLocation } from "react-router-dom";
@@ -17,7 +17,28 @@ export function LoginPage() {
   const profilePath = localizedLanguages.has(language) ? `/${language}/userprofile` : "/userprofile";
   const localizedLoginPath = localizedLanguages.has(language) ? `/${language}/login` : "/login";
   const providerError = new URLSearchParams(location.search).has("error");
+  const [authMethods, setAuthMethods] = useState<{ google: boolean; yandex: boolean; magicLink: boolean } | null>(null);
   const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/auth-status", { credentials: "same-origin", cache: "no-store" })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Authentication status unavailable");
+        return response.json() as Promise<{ google?: boolean; yandex?: boolean; magicLink?: boolean }>;
+      })
+      .then((config) => {
+        if (active) setAuthMethods({
+          google: config.google === true,
+          yandex: config.yandex === true,
+          magicLink: config.magicLink === true
+        });
+      })
+      .catch(() => {
+        if (active) setAuthMethods({ google: false, yandex: false, magicLink: false });
+      });
+    return () => { active = false; };
+  }, []);
   const [busy, setBusy] = useState<"google" | "yandex" | "email" | null>(null);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
@@ -127,20 +148,36 @@ export function LoginPage() {
             </div>
           ) : (
             <>
-              <div className="auth-social-buttons">
-                <button className="auth-social-button" type="button" onClick={signInWithGoogle} disabled={busy !== null}>
-                  {busy === "google" ? <LoaderCircle className="auth-spinner-icon" size={18} /> : <span className="auth-google-mark">G</span>}
-                  {t("auth.login.google")}
-                </button>
-                <button className="auth-social-button" type="button" onClick={signInWithYandex} disabled={busy !== null}>
-                  {busy === "yandex" ? <LoaderCircle className="auth-spinner-icon" size={18} /> : <span className="auth-yandex-mark">Я</span>}
-                  {t("auth.login.yandex")}
-                </button>
-              </div>
+              {authMethods === null ? (
+                <div className="auth-social-buttons" aria-live="polite" aria-busy="true">
+                  <div className="auth-social-button" aria-hidden="true">
+                    <LoaderCircle className="auth-spinner-icon" size={18} />
+                    {t("auth.login.sending")}
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {(authMethods.google || authMethods.yandex) && (
+                    <div className="auth-social-buttons">
+                      {authMethods.google && (
+                        <button className="auth-social-button" type="button" onClick={signInWithGoogle} disabled={busy !== null}>
+                          {busy === "google" ? <LoaderCircle className="auth-spinner-icon" size={18} /> : <span className="auth-google-mark">G</span>}
+                          {t("auth.login.google")}
+                        </button>
+                      )}
+                      {authMethods.yandex && (
+                        <button className="auth-social-button" type="button" onClick={signInWithYandex} disabled={busy !== null}>
+                          {busy === "yandex" ? <LoaderCircle className="auth-spinner-icon" size={18} /> : <span className="auth-yandex-mark">Я</span>}
+                          {t("auth.login.yandex")}
+                        </button>
+                      )}
+                    </div>
+                  )}
 
-              <div className="auth-divider"><span>{t("auth.login.divider")}</span></div>
-
-              <form className="auth-email-form" onSubmit={sendMagicLink}>
+                  {authMethods.magicLink && (
+                    <>
+                      {(authMethods.google || authMethods.yandex) && <div className="auth-divider"><span>{t("auth.login.divider")}</span></div>}
+                      <form className="auth-email-form" onSubmit={sendMagicLink}>
                 <label htmlFor="auth-email">{t("auth.login.emailLabel")}</label>
                 <div className={validationError ? "auth-input-wrap has-error" : "auth-input-wrap"}>
                   <Mail size={17} aria-hidden="true" />
@@ -162,7 +199,15 @@ export function LoginPage() {
                 <button className="auth-submit-button" type="submit" disabled={busy !== null}>
                   {busy === "email" ? <><LoaderCircle className="auth-spinner-icon" size={17} />{t("auth.login.sending")}</> : <>{t("auth.login.submit")}<ArrowUpRight size={17} /></>}
                 </button>
-              </form>
+                      </form>
+                    </>
+                  )}
+
+                  {!authMethods.google && !authMethods.yandex && !authMethods.magicLink && (
+                    <p className="auth-error-message" role="status">{t("auth.login.providerUnavailable")}</p>
+                  )}
+                </>
+              )}
             </>
           )}
 
