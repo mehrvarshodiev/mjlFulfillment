@@ -12,21 +12,31 @@ if (!authSecret || authSecret.length < 32) {
 
 const productionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 const deploymentHost = process.env.VERCEL_URL;
+const branchHost = process.env.VERCEL_BRANCH_URL;
+const isPreview = process.env.VERCEL_ENV === "preview";
+const previewHost = branchHost || deploymentHost;
+
 const baseURL =
-  (process.env.VERCEL_ENV === "preview" && deploymentHost ? "https://" + deploymentHost : undefined) ||
+  (isPreview && previewHost ? "https://" + previewHost : undefined) ||
   process.env.BETTER_AUTH_URL ||
   (productionHost ? "https://" + productionHost : undefined) ||
   "http://localhost:3000";
 
+const previewOrigins = isPreview
+  ? [branchHost, deploymentHost]
+      .filter((host): host is string => Boolean(host))
+      .map((host) => "https://" + host)
+  : [];
+
 const trustedOrigins = [
   baseURL,
   "https://mjlfulfillment.vercel.app",
+  ...previewOrigins,
   ...(process.env.BETTER_AUTH_TRUSTED_ORIGINS || "")
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean)
 ];
-
 const database = new Pool({
   connectionString: databaseUrl,
   max: 5,
