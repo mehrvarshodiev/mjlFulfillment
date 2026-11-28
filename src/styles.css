@@ -1853,3 +1853,46 @@ textarea:focus-visible {
   font-size: 11px;
   font-weight: 800;
 }
+
+/* Commercial conversion sections — retain the established MJL navy/blue system. */
+.seller-value-section{padding-block:76px 86px}
+.seller-value-heading{max-width:760px;margin-bottom:30px}
+.seller-value-heading h2{max-width:700px;margin:15px 0 12px;font-size:clamp(30px,3.8vw,46px);line-height:1.08;letter-spacing:-.055em}
+.seller-value-heading p{max-width:640px;margin:0;color:#91a2ba;font-size:13px;line-height:1.8}
+.seller-value-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.seller-value-card{min-height:190px;padding:23px;border:1px solid rgb(148 163 184 / 13%);border-radius:17px;background:linear-gradient(145deg,#15243a,#101b2c)}
+.seller-value-card-top{display:flex;align-items:center;justify-content:space-between;color:#83b5ff}
+.seller-value-card-top span{color:#607895;font-size:10px;font-weight:900;letter-spacing:.13em}
+.seller-value-card h3{margin:27px 0 9px;font-size:16px;line-height:1.35}
+.seller-value-card p{max-width:340px;margin:0;color:#91a2b8;font-size:11px;line-height:1.8}
+.seller-value-link{margin-top:24px}
+.tariffs-section{padding-block:78px 92px}
+.tariffs-heading h2{max-width:680px}
+.tariffs-heading>p{max-width:420px;color:#91a2b8;font-size:13px;line-height:1.8}
+.tariffs-table{overflow:hidden;border:1px solid rgb(148 163 184 / 14%);border-radius:17px;background:#101c2d}
+.tariffs-table-head,.tariffs-table-row{display:grid;grid-template-columns:minmax(150px,.8fr) minmax(260px,1.6fr) minmax(190px,.9fr);align-items:center;gap:22px;padding:16px 21px}
+.tariffs-table-head{background:#15263d;color:#7e9abf;font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.tariffs-table-row{border-top:1px solid rgb(148 163 184 / 10%)}
+.tariffs-table-row>strong{font-size:13px;color:#e5edf8}
+.tariffs-table-row>p{margin:0;color:#91a2b8;font-size:11px;line-height:1.7}
+.tariffs-rate{color:#a9caff;font-size:12px;font-weight:800;line-height:1.55}
+.tariffs-disclaimer{display:flex;align-items:flex-start;gap:10px;margin:16px 2px 0;color:#9eb0c7;font-size:11px;line-height:1.75}
+.tariffs-disclaimer svg{flex-shrink:0;margin-top:1px;color:#78aaff}
+:root[data-theme="light"] .seller-value-card,:root[data-theme="light"] .tariffs-table{background:#fff;border-color:#e1e8f0;box-shadow:0 12px 35px rgb(15 23 42 / 4%)}
+:root[data-theme="light"] .seller-value-heading h2,:root[data-theme="light"] .seller-value-card h3,:root[data-theme="light"] .tariffs-heading h2,:root[data-theme="light"] .tariffs-table-row>strong{color:#172033}
+:root[data-theme="light"] .seller-value-heading p,:root[data-theme="light"] .seller-value-card p,:root[data-theme="light"] .tariffs-heading>p,:root[data-theme="light"] .tariffs-table-row>p{color:#64748b}
+:root[data-theme="light"] .tariffs-table-head{background:#edf3fb;color:#526984}
+:root[data-theme="light"] .tariffs-table-row{border-color:#e6edf5}
+:root[data-theme="light"] .tariffs-table-row>strong{color:#334155}
+:root[data-theme="light"] .tariffs-rate{color:#1d5eb5}
+:root[data-theme="light"] .tariffs-disclaimer{color:#64748b}
+@media(max-width:900px){.seller-value-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){
+  .seller-value-section,.tariffs-section{padding-block:58px 68px}
+  .seller-value-grid{grid-template-columns:1fr}
+  .seller-value-card{min-height:160px}
+  .tariffs-table-head{display:none}
+  .tariffs-table-row{grid-template-columns:1fr;gap:6px;padding:17px}
+  .tariffs-table-row>p{font-size:10px}
+  .tariffs-disclaimer{font-size:10px}
+}
