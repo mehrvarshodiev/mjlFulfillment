@@ -122,12 +122,12 @@ export function isValidPhone(value: string): boolean {
 }
 
 export async function insertLead(sql: SqlClient, lead: LeadInput): Promise<string> {
-  const rows = await sql`INSERT INTO mjl_leads
+  const rows = (await sql`INSERT INTO mjl_leads
     (name, phone, company, country, product_type, volume, marketplace, telegram)
     VALUES
     (${lead.name}, ${lead.phone}, ${lead.company}, ${lead.country},
      ${lead.productType}, ${lead.volume}, ${lead.marketplace}, ${lead.telegram})
-    RETURNING id::text AS id`;
+    RETURNING id::text AS id`) as unknown as Array<{ id?: string }>;
   const id = rows[0]?.id;
   if (!id) throw new Error("Lead insert returned no id");
   await sql`INSERT INTO mjl_lead_events (lead_id, actor_telegram_id, event_type, new_value)
@@ -136,10 +136,10 @@ export async function insertLead(sql: SqlClient, lead: LeadInput): Promise<strin
 }
 
 export async function getLead(sql: SqlClient, id: string): Promise<LeadRecord | null> {
-  const rows = await sql`SELECT id::text AS id, name, phone, company, country,
+  const rows = (await sql`SELECT id::text AS id, name, phone, company, country,
     product_type, volume, marketplace, telegram, status, notes, notification_status,
     created_at, updated_at
-    FROM mjl_leads WHERE id = ${id} LIMIT 1`;
+    FROM mjl_leads WHERE id = ${id} LIMIT 1`) as unknown as LeadRecord[];
   return (rows[0] as LeadRecord | undefined) ?? null;
 }
 
@@ -174,9 +174,9 @@ export async function listLeads(
         volume, marketplace, telegram, status, notes, notification_status, created_at, updated_at
         FROM mjl_leads WHERE status = ${filter}
         ORDER BY created_at DESC LIMIT ${safeLimit} OFFSET ${safeOffset}`;
-  const counts = filter === "all"
+  const counts = (filter === "all"
     ? await sql`SELECT COUNT(*)::int AS total FROM mjl_leads`
-    : await sql`SELECT COUNT(*)::int AS total FROM mjl_leads WHERE status = ${filter}`;
+    : await sql`SELECT COUNT(*)::int AS total FROM mjl_leads WHERE status = ${filter}`) as unknown as Array<{ total?: number | string }>;
   return {
     items: items as unknown as LeadRecord[],
     total: Number(counts[0]?.total ?? 0)
@@ -208,8 +208,8 @@ export async function setNoteSession(sql: SqlClient, userId: string, leadId: str
 }
 
 export async function getNoteSession(sql: SqlClient, userId: string): Promise<string | null> {
-  const rows = await sql`SELECT note_lead_id::text AS lead_id
-    FROM mjl_bot_sessions WHERE telegram_user_id = ${userId} LIMIT 1`;
+  const rows = (await sql`SELECT note_lead_id::text AS lead_id
+    FROM mjl_bot_sessions WHERE telegram_user_id = ${userId} LIMIT 1`) as unknown as Array<{ lead_id?: string | null }>;
   return rows[0]?.lead_id ? String(rows[0].lead_id) : null;
 }
 
