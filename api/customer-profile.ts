@@ -1,6 +1,6 @@
 import { neon } from "@neondatabase/serverless";
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { auth } from "../src/server/auth";
+import { auth } from "../src/server/auth.js";
 
 type ApiRequest = IncomingMessage & { body?: unknown };
 type ApiResponse = ServerResponse & {
