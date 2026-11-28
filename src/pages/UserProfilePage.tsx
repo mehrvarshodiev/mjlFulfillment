@@ -82,7 +82,6 @@ export function UserProfilePage() {
         const result = await authClient.listAccounts();
         if (active && result.data) {
           const methods = result.data.map((account) => account.providerId);
-          if (!methods.includes("email")) methods.push("email");
           setLinkedProviders([...new Set(methods)]);
         }
       } catch {
@@ -282,7 +281,7 @@ export function UserProfilePage() {
             </div>
             <div className="profile-linked-methods">
               <strong>{t("auth.profile.linkedMethods")}</strong>
-              {(linkedProviders.length ? linkedProviders : ["email"]).map((provider) => (
+              {linkedProviders.map((provider) => (
                 <div className="profile-linked-method" key={provider}>
                   <span className={"profile-provider-mark profile-provider-mark--" + provider}>{provider === "google" ? "G" : provider === "yandex" ? "Я" : <Mail size={15} />}</span>
                   <span>{providerLabels[provider] || provider}</span>
