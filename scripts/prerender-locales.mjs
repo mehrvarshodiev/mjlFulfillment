@@ -4,7 +4,7 @@ import path from "node:path";
 
 const origin = "https://mjlfulfillment.vercel.app";
 const languages = ["", "en", "zh", "ky", "kk", "uz", "tg"];
-const pages = ["", "services", "china", "about", "contacts"];
+const pages = ["", "services", "china", "about", "contacts", "login", "userprofile"];
 const routes = languages.flatMap((language) =>
   pages.map((page) => {
     const prefix = language ? `/${language}` : "";
