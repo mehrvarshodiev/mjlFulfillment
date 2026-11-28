@@ -64,7 +64,7 @@ Copy `.env.example` to `.env.local` for local development. Use `BETTER_AUTH_URL=
 
 - `DATABASE_URL` — the existing Neon PostgreSQL connection string.
 - `BETTER_AUTH_SECRET` — a unique random secret of at least 32 characters. Generate one with `openssl rand -base64 32`.
-- `BETTER_AUTH_URL` — `https://mjlfulfillment.vercel.app` in Production; use `http://localhost:5173` locally. For Preview, set the exact Preview origin or omit it and use Vercel's deployment URL.
+- `BETTER_AUTH_URL` — `https://mjlfulfillment.vercel.app` in Production; use `http://localhost:3000` locally. For Preview, the auth server automatically prefers Vercel's unique deployment URL; do not set a Production-only `BETTER_AUTH_URL` override in Preview.
 - `BETTER_AUTH_TRUSTED_ORIGINS` — optional comma-separated extra origins for trusted preview domains.
 - `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` — Google OAuth credentials.
 - `YANDEX_CLIENT_ID` and `YANDEX_CLIENT_SECRET` — Yandex ID OAuth credentials.
@@ -74,7 +74,7 @@ Copy `.env.example` to `.env.local` for local development. Use `BETTER_AUTH_URL=
 
 ### OAuth callback URLs
 
-Register these exact callback URLs in the OAuth provider consoles:
+Register these exact callback URLs in the OAuth provider consoles (the Yandex URI uses Better Auth’s Generic OAuth callback route):
 
 - Google: `https://mjlfulfillment.vercel.app/api/auth/callback/google`
 - Yandex ID: `https://mjlfulfillment.vercel.app/api/auth/oauth2/callback/yandex`
