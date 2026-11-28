@@ -85,7 +85,7 @@ export function UserProfilePage() {
           setLinkedProviders([...new Set(methods)]);
         }
       } catch {
-        if (active) setLinkedProviders(["email"]);
+        if (active) setLinkedProviders([]);
       }
     }
     void loadAccounts();
