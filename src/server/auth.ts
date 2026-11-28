@@ -113,6 +113,12 @@ export const auth = betterAuth({
   secret: authSecret,
   trustedOrigins,
   database,
+  // Neon PostgreSQL auth tables use UUID primary keys with gen_random_uuid() defaults.
+  advanced: {
+    database: {
+      generateId: false
+    }
+  },
   emailAndPassword: { enabled: false },
   socialProviders: googleConfigured
     ? {
