@@ -31,11 +31,18 @@ function requestHeaders(req: ApiRequest): Headers {
 function isSameOrigin(req: ApiRequest): boolean {
   const origin = req.headers.origin;
   if (typeof origin !== "string" || !origin) return req.method === "GET";
+
   const forwardedHost = req.headers["x-forwarded-host"];
   const host = (typeof forwardedHost === "string" ? forwardedHost : req.headers.host)
     ?.split(",")[0]?.trim().toLowerCase();
+  if (!host) return false;
+
+  const forwardedProto = req.headers["x-forwarded-proto"];
+  const protocol = (typeof forwardedProto === "string" ? forwardedProto.split(",")[0]?.trim() : "")
+    || (host.startsWith("localhost") || host.startsWith("127.0.0.1") ? "http" : "https");
+
   try {
-    return Boolean(host && new URL(origin).host.toLowerCase() === host);
+    return new URL(origin).origin === new URL(protocol + "://" + host).origin;
   } catch {
     return false;
   }
@@ -94,7 +101,12 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
   }
   if (!isSameOrigin(req)) return res.status(403).json({ ok: false, code: "origin_not_allowed" });
 
-  const session = await auth.api.getSession({ headers: requestHeaders(req) });
+  let session;
+  try {
+    session = await auth.api.getSession({ headers: requestHeaders(req) });
+  } catch {
+    return res.status(503).json({ ok: false, code: "authentication_unavailable" });
+  }
   if (!session) return res.status(401).json({ ok: false, code: "unauthorized" });
 
   const databaseUrl = process.env.DATABASE_URL;
