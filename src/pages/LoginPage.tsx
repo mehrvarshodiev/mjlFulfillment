@@ -12,9 +12,10 @@ export function LoginPage() {
   const location = useLocation();
   const state = location.state as LoginLocationState | null;
   const { data: session, isPending: sessionPending } = authClient.useSession();
-  const language = (i18n.resolvedLanguage || "ru").split("-")[0];
-  const profilePath = language !== "ru" && ["en", "zh", "ky", "kk", "uz", "tg"].includes(language) ? `/${language}/userprofile` : "/userprofile";
-  const localizedLoginPath = language !== "ru" && ["en", "zh", "ky", "kk", "uz", "tg"].includes(language) ? `/${language}/login` : "/login";
+  const language = (i18n.resolvedLanguage || "ru").split("-")[0] ?? "ru";
+  const localizedLanguages = new Set<string>(["en", "zh", "ky", "kk", "uz", "tg"]);
+  const profilePath = localizedLanguages.has(language) ? `/${language}/userprofile` : "/userprofile";
+  const localizedLoginPath = localizedLanguages.has(language) ? `/${language}/login` : "/login";
   const providerError = new URLSearchParams(location.search).has("error");
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState<"google" | "yandex" | "email" | null>(null);
@@ -49,8 +50,8 @@ export function LoginPage() {
     setError("");
     setBusy("yandex");
     try {
-      const result = await authClient.signIn.oauth2({
-        providerId: "yandex",
+      const result = await authClient.signIn.social({
+        provider: "yandex",
         callbackURL: profilePath,
         errorCallbackURL: localizedLoginPath,
         newUserCallbackURL: profilePath
