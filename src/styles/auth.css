@@ -725,3 +725,11 @@
   .profile-side-column { grid-template-columns: 1fr; }
   .mobile-account-entry .header-account-login { justify-content: center; }
 }
+
+.account-dropdown-error {
+  margin: 4px 10px 8px;
+  color: #f3a5a5;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.profile-signout-button:disabled { opacity: .6; cursor: wait; }
