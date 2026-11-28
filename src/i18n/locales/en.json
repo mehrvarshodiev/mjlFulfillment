@@ -18,11 +18,11 @@
     "contacts": "Contact"
   },
   "home": {
-    "eyebrow": "Fulfillment for Wildberries & Ozon",
-    "title": "Logistics that moves your marketplace business forward",
-    "description": "Receiving, inspection, labeling, packing and delivery to Wildberries and Ozon warehouses. One operations partner for sellers across Russia, the CIS and China.",
-    "primaryCta": "Calculate pricing",
-    "secondaryCta": "Discuss a shipment",
+    "eyebrow": "Fulfillment for Wildberries and Ozon sellers",
+    "title": "Marketplace-ready products, managed in one workflow",
+    "description": "MJL helps coordinate receiving, counting, inspection, labeling, packing, storage and shipment preparation for Wildberries and Ozon. Scope, timing and responsibilities are agreed before work begins.",
+    "primaryCta": "Get an indicative estimate",
+    "secondaryCta": "Discuss your shipment",
     "metrics": {
       "sla": "Operational SLA",
       "dispatch": "Dispatch to marketplace warehouses",
@@ -37,8 +37,8 @@
     }
   },
   "services": {
-    "title": "Fulfillment built around your operation",
-    "description": "Transparent workflows and clear pricing at every stage of product handling.",
+    "title": "Clear warehouse operations for Wildberries and Ozon",
+    "description": "Every shipment is broken into clear steps: what happens to your goods, what affects the estimate and what needs to be agreed before work starts.",
     "fbo": "FBO — inbound to marketplace warehouse",
     "fbs": "FBS — storage and order fulfillment",
     "receiving": "Goods receiving and quantity check",
@@ -49,55 +49,25 @@
     "picking": "Order picking",
     "dispatch": "Delivery to WB and Ozon warehouses",
     "calculator": {
-      "eyebrow": "PLAN YOUR COSTS",
-      "intro": "Set your shipment parameters to get an indicative estimate for core warehouse operations.",
-      "model": "Fulfillment model",
-      "marketplaces": {
-        "wb": "Wildberries",
-        "ozon": "Ozon",
-        "both": "Both"
-      },
-      "models": {
-        "fbo": "Marketplace inbound",
-        "fbs": "Order fulfillment"
-      },
-      "storageDays": "Storage period",
-      "days": "days",
-      "markingHint": "Adds an indicative per-unit fee for applying required codes.",
-      "estimateLabel": "Indicative estimate",
-      "live": "Live calculation",
-      "resultCaption": "Estimate for {{count}} units · {{marketplace}}",
-      "breakdown": "Cost breakdown",
-      "total": "Estimated total",
-      "requestQuote": "Request an exact quote",
-      "receiving": "Receiving and count",
-      "inspection": "Quality inspection",
-      "packaging": "Packaging",
-      "marking": "Chestny ZNAK marking",
-      "storage": "Storage",
-      "dispatch": "Handling and dispatch",
-      "disclaimer": "Demo rates for estimation only; they are not a public offer. The selected marketplace is shown as the quote scope; demo warehouse rates are currently shared across Wildberries and Ozon. Final pricing depends on dimensions, category, marketplace rules, volume and logistics. Confirm current rates with our team.",
-      "title": "Service cost calculator",
-      "marketplace": "Marketplace",
-      "items": "Number of items",
-      "standard": "Standard packaging",
-      "protective": "Protective packaging",
-      "custom": "Custom packaging"
+      "intro": "Adjust the shipment details to see an indicative breakdown using demo rates. This is not a commercial offer.",
+      "live": "DEMO ESTIMATE",
+      "disclaimer": "Demo rates are for guidance only. This estimate is not an offer; the final price is confirmed by a manager after reviewing your products, volume, marketplace requirements and logistics.",
+      "requestQuote": "Request a tailored quote"
     },
     "eyebrow": "END-TO-END OPERATIONS / 01",
-    "heroNote": "One partner — from receiving to marketplace dispatch",
+    "heroNote": "Choose the workflow and operations for your shipment.",
     "catalogEyebrow": "WHAT WE HANDLE",
-    "catalogTitle": "Every operation, clearly managed",
-    "catalogDescription": "We take care of daily fulfillment workflows so you can focus on products and sales.",
+    "catalogTitle": "What happens to your goods",
+    "catalogDescription": "The scope is tailored to your product category, marketplace requirements and chosen FBO or FBS model.",
     "modelsEyebrow": "TWO OPERATING MODELS",
     "modelsTitle": "FBO or FBS — built around your workflow",
     "details": {
-      "receiving": "We receive inbound shipments, verify quantities, record discrepancies and register goods in inventory.",
-      "inspection": "We inspect appearance and included components, identifying damage or inconsistencies before dispatch.",
-      "labeling": "We prepare labels, barcodes and product marking according to marketplace requirements.",
-      "packing": "We select suitable packaging and protect products according to category and Wildberries/Ozon rules.",
-      "storage": "We organize stock placement, inventory tracking and careful warehouse storage.",
-      "dispatch": "We pick and prepare shipments and arrange handover to marketplace warehouses."
+      "receiving": "Receive the batch, reconcile quantities against the accompanying information and record any discrepancies.",
+      "inspection": "Carry out the agreed visual inspection and note visible damage or inconsistencies.",
+      "labeling": "Apply agreed labels and marking codes where required for your product category.",
+      "packing": "Prepare packaging based on product characteristics and the selected marketplace requirements.",
+      "storage": "Agree storage conditions and duration before picking or dispatch.",
+      "dispatch": "Prepare batches or orders for handover to the agreed receiving point or logistics route."
     },
     "modelDetails": {
       "fbo": "We prepare, label, pack and deliver your batch to the marketplace warehouse. The marketplace then stores products and fulfills customer orders.",
