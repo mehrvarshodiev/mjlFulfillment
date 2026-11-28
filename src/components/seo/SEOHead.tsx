@@ -22,7 +22,12 @@ export function SEOHead() {
     const language = ((i18n.resolvedLanguage || "ru").split("-")[0] as SupportedLanguage);
     const path = location.pathname === "/" ? "/" : location.pathname.replace(/\/$/, "");
     const fallbackMetadata: [string, string] = pageMeta.ru["/"]!;
-    const metadata = pageMeta[language]?.[path] ?? pageMeta[language]["/"] ?? fallbackMetadata;
+    const isPrivateRoute = path === "/login" || path === "/userprofile";
+    const metadata: [string, string] = path === "/login"
+      ? [t("auth.login.title") + " | MJL Fulfillment", t("auth.login.description")]
+      : path === "/userprofile"
+        ? [t("auth.profile.title") + " | MJL Fulfillment", t("auth.profile.description")]
+        : pageMeta[language]?.[path] ?? pageMeta[language]["/"] ?? fallbackMetadata;
     const [title, description] = metadata;
     const canonical = localizedSeoUrl(language, path);
     const locale: Record<SupportedLanguage, string> = {
@@ -32,7 +37,7 @@ export function SEOHead() {
     document.title = title;
     document.documentElement.lang = language === "zh" ? "zh-Hans" : language;
     setMeta("description", description);
-    setMeta("robots", "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
+    setMeta("robots", isPrivateRoute ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1");
     setMeta("theme-color", document.documentElement.dataset.theme === "light" ? "#f4f7fb" : "#0b1220");
     setMeta("og:type", "website", "property");
     setMeta("og:site_name", "mjlFulfillment", "property");
