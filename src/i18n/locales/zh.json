@@ -27,6 +27,61 @@
       "sla": "运营服务水平协议",
       "dispatch": "发往电商平台仓库",
       "marketplaces": "支持 Wildberries 与 Ozon 入仓"
+    },
+    "serviceStages": {
+      "inbound": "01 / 收货",
+      "preparation": "02 / 预处理",
+      "packing": "03 / 包装",
+      "delivery": "04 / 发运"
+    },
+    "visual": {
+      "processLabel": "仓储作业流程示意",
+      "statusLabel": "流程概览",
+      "artAlt": "仓库及货物流转示意图",
+      "marketplaceReady": "电商平台入仓准备",
+      "operationStages": "个处理环节",
+      "qualityControl": "质量检查",
+      "dispatchWorkflow": "发货准备"
+    },
+    "proof": {
+      "ariaLabel": "服务概览",
+      "operationsValue": "06",
+      "operationsLabel": "个履约环节",
+      "modelsValue": "02",
+      "modelsLabel": "种 FBO / FBS 模式",
+      "channelsValue": "02",
+      "channelsLabel": "个电商平台",
+      "languagesValue": "07",
+      "languagesLabel": "种网站语言"
+    },
+    "process": {
+      "eyebrow": "清晰的合作流程 / 02",
+      "title": "从首次沟通到制定发货方案",
+      "description": "先了解商品和数量，再共同确认服务范围、费用估算及各项操作顺序。",
+      "cta": "咨询合作方案",
+      "steps": {
+        "request": {
+          "title": "说明您的需求",
+          "description": "提供商品、品类、数量、目标平台及希望采用的履约模式。"
+        },
+        "scope": {
+          "title": "确认服务与费用",
+          "description": "明确所需操作、商品要求、物流安排及初步费用。"
+        },
+        "prepare": {
+          "title": "收货并完成准备",
+          "description": "按照双方确认的方案进行检查、贴标、包装及订单处理。"
+        },
+        "handoff": {
+          "title": "安排后续交接",
+          "description": "协调发运，将准备完成的商品交接至下一物流环节。"
+        }
+      }
+    },
+    "sectionLabels": {
+      "services": "我们的服务 / 01",
+      "china": "中国供应链 / 03",
+      "contact": "沟通您的需求 / 04"
     }
   },
   "services": {
