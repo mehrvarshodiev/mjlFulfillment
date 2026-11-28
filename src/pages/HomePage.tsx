@@ -47,7 +47,7 @@ export function HomePage() {
     </div></section>
 
     <section className="services-preview section-wrap">
-      <div className="section-heading"><div><span className="section-kicker">WHAT WE DO / 01</span><h2>{t("services.title")}</h2></div><Link to="/services" className="text-link">{t("common.learnMore")}<ArrowUpRight size={16}/></Link></div>
+      <div className="section-heading"><div><span className="section-kicker">{t("home.sectionLabels.services")}</span><h2>{t("services.title")}</h2></div><Link to="/services" className="text-link">{t("common.learnMore")}<ArrowUpRight size={16}/></Link></div>
       <div className="service-grid">{services.map(({icon:Icon,title,detail},index)=><article className="service-tile service-tile-reveal" key={detail} style={{ animationDelay: `${index * 70}ms` }}><div className="tile-top"><Icon size={21}/><span>{detail}</span></div><h3>{title}</h3><span className="tile-arrow"><ArrowUpRight size={17}/></span></article>)}</div>
     </section>
 
@@ -67,7 +67,7 @@ export function HomePage() {
       </div>
     </section>
 
-    <section className="china-banner"><div className="section-wrap china-banner-inner"><div><span className="section-kicker">CROSS-BORDER / 02</span><h2>{t("china.title")}</h2><p>{t("china.description")}</p></div><Link to="/china" className="button-light">{t("china.cta")}<ArrowUpRight size={17}/></Link></div></section>
-    <section className="closing-cta section-wrap"><div><span className="section-kicker">LET’S MOVE FORWARD / 03</span><h2>{t("contacts.title")}</h2><p>{t("contacts.description")}</p></div><Link to="/contacts" className="button-primary">{t("common.contact")}<ArrowUpRight size={17}/></Link></section>
+    <section className="china-banner"><div className="section-wrap china-banner-inner"><div><span className="section-kicker">{t("home.sectionLabels.china")}</span><h2>{t("china.title")}</h2><p>{t("china.description")}</p></div><Link to="/china" className="button-light">{t("china.cta")}<ArrowUpRight size={17}/></Link></div></section>
+    <section className="closing-cta section-wrap"><div><span className="section-kicker">{t("home.sectionLabels.contact")}</span><h2>{t("contacts.title")}</h2><p>{t("contacts.description")}</p></div><Link to="/contacts" className="button-primary">{t("common.contact")}<ArrowUpRight size={17}/></Link></section>
   </main>;
 }
