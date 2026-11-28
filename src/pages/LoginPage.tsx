@@ -8,10 +8,14 @@ import { MjlLogo } from "../components/brand/MjlLogo";
 type LoginLocationState = { from?: string };
 
 export function LoginPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const state = location.state as LoginLocationState | null;
   const { data: session, isPending: sessionPending } = authClient.useSession();
+  const language = (i18n.resolvedLanguage || "ru").split("-")[0];
+  const profilePath = language !== "ru" && ["en", "zh", "ky", "kk", "uz", "tg"].includes(language) ? `/${language}/userprofile` : "/userprofile";
+  const localizedLoginPath = language !== "ru" && ["en", "zh", "ky", "kk", "uz", "tg"].includes(language) ? `/${language}/login` : "/login";
+  const providerError = new URLSearchParams(location.search).has("error");
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState<"google" | "yandex" | "email" | null>(null);
   const [sent, setSent] = useState(false);
@@ -26,8 +30,8 @@ export function LoginPage() {
     try {
       const result = await authClient.signIn.social({
         provider: "google",
-        callbackURL: "/userprofile",
-        errorCallbackURL: "/login"
+        callbackURL: profilePath,
+        errorCallbackURL: localizedLoginPath
       });
       if (result.error) setError(result.error.message || t("auth.login.error"));
     } catch {
@@ -43,9 +47,9 @@ export function LoginPage() {
     try {
       const result = await authClient.signIn.oauth2({
         providerId: "yandex",
-        callbackURL: "/userprofile",
-        errorCallbackURL: "/login",
-        newUserCallbackURL: "/userprofile"
+        callbackURL: profilePath,
+        errorCallbackURL: localizedLoginPath,
+        newUserCallbackURL: profilePath
       });
       if (result.error) setError(result.error.message || t("auth.login.error"));
     } catch {
@@ -68,9 +72,9 @@ export function LoginPage() {
     try {
       const result = await authClient.signIn.magicLink({
         email: normalizedEmail,
-        callbackURL: "/userprofile",
-        newUserCallbackURL: "/userprofile",
-        errorCallbackURL: "/login"
+        callbackURL: profilePath,
+        newUserCallbackURL: profilePath,
+        errorCallbackURL: localizedLoginPath
       });
       if (result.error) {
         setError(result.error.message || t("auth.login.error"));
@@ -157,7 +161,7 @@ export function LoginPage() {
             </>
           )}
 
-          {error && <p className="auth-error-message" role="alert">{error}</p>}
+          {(error || providerError) && <p className="auth-error-message" role="alert">{error || t("auth.login.error")}</p>}
           <p className="auth-security-note">{t("auth.login.security")}</p>
         </div>
       </section>
