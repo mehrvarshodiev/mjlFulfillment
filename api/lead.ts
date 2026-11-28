@@ -34,8 +34,11 @@ function isAllowedOrigin(req: ApiRequest): boolean {
   if (typeof origin !== "string" || !origin) return false;
 
   const forwardedHost = req.headers["x-forwarded-host"];
-  const host = (typeof forwardedHost === "string" ? forwardedHost : req.headers.host)
-    ?.split(",")[0]?.trim().toLowerCase();
+  const fallbackHost = req.headers.host;
+  const rawHost = Array.isArray(forwardedHost)
+    ? forwardedHost[0]
+    : forwardedHost ?? (Array.isArray(fallbackHost) ? fallbackHost[0] : fallbackHost);
+  const host = rawHost?.split(",")[0]?.trim().toLowerCase();
   if (!host) return false;
 
   const forwardedProto = req.headers["x-forwarded-proto"];
