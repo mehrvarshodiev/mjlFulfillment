@@ -56,13 +56,13 @@ async function sendMagicLink(email: string, url: string): Promise<void> {
       to: [email],
       subject: "Вход в личный кабинет MJL Fulfillment",
       html: [
-        "<div style=\\"font-family:Arial,sans-serif;background:#0b1220;color:#eaf1fb;padding:36px 20px\\">",
-        "<div style=\\"max-width:520px;margin:auto;padding:32px;border:1px solid #263750;border-radius:20px;background:#111e31\\">",
-        "<p style=\\"color:#77aaff;font-weight:700;letter-spacing:2px\\">MJL FULFILLMENT</p>",
-        "<h1 style=\\"font-size:26px\\">Вход в личный кабинет</h1>",
-        "<p style=\\"color:#a7b6ca;line-height:1.7\\">Нажмите кнопку ниже, чтобы безопасно войти в клиентский портал MJL.</p>",
-        "<a href=\\"" + safeUrl + "\\" style=\\"display:inline-block;padding:14px 22px;border-radius:999px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700\\">Войти в личный кабинет</a>",
-        "<p style=\\"margin-top:28px;color:#7f91aa;font-size:12px;line-height:1.6\\">Ссылка одноразовая и действует 10 минут. Если вы не запрашивали вход, просто проигнорируйте это письмо.</p>",
+        "<div style=\"font-family:Arial,sans-serif;background:#0b1220;color:#eaf1fb;padding:36px 20px\">",
+        "<div style=\"max-width:520px;margin:auto;padding:32px;border:1px solid #263750;border-radius:20px;background:#111e31\">",
+        "<p style=\"color:#77aaff;font-weight:700;letter-spacing:2px\">MJL FULFILLMENT</p>",
+        "<h1 style=\"font-size:26px\">Вход в личный кабинет</h1>",
+        "<p style=\"color:#a7b6ca;line-height:1.7\">Нажмите кнопку ниже, чтобы безопасно войти в клиентский портал MJL.</p>",
+        "<a href=\"" + safeUrl + "\" style=\"display:inline-block;padding:14px 22px;border-radius:999px;background:#2563eb;color:#fff;text-decoration:none;font-weight:700\">Войти в личный кабинет</a>",
+        "<p style=\"margin-top:28px;color:#7f91aa;font-size:12px;line-height:1.6\">Ссылка одноразовая и действует 10 минут. Если вы не запрашивали вход, просто проигнорируйте это письмо.</p>",
         "</div></div>"
       ].join(""),
       text: "Вход в личный кабинет MJL Fulfillment\\n\\nОткройте ссылку для входа (действует 10 минут):\\n" + url + "\\n\\nЕсли вы не запрашивали вход, проигнорируйте это письмо."
